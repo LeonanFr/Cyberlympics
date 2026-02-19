@@ -1,0 +1,152 @@
+<!-- ranking.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ranking Geral — CyberLympics UEPA</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="page-ranking">
+
+    <!-- NAV -->
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-terminal"></i> [CyberLympics_UEPA]
+        </div>
+        <div class="nav-links">
+            <a href="index.html#topo"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="index.html#desafios"><i class="fa-solid fa-gamepad"></i> Provas</a>
+            <a href="index.html#matriz"><i class="fa-solid fa-microchip"></i> Matriz</a>
+        </div>
+    </nav>
+
+    <header class="sub-hero">
+        <div class="sub-hero-inner">
+            <h1 class="sub-title"><i class="fa-solid fa-ranking-star"></i> Ranking Geral</h1>
+            <p class="sub-text">
+                Esta página exibe a classificação completa. Antes do evento: <strong>placeholders</strong>.
+                No dia: integração ao vivo via API (<strong>TBD</strong>).
+            </p>
+
+            <div class="rank-controls">
+                <div class="rank-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input id="rankSearch" type="text" placeholder="Buscar por nome da equipe..." autocomplete="off" />
+                </div>
+
+                <div class="rank-actions">
+                    <button class="btn-ghost btn-small" id="resetSearch" type="button">
+                        <i class="fa-solid fa-rotate-left"></i> Limpar
+                    </button>
+                    <a class="btn-neon btn-small" href="index.html#ranking">
+                        <i class="fa-solid fa-arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="table-box">
+            <div class="table-head">
+                <span>Posição</span>
+                <span>Equipe</span>
+                <span>CC</span>
+            </div>
+
+            <!-- Placeholders de produção (0 CC) -->
+            <div class="table-row" data-team="em breve">
+                <span class="col-pos"><i class="fa-solid fa-crown"></i> 01</span>
+                <span class="col-team">Em breve</span>
+                <span class="col-cc">0</span>
+            </div>
+
+            <!-- 02..30 -->
+            <div class="table-row" data-team="em breve"><span class="col-pos">02</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">03</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">04</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">05</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">06</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">07</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">08</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">09</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">10</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">11</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">12</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">13</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">14</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">15</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">16</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">17</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">18</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">19</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">20</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">21</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">22</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">23</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">24</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">25</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">26</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">27</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">28</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">29</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+            <div class="table-row" data-team="em breve"><span class="col-pos">30</span><span class="col-team">Em
+                    breve</span><span class="col-cc">0</span></div>
+
+            <div class="table-empty" id="rankEmpty" hidden>
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                Nenhuma equipe encontrada com esse filtro.
+            </div>
+        </div>
+
+        <div class="lb-footnote" style="margin-top:16px;">
+            <i class="fa-solid fa-circle-info"></i>
+            Antes do evento, tudo aparece como <strong>Em breve</strong>. No dia 16/05/2026, a API alimenta os nomes e
+            CC.
+        </div>
+    </main>
+
+    <footer>
+        <p>EOF. 2026 — CyberLympics UEPA // <code>SELECT * FROM ranking;</code></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
