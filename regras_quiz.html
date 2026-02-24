@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flash Quiz — Copa de Software</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/effects/delorean-anim.css">
+    <link rel="icon" href="assets/starwars.png">
+</head>
+
+<body class="page-rules-detail">
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html#info" title="Informações gerais"><i class="fa-solid fa-circle-info"></i> Info</a>
+            <a href="index.html#desafios" title="Modalidades de prova"><i class="fa-solid fa-gamepad"></i> Provas</a>
+            <a href="index.html#matriz" title="Macroáreas de estudo"><i class="fa-solid fa-microchip"></i> Matriz</a>
+            <a href="ranking.html" title="Classificação ao vivo"><i class="fa-solid fa-trophy"></i> Ranking</a>
+            <a href="equipes.html" title="Times confirmados"><i class="fa-solid fa-users"></i> Equipes</a>
+            <a href="inscricao.html" title="Garanta sua vaga"><i class="fa-solid fa-user-plus"></i> Inscrição</a>
+        </div>
+    </nav>
+
+    <header class="sub-hero">
+        <div class="sub-hero-inner">
+            <h1 class="sub-title"><i class="fa-solid fa-bolt"></i> Flash Quiz</h1>
+            <p class="sub-text">Domínio teórico e reflexos afiados sob o cronômetro.</p>
+        </div>
+    </header>
+
+    <main class="container rules-container">
+        <article class="rules-paper">
+            <section class="rules-section">
+                <h2>// O_CONCEITO</h2>
+                <p>O Flash Quiz testa o conhecimento teórico da equipe sobre computação em rodadas simultâneas. A
+                    precisão e o tempo de reação são os pilares para garantir os créditos desta modalidade.</p>
+            </section>
+
+            <section class="rules-section">
+                <h2>// FUNCIONAMENTO</h2>
+                <p>As perguntas são exibidas para todos os times ao mesmo tempo em um sistema central. Cada questão
+                    possui um tempo rigoroso; as respostas devem ser registradas no formato solicitado logo após o
+                    sinal.</p>
+            </section>
+
+            <section class="rules-section">
+                <h2>// TEMAS_CHAVE</h2>
+                <ul class="rules-list">
+                    <li>Engenharia de Software: Fundamentos e boas práticas.</li>
+                    <li>Hardware: Arquitetura e funcionamento de computadores.</li>
+                    <li>História: Marcos tecnológicos e evolução da computação.</li>
+                    <li>Mercado: Curiosidades e atualidades do mundo tech.</li>
+                </ul>
+            </section>
+
+            <section class="rules-section">
+                <h2>// PONTUACAO</h2>
+                <p>Nesta prova, o sistema de créditos funciona por acúmulo direto:</p>
+                <ul class="rules-list">
+                    <li>Acerto: Todas as equipes que responderem corretamente no prazo recebem o valor total da rodada.
+                    </li>
+                    <li>Valor: Cada pergunta possui um peso fixo de pontos.</li>
+                    <li>Erros: Não há penalidade por resposta incorreta, apenas a ausência de ganho.</li>
+                </ul>
+            </section>
+
+            <section class="rules-section">
+                <h2>// RESTRICOES</h2>
+                <p>Para manter a integridade do desafio, os seguintes protocolos são obrigatórios:</p>
+                <ul class="rules-list">
+                    <li>É proibido o uso de qualquer material de consulta externa ou dispositivos móveis.</li>
+                    <li>Não é permitida a troca de informações ou "sopro" de respostas entre times diferentes.</li>
+                    <li>Gritar a resposta ou alterar o registro após o sinal resultará em invalidação do acerto.</li>
+                </ul>
+            </section>
+
+            <div class="cta-regulamento">
+                <a href="index.html#desafios" class="link-chip">
+                    <i class="fa-solid fa-arrow-left"></i> Voltar para Provas
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-visual">
+                <div id="delorean-display"></div>
+            </div>
+            <div class="footer-text">
+                <div class="footer-brand">
+                    <span>Engenharia de Software — UEPA Castanhal</span>
+                    <span class="separator">//</span>
+                    <code><span id="rotating-phrase">Aguardando sinal de resposta...</span></code>
+                </div>
+                <div class="footer-copy">
+                    Desenvolvido por <strong>Leonan Freitas</strong> &copy; 2026
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/effects/hamburger.js"></script>
+    <script src="js/effects/matrix.js"></script>
+    <script src="js/rotating-phrases.js"></script>
+    <script>
+        fetch('assets/delorean-anim.html')
+            .then(res => res.text())
+            .then(data => document.getElementById('delorean-display').innerHTML = data);
+    </script>
+</body>
+
+</html>
