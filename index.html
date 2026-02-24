@@ -4,334 +4,269 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CyberLympics — Engenharia de Software UEPA</title>
-
+    <title>I Copa de Software — UEPA</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
         rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="assets/starwars.png">
 </head>
 
 <body>
-
     <nav class="navbar">
         <div class="logo">
-            <i class="fa-solid fa-terminal"></i> [CyberLympics_UEPA]
+            <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
         </div>
-        <div class="nav-links">
-            <a href="#info" data-nav="info"><i class="fa-solid fa-circle-info"></i> Info</a>
-            <a href="#desafios" data-nav="desafios"><i class="fa-solid fa-gamepad"></i> Provas</a>
-            <a href="#ranking" data-nav="ranking"><i class="fa-solid fa-trophy"></i> Ranking</a>
-            <a href="#matriz" data-nav="matriz"><i class="fa-solid fa-microchip"></i> Matriz</a>
+        <div class="menu-toggle" id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html#info"><i class="fa-solid fa-circle-info"></i> Info</a>
+            <a href="index.html#desafios"><i class="fa-solid fa-gamepad"></i> Provas</a>
+            <a href="index.html#matriz"><i class="fa-solid fa-microchip"></i> Matriz</a>
+            <a href="ranking.html"><i class="fa-solid fa-trophy"></i> Ranking</a>
+            <a href="equipes.html"><i class="fa-solid fa-users"></i> Equipes</a>
         </div>
     </nav>
 
     <header class="hero" id="topo">
         <div class="hero-overlay"></div>
-
         <div class="terminal-hero">
             <div class="terminal-bar">
                 <span class="dot red"></span>
                 <span class="dot yellow"></span>
                 <span class="dot green"></span>
-                <span class="term-title"><i class="fa-solid fa-terminal"></i> cyberlympics@uepa:~</span>
+                <span class="term-title"><i class="fa-solid fa-terminal"></i> copa@uepa:~</span>
             </div>
-
             <div class="terminal-body">
-                <div class="glitch-wrapper">
-                    <h1 class="glitch" data-text="CYBERLYMPICS">CYBERLYMPICS</h1>
+                <div class="title-wrapper">
+                    <h1 class="main-title">I COPA DE SOFTWARE</h1>
                 </div>
-
                 <p class="terminal-line">
                     <span class="prompt">></span>
                     <span id="typing"></span><span class="caret">█</span>
                 </p>
-
                 <div class="hero-pills">
                     <span class="pill"><i class="fa-regular fa-calendar-days"></i> 16 de maio de 2026</span>
-                    <span class="pill"><i class="fa-solid fa-location-dot"></i> UEPA — Campus (TBD)</span>
-                    <span class="pill"><i class="fa-solid fa-users"></i> Times com 3 pessoas</span>
-                    <span class="pill"><i class="fa-solid fa-bolt"></i> 4 modalidades</span>
+                    <span class="pill"><i class="fa-regular fa-clock"></i> 8:30 – 12:30</span>
+                    <span class="pill"><i class="fa-solid fa-location-dot"></i> Campus XX</span>
+                    <span class="pill"><i class="fa-solid fa-users"></i> Formato Trio</span>
+                </div>
+
+                <div class="countdown-modern">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">00</span>
+                        <span class="countdown-label">dias</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">00</span>
+                        <span class="countdown-label">horas</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">00</span>
+                        <span class="countdown-label">minutos</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">00</span>
+                        <span class="countdown-label">segundos</span>
+                    </div>
                 </div>
 
                 <p class="subtitle">
-                    Competição prática do Dia do Orgulho Nerd: programação, banco de dados, teoria e estratégia sob
-                    pressão.
-                    <code>Hello, world!</code>
+                    O desafio final da Engenharia de Software: programação, banco de dados e estratégia em tempo real.
                 </p>
-
                 <div class="hero-cta">
-                    <a class="btn-neon" href="#inscricao"><i class="fa-solid fa-user-astronaut"></i> Inscrever time</a>
-                    <a class="btn-ghost" href="#desafios"><i class="fa-solid fa-gamepad"></i> Ver modalidades</a>
-                    <a class="btn-ghost" href="#regulamento"><i class="fa-solid fa-book"></i> Regulamento</a>
-                </div>
-
-                <div class="hero-note">
-                    <i class="fa-solid fa-circle-info"></i>
-                    Informações oficiais e ranking ao vivo serão liberados no dia do evento.
+                    <a class="btn-neon" id="btnInscricao" href="#inscricao"><i class="fa-solid fa-user-astronaut"></i>
+                        Inscreva-se</a>
+                    <a class="btn-ghost" href="#desafios"><i class="fa-solid fa-gamepad"></i> Modalidades</a>
+                    <a class="btn-ghost" href="regulamento_geral.html"><i class="fa-solid fa-book"></i> Regulamento</a>
                 </div>
             </div>
         </div>
     </header>
 
     <section id="info" class="container">
-        <h2 class="section-title"><i class="fa-solid fa-circle-info"></i> // INFORMAÇÕES DO EVENTO</h2>
-
+        <h2 class="section-title"><i class="fa-solid fa-circle-info"></i> // SOBRE O EVENTO</h2>
         <div class="grid">
             <div class="card info-card" tabindex="0">
                 <div class="card-icon"><i class="fa-solid fa-flag-checkered"></i></div>
-                <h3>Como funciona</h3>
-                <p>Times de 3 pessoas acumulam pontos em 4 provas. Vence quem somar mais no geral.</p>
-                <span class="badge">Formato: trio</span>
+                <h3>Proposta</h3>
+                <p>Aplicação de conhecimentos teóricos em cenários práticos e integração entre acadêmicos de diversos
+                    semestres.</p>
+                <span class="badge">UEPA Castanhal</span>
             </div>
-
             <div class="card info-card" tabindex="0">
                 <div class="card-icon"><i class="fa-solid fa-bullseye"></i></div>
-                <h3>O que avalia</h3>
-                <p>Programação, modelagem e consultas em BD, teoria rápida e gestão de risco sob pressão.</p>
-                <span class="badge">Prática + estratégia</span>
+                <h3>Critérios</h3>
+                <p>Avaliação técnica de algoritmos, modelagem SQL e gestão estratégica de riscos sob pressão.</p>
+                <span class="badge">Hard + Soft Skills</span>
             </div>
-
             <div class="card info-card" tabindex="0">
-                <div class="card-icon"><i class="fa-solid fa-clock"></i></div>
-                <h3>Cronograma</h3>
-                <p>Credenciamento, abertura, rodadas e final. Horários exatos: <strong>TBD</strong>.</p>
-                <span class="badge">Em breve</span>
-            </div>
-        </div>
-    </section>
-
-    <section id="regulamento" class="container">
-        <h2 class="section-title"><i class="fa-solid fa-book"></i> // REGULAMENTO (RESUMO)</h2>
-
-        <div class="grid">
-            <div class="card" tabindex="0">
-                <div class="card-icon"><i class="fa-solid fa-users"></i></div>
-                <h3>Formação</h3>
-                <p>Participação estritamente em trios. A pontuação é somada ao longo de todas as provas.</p>
-                <span class="badge">Obrigatório</span>
-            </div>
-
-            <div class="card" tabindex="0">
-                <div class="card-icon"><i class="fa-solid fa-ranking-star"></i></div>
-                <h3>Classificação</h3>
-                <p>A tabela geral considera desempenho técnico e pontos estratégicos (na final Burnout).</p>
-                <span class="badge">Tabela geral</span>
-            </div>
-
-            <div class="card" tabindex="0">
-                <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                <h3>Conduta</h3>
-                <p>Sem cola, sem interferência externa. Comunicação e trabalho em equipe fazem parte do desafio.</p>
-                <span class="badge">Fair play</span>
+                <div class="card-icon"><i class="fa-solid fa-calendar-check"></i></div>
+                <h3>Data</h3>
+                <p>As inscrições abrem dia 14/03. A competição presencial ocorre no dia 16 de maio de 2026.</p>
+                <span class="badge">Salva a data</span>
             </div>
         </div>
     </section>
 
     <section id="desafios" class="container">
-        <h2 class="section-title"><i class="fa-solid fa-network-wired"></i> // FRENTES DE BATALHA</h2>
-
+        <h2 class="section-title"><i class="fa-solid fa-network-wired"></i> // FRENTES ESTRATÉGICAS</h2>
         <div class="grid">
-            <div class="card" onclick="openModal('modal-algoritmos')" role="button" tabindex="0"
-                data-modal="modal-algoritmos">
-                <div class="card-icon"><i class="fa-solid fa-user-ninja"></i></div>
-                <h3>Algoritmos às Cegas</h3>
-                <p>Programação modular sem ver a tela dos parceiros. Integração automática no final.</p>
-                <span class="badge">Ler regras</span>
+            <div class="card" onclick="openModal('modal-algoritmos')">
+                <div class="card-icon"><i class="fa-solid fa-code-branch"></i></div>
+                <h3>Algoritmos em Revezamento</h3>
+                <p>Construção coletiva de soluções. Janelas de 5 min por integrante. Comunicação via comentários.</p>
+                <span class="badge">Ver Regras</span>
             </div>
-
-            <div class="card" onclick="openModal('modal-sql')" role="button" tabindex="0" data-modal="modal-sql">
+            <div class="card" onclick="openModal('modal-sql')">
                 <div class="card-icon"><i class="fa-solid fa-database"></i></div>
-                <h3>Investigação SQL</h3>
-                <p>Coop assimétrico: um executa queries, outro(s) guiam pelas pistas do caso.</p>
-                <span class="badge">Ler regras</span>
+                <h3>Inquérito Relacional</h3>
+                <p>Investigação baseada em SQL com pistas fragmentadas. Comunicação verbal é essencial.</p>
+                <span class="badge">Ver Regras</span>
             </div>
-
-            <div class="card" onclick="openModal('modal-quiz')" role="button" tabindex="0" data-modal="modal-quiz">
+            <div class="card" onclick="openModal('modal-quiz')">
                 <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
                 <h3>Flash Quiz</h3>
-                <p>Questões rápidas no telão. Tempo curto, resposta no quadro. Teoria síncrona.</p>
-                <span class="badge">Ler regras</span>
+                <p>Conhecimentos teóricos em rodadas rápidas no telão. Respostas síncronas sem penalidade por erro.</p>
+                <span class="badge">Ver Regras</span>
             </div>
-
-            <div class="card" onclick="openModal('modal-br')" role="button" tabindex="0" data-modal="modal-br">
+            <div class="card" onclick="openModal('modal-br')">
                 <div class="card-icon"><i class="fa-solid fa-fire-flame-curved"></i></div>
                 <h3>Grande Burnout</h3>
-                <p>Final em formato battle royale com Créditos (CC). Técnica + gestão de risco.</p>
-                <span class="badge">Ler regras</span>
+                <p>Gestão de Créditos e apostas estratégicas. A prova final e decisiva da Copa de Software.</p>
+                <span class="badge">Ver Regras</span>
             </div>
         </div>
     </section>
 
     <section id="matriz" class="container">
-        <h2 class="section-title text-center"><i class="fa-solid fa-microchip"></i> > MATRIZ DE CONHECIMENTO
-            (MACROÁREAS)</h2>
-        <p class="muted-center">
-            Referência de estudos alinhada às macroáreas de Engenharia de Software. Itens detalhados:
-            <strong>TBD</strong>.
-        </p>
-
+        <h2 class="section-title text-center"><i class="fa-solid fa-microchip"></i> > MATRIZ DE CONHECIMENTO</h2>
         <div class="tags">
-            <span class="tag"><i class="fa-solid fa-diagram-project"></i> Algoritmos</span>
-            <span class="tag"><i class="fa-solid fa-layer-group"></i> Estruturas de Dados</span>
-            <span class="tag"><i class="fa-solid fa-sitemap"></i> Arquitetura e Padrões</span>
-            <span class="tag"><i class="fa-solid fa-pen-ruler"></i> Engenharia de Requisitos</span>
-            <span class="tag"><i class="fa-solid fa-table"></i> Banco de Dados e Modelagem</span>
-            <span class="tag"><i class="fa-solid fa-vial"></i> Qualidade e Testes</span>
-            <span class="tag"><i class="fa-solid fa-code-branch"></i> DevOps e Versionamento</span>
-            <span class="tag"><i class="fa-solid fa-palette"></i> UI/UX</span>
+            <span class="tag"><i class="fa-solid fa-jedi"></i> Algoritmos</span>
+            <span class="tag"><i class="fa-solid fa-floppy-disk"></i> Estruturas de Dados</span>
+            <span class="tag"><i class="fa-solid fa-rocket"></i> Arquitetura</span>
+            <span class="tag"><i class="fa-solid fa-robot"></i> Eng. Requisitos</span>
+            <span class="tag"><i class="fa-solid fa-table"></i> Banco de Dados</span>
+            <span class="tag"><i class="fa-solid fa-shield-alt"></i> Qualidade</span>
+            <span class="tag"><i class="fa-solid fa-cogs"></i> DevOps</span>
+            <span class="tag"><i class="fa-solid fa-paint-brush"></i> UI/UX</span>
             <span class="tag"><i class="fa-solid fa-bug"></i> Debugging</span>
-            <span class="tag"><i class="fa-solid fa-shield-halved"></i> Segurança</span>
+            <span class="tag"><i class="fa-solid fa-lock"></i> Segurança</span>
         </div>
     </section>
 
     <section id="ranking" class="container">
         <div class="section-head">
-            <h2 class="section-title"><i class="fa-solid fa-ranking-star"></i> // LEADERBOARD (PRÉVIA)</h2>
-            <a class="link-chip" href="ranking.html"><i class="fa-solid fa-up-right-from-square"></i> Ver ranking
-                completo</a>
+            <h2 class="section-title"><i class="fa-solid fa-ranking-star"></i> // LEADERBOARD</h2>
+            <a class="link-chip" href="ranking.html"><i class="fa-solid fa-up-right-from-square"></i> Ranking
+                Completo</a>
         </div>
-
         <div class="leaderboard-box">
             <div class="lb-head">
-                <span>Posição</span>
-                <span>Equipe</span>
-                <span>Créditos (CC)</span>
+                <span class="col-pos">Posição</span>
+                <span class="col-name">Equipe</span>
+                <span class="col-score">Créditos</span>
             </div>
-
             <div class="lb-item first">
                 <span class="lb-pos"><i class="fa-solid fa-crown"></i> 01</span>
-                <span class="lb-name">Em breve</span>
-                <span class="lb-score">0 CC</span>
+                <span class="lb-name">Aguardando...</span>
+                <span class="lb-score">0</span>
             </div>
             <div class="lb-item">
                 <span class="lb-pos">02</span>
-                <span class="lb-name">Em breve</span>
-                <span class="lb-score">0 CC</span>
+                <span class="lb-name">Aguardando...</span>
+                <span class="lb-score">0</span>
             </div>
             <div class="lb-item">
                 <span class="lb-pos">03</span>
-                <span class="lb-name">Em breve</span>
-                <span class="lb-score">0 CC</span>
+                <span class="lb-name">Aguardando...</span>
+                <span class="lb-score">0</span>
             </div>
-            <div class="lb-item">
-                <span class="lb-pos">04</span>
-                <span class="lb-name">Em breve</span>
-                <span class="lb-score">0 CC</span>
-            </div>
-            <div class="lb-item">
-                <span class="lb-pos">05</span>
-                <span class="lb-name">Em breve</span>
-                <span class="lb-score">0 CC</span>
-            </div>
-            <div class="lb-item">
-                <span class="lb-pos">06</span>
-                <span class="lb-name">Em breve</span>
-                <span class="lb-score">0 CC</span>
-            </div>
-            <div class="lb-item">
-                <span class="lb-pos">07</span>
-                <span class="lb-name">Em breve</span>
-                <span class="lb-score">0 CC</span>
-            </div>
-            <div class="lb-item">
-                <span class="lb-pos">08</span>
-                <span class="lb-name">Em breve</span>
-                <span class="lb-score">0 CC</span>
-            </div>
-            <div class="lb-item">
-                <span class="lb-pos">09</span>
-                <span class="lb-name">Em breve</span>
-                <span class="lb-score">0 CC</span>
-            </div>
-            <div class="lb-item">
-                <span class="lb-pos">10</span>
-                <span class="lb-name">Em breve</span>
-                <span class="lb-score">0 CC</span>
-            </div>
-        </div>
-
-        <div class="lb-footnote">
-            <i class="fa-solid fa-satellite-dish"></i>
-            Ranking ao vivo: <strong>TBD</strong> (integração com API no dia do evento).
         </div>
     </section>
 
     <section id="inscricao" class="container">
         <div class="cta-box">
             <div>
-                <h2 class="cta-title">Pronto pra montar o trio?</h2>
-                <p class="cta-text">A inscrição oficial será liberada aqui. Link do formulário: <strong>TBD</strong>.
+                <h2 class="cta-title">Prepare sua estratégia!</h2>
+                <p class="cta-text">Abertura das inscrições em <strong>14 de março</strong> através do portal oficial.
                 </p>
             </div>
-            <a class="btn-neon" href="#" aria-label="Inscrição (TBD)">
-                <i class="fa-solid fa-paper-plane"></i> Inscrição (TBD)
-            </a>
+            <a class="btn-neon" href="#"><i class="fa-solid fa-paper-plane"></i> Inscreva-se</a>
         </div>
     </section>
 
-    <footer>
-        <p>EOF. 2026 — Engenharia de Software UEPA // <code>fmt.Println("May the force be with you")</code></p>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-visual">
+                <div id="delorean-display"></div>
+            </div>
+            <div class="footer-text">
+                <div class="footer-brand">
+                    <span>Engenharia de Software — UEPA Castanhal</span>
+                    <span class="separator">//</span>
+                    <code><span id="rotating-phrase">Initializing system...</span></code>
+                </div>
+                <div class="footer-copy">
+                    Desenvolvido por <strong>Leonan Freitas</strong> &copy; 2026
+                </div>
+            </div>
+        </div>
     </footer>
 
     <div id="modal-algoritmos" class="modal" aria-hidden="true">
-        <div class="modal-content" role="dialog" aria-modal="true" aria-label="Regras: Algoritmos às Cegas">
-            <span class="close-btn" onclick="closeModal('modal-algoritmos')" aria-label="Fechar"><i
-                    class="fa-solid fa-xmark"></i></span>
-            <h2><i class="fa-solid fa-user-ninja"></i> Algoritmos às Cegas</h2>
-            <ul>
-                <li>Time com 3 pessoas. Cada uma escreve um fragmento isolado.</li>
-                <li>Sem acesso visual à tela dos parceiros durante a escrita.</li>
-                <li>+20 pontos por parte que rodar e cumprir função isolada.</li>
-                <li>+30 pontos de bônus se o código final integrado funcionar.</li>
-            </ul>
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-algoritmos')"><i class="fa-solid fa-xmark"></i></span>
+            <h2>Algoritmos em Revezamento</h2>
+            <p>Duração total de 45 minutos. Dinâmica dividida em janelas de <strong>5 minutos por integrante</strong>.
+                Orientações permitidas apenas via comentários internos. Silêncio absoluto durante a prova.</p>
+            <a href="regras_algoritmos.html" class="link-chip">Regulamento Completo</a>
         </div>
     </div>
 
     <div id="modal-sql" class="modal" aria-hidden="true">
-        <div class="modal-content" role="dialog" aria-modal="true" aria-label="Regras: Investigação SQL">
-            <span class="close-btn" onclick="closeModal('modal-sql')" aria-label="Fechar"><i
-                    class="fa-solid fa-xmark"></i></span>
-            <h2><i class="fa-solid fa-database"></i> Investigação SQL</h2>
-            <ul>
-                <li>Coop assimétrico: um membro executa queries; outro(s) têm as pistas.</li>
-                <li>A comunicação verbal guia as consultas e a resolução do caso.</li>
-                <li>Pontuação baseada em velocidade e precisão das queries.</li>
-                <li>Concessão automática via webhook ao finalizar a investigação.</li>
-            </ul>
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-sql')"><i class="fa-solid fa-xmark"></i></span>
+            <h2>Inquérito Relacional</h2>
+            <p>Investigação SQL com pistas fragmentadas entre o trio. Comunicação verbal indispensável para o cruzamento
+                de dados e resolução do mistério.</p>
+            <a href="regras_sql.html" class="link-chip">Regulamento Completo</a>
         </div>
     </div>
 
     <div id="modal-quiz" class="modal" aria-hidden="true">
-        <div class="modal-content" role="dialog" aria-modal="true" aria-label="Regras: Flash Quiz">
-            <span class="close-btn" onclick="closeModal('modal-quiz')" aria-label="Fechar"><i
-                    class="fa-solid fa-xmark"></i></span>
-            <h2><i class="fa-solid fa-bolt"></i> Flash Quiz</h2>
-            <ul>
-                <li>Questões projetadas em telão com cronômetro.</li>
-                <li>Times respondem no quadro/papel e levantam simultaneamente.</li>
-                <li>Acerto vale pontuação fixa (ex.: 10 pontos).</li>
-                <li>Sem penalidade por erro nessa etapa.</li>
-            </ul>
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-quiz')"><i class="fa-solid fa-xmark"></i></span>
+            <h2>Flash Quiz</h2>
+            <p>Perguntas teóricas rápidas no telão sobre Hardware, SO e História da Tecnologia. Respostas simultâneas
+                escritas para validação imediata.</p>
+            <a href="regras_quiz.html" class="link-chip">Regulamento Completo</a>
         </div>
     </div>
 
     <div id="modal-br" class="modal" aria-hidden="true">
-        <div class="modal-content" role="dialog" aria-modal="true" aria-label="Regras: Grande Burnout">
-            <span class="close-btn" onclick="closeModal('modal-br')" aria-label="Fechar"><i
-                    class="fa-solid fa-xmark"></i></span>
-            <h2><i class="fa-solid fa-fire-flame-curved"></i> Grande Burnout</h2>
-            <ul>
-                <li>Saldo geral vira Créditos de Competição (CC) para a final.</li>
-                <li>Entrada com taxa (pingo) + aporte da organização por rodada.</li>
-                <li>Quem acerta leva a mesa; o lucro sofre 15% de taxa (anti-inflação).</li>
-                <li>Rodízio obrigatório: a cada questão, um membro diferente assume.</li>
-            </ul>
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('modal-br')"><i class="fa-solid fa-xmark"></i></span>
+            <h2>Grande Burnout</h2>
+            <p>A fase estratégica final. Apostas usando Créditos acumulados. Sistema de risco com taxas e rodízio: quem
+                acerta fica fora por 2 rodadas.</p>
+            <a href="regras_burnout.html" class="link-chip">Regulamento Completo</a>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/effects/hamburger.js"></script>
+    <script src="js/effects/matrix.js"></script>
+    <script src="js/effects/confetti.js"></script>
+    <script src="js/rotating-phrases.js"></script>
+    <script>
+        fetch('assets/delorean-anim.html')
+            .then(res => res.text())
+            .then(data => document.getElementById('delorean-display').innerHTML = data);
+    </script>
 </body>
 
 </html>
