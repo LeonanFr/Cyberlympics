@@ -53,6 +53,41 @@ window.addEventListener('keydown', (e) => {
     tick();
 })();
 
+(function countdown() {
+    const target = new Date('May 16, 2026 08:30:00').getTime();
+
+    const update = () => {
+        const now = new Date().getTime();
+        const diff = target - now;
+
+        const dEl = document.getElementById('days');
+        const hEl = document.getElementById('hours');
+        const mEl = document.getElementById('minutes');
+        const sEl = document.getElementById('seconds');
+
+        if (diff <= 0) {
+            if (dEl) dEl.textContent = '00';
+            if (hEl) hEl.textContent = '00';
+            if (mEl) mEl.textContent = '00';
+            if (sEl) sEl.textContent = '00';
+            return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+        if (dEl) dEl.textContent = String(days).padStart(2, '0');
+        if (hEl) hEl.textContent = String(hours).padStart(2, '0');
+        if (mEl) mEl.textContent = String(mins).padStart(2, '0');
+        if (sEl) sEl.textContent = String(secs).padStart(2, '0');
+    };
+
+    update();
+    setInterval(update, 1000);
+})();
+
 (function reveal() {
     const items = document.querySelectorAll(
         '.card, .leaderboard-box, .cta-box, .section-title, .lb-footnote, .muted-center, .section-head'
