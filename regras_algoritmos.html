@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regras: Algoritmos — I Copa de Software</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/effects/delorean-anim.css">
+    <link rel="icon" href="assets/starwars.png">
+</head>
+
+<body class="page-rules-detail">
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html#info" title="Informações gerais"><i class="fa-solid fa-circle-info"></i> Info</a>
+            <a href="index.html#desafios" title="Modalidades de prova"><i class="fa-solid fa-gamepad"></i> Provas</a>
+            <a href="index.html#matriz" title="Macroáreas de estudo"><i class="fa-solid fa-microchip"></i> Matriz</a>
+            <a href="ranking.html" title="Classificação ao vivo"><i class="fa-solid fa-trophy"></i> Ranking</a>
+            <a href="equipes.html" title="Times confirmados"><i class="fa-solid fa-users"></i> Equipes</a>
+            <a href="inscricao.html" title="Garanta sua vaga"><i class="fa-solid fa-user-plus"></i> Inscrição</a>
+        </div>
+    </nav>
+
+    <header class="sub-hero">
+        <div class="sub-hero-inner">
+            <h1 class="sub-title"><i class="fa-solid fa-code"></i> Algoritmos em Revezamento</h1>
+            <p class="sub-text">Três mentes, um teclado e muita lógica.</p>
+        </div>
+    </header>
+
+    <main class="container rules-container">
+        <article class="rules-paper">
+            <section class="rules-section">
+                <h2>// O_FORMATO</h2>
+                <p>Nesta prova, os times enfrentam uma sequência de problemas de lógica. O diferencial? Apenas um
+                    integrante pode tocar no computador por vez, enquanto os outros planejam no papel.</p>
+            </section>
+
+            <section class="rules-section">
+                <h2>// REGRAS_DE_TROCA</h2>
+                <p>As trocas de integrantes ocorrem em intervalos fixos ou após a submissão de um código. É proibido
+                    sussurrar dicas diretamente no ouvido de quem está digitando; a estratégia deve ser montada antes do
+                    "turno" começar.</p>
+            </section>
+
+            <section class="rules-section">
+                <h2>// PONTUACAO</h2>
+                <ul class="rules-list">
+                    <li>Problema resolvido na primeira tentativa: 100 créditos.</li>
+                    <li>Erros de compilação ou lógica geram penalidade de tempo.</li>
+                    <li>O bônus de "Clean Code" pode ser aplicado por juízes convidados.</li>
+                </ul>
+            </section>
+
+            <div class="cta-regulamento">
+                <a href="index.html#desafios" class="link-chip">
+                    <i class="fa-solid fa-arrow-left"></i> Voltar para Provas
+                </a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-visual">
+                <div id="delorean-display"></div>
+            </div>
+            <div class="footer-text">
+                <div class="footer-brand">
+                    <span>Engenharia de Software — UEPA Castanhal</span>
+                    <span class="separator">//</span>
+                    <code><span id="rotating-phrase">Compiling rules...</span></code>
+                </div>
+                <div class="footer-copy">
+                    Desenvolvido por <strong>Leonan Freitas</strong> &copy; 2026
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/effects/hamburger.js"></script>
+    <script src="js/effects/matrix.js"></script>
+    <script src="js/rotating-phrases.js"></script>
+    <script>
+        fetch('assets/delorean-anim.html')
+            .then(res => res.text())
+            .then(data => document.getElementById('delorean-display').innerHTML = data);
+    </script>
+</body>
+
+</html>
