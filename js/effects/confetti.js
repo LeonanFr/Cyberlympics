@@ -39,8 +39,6 @@
     const btn = document.getElementById('btnInscricao');
     if (btn) {
         btn.addEventListener('mouseenter', () => {
-            // VERIFICAÇÃO DE LIMITE: 
-            // Só gera novos se não houver nenhum elemento .confetti no documento
             if (document.querySelector('.confetti')) return;
 
             for (let i = 0; i < 20; i++) {
