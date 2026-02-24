@@ -1,5 +1,3 @@
-// script.js
-
 function openModal(id) {
     const el = document.getElementById(id);
     if (!el) return;
