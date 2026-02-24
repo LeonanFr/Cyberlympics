@@ -27,7 +27,7 @@
                         <a href="index.html#info"><i class="fa-solid fa-circle-info"></i> Info</a>
                         <a href="index.html#desafios"><i class="fa-solid fa-gamepad"></i> Provas</a>
                         <a href="index.html#matriz"><i class="fa-solid fa-microchip"></i> Matriz</a>
-                        <a href="ranking.html"><i class="fa-solid fa-trophy"></i> Ranking</a>
+                        <a href="ranking.html" class="active"><i class="fa-solid fa-trophy"></i> Ranking</a>
                         <a href="equipes.html"><i class="fa-solid fa-users"></i> Equipes</a>
                 </div>
         </nav>
@@ -35,10 +35,7 @@
         <header class="sub-hero">
                 <div class="sub-hero-inner">
                         <h1 class="sub-title"><i class="fa-solid fa-ranking-star"></i> Ranking Geral</h1>
-                        <p class="sub-text">
-                                Classificação oficial das equipes.
-                        </p>
-
+                        <p class="sub-text">Classificação oficial das equipes em tempo real.</p>
                         <div class="rank-controls">
                                 <div class="rank-search">
                                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -65,8 +62,9 @@
                                 <span class="col-score">Créditos</span>
                         </div>
 
-                        <div id="rankEmpty" class="table-empty" hidden>
-                                <i class="fa-solid fa-triangle-exclamation"></i> Nenhuma equipe encontrada.
+                        <div id="rankEmpty" class="table-empty" style="display: none;">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Nenhuma equipe encontrada com esse
+                                nome.
                         </div>
 
                         <div class="table-row" data-team="aguardando">
@@ -104,6 +102,7 @@
         <script src="js/effects/hamburger.js"></script>
         <script src="js/effects/matrix.js"></script>
         <script src="js/rotating-phrases.js"></script>
+        <script src="js/ranking-script.js"></script>
         <script>
                 fetch('assets/delorean-anim.html')
                         .then(res => res.text())

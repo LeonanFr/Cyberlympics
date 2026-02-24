@@ -131,37 +131,3 @@ window.addEventListener('keydown', (e) => {
 
     sections.forEach(s => io.observe(s));
 })();
-
-(function rankingSearch() {
-    const input = document.getElementById('rankSearch');
-    const reset = document.getElementById('resetSearch');
-    const empty = document.getElementById('rankEmpty');
-
-    if (!input) return;
-
-    const rows = Array.from(document.querySelectorAll('.table-row'));
-
-    function applyFilter() {
-        const q = input.value.trim().toLowerCase();
-        let visible = 0;
-
-        rows.forEach(r => {
-            const name = (r.dataset.team || '').toLowerCase();
-            const match = name.includes(q);
-            r.style.display = match ? 'grid' : 'none';
-            if (match) visible++;
-        });
-
-        if (empty) empty.hidden = visible !== 0;
-    }
-
-    input.addEventListener('input', applyFilter);
-
-    if (reset) {
-        reset.addEventListener('click', () => {
-            input.value = '';
-            applyFilter();
-            input.focus();
-        });
-    }
-})();
