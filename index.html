@@ -38,11 +38,12 @@
             <span class="bar"></span>
         </div>
         <div class="nav-links" id="navLinks">
-            <a href="index.html#info"><i class="fa-solid fa-circle-info"></i> Info</a>
-            <a href="index.html#desafios"><i class="fa-solid fa-gamepad"></i> Provas</a>
-            <a href="index.html#matriz"><i class="fa-solid fa-microchip"></i> Matriz</a>
-            <a href="ranking.html"><i class="fa-solid fa-trophy"></i> Ranking</a>
-            <a href="equipes.html"><i class="fa-solid fa-users"></i> Equipes</a>
+            <a href="index.html#info" title="Informações gerais"><i class="fa-solid fa-circle-info"></i> Info</a>
+            <a href="index.html#desafios" title="Modalidades de prova"><i class="fa-solid fa-gamepad"></i> Provas</a>
+            <a href="index.html#matriz" title="Macroáreas de estudo"><i class="fa-solid fa-microchip"></i> Matriz</a>
+            <a href="ranking.html" title="Classificação ao vivo"><i class="fa-solid fa-trophy"></i> Ranking</a>
+            <a href="equipes.html" title="Times confirmados"><i class="fa-solid fa-users"></i> Equipes</a>
+            <a href="inscricao.html" title="Garanta sua vaga"><i class="fa-solid fa-user-plus"></i> Inscrição</a>
         </div>
     </nav>
 
@@ -93,17 +94,24 @@
                     O desafio final da Engenharia de Software: programação, banco de dados e estratégia em tempo real.
                 </p>
                 <div class="hero-cta">
-                    <a class="btn-neon" id="btnInscricao" href="#inscricao"><i class="fa-solid fa-user-astronaut"></i>
+                    <a class="btn-neon" id="btnInscricao" href="/inscricao.html"><i
+                            class="fa-solid fa-user-astronaut"></i>
                         Inscreva-se</a>
                     <a class="btn-ghost" href="#desafios"><i class="fa-solid fa-gamepad"></i> Modalidades</a>
-                    <a class="btn-ghost" href="regulamento_geral.html"><i class="fa-solid fa-book"></i> Regulamento</a>
+                    <a class="btn-ghost" href="regulamento.html"><i class="fa-solid fa-book"></i> Regulamento</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <section id="info" class="container">
-        <h2 class="section-title"><i class="fa-solid fa-circle-info"></i> // SOBRE O EVENTO</h2>
+    <section id="info" class="container reveal">
+        <div class="section-head">
+            <h2 class="section-title"><i class="fa-solid fa-circle-info"></i> // SOBRE O EVENTO</h2>
+            <a class="link-chip" href="regulamento.html">
+                <i class="fa-solid fa-file-lines"></i> Ler Regulamento
+            </a>
+        </div>
+
         <div class="grid">
             <div class="card info-card" tabindex="0">
                 <div class="card-icon"><i class="fa-solid fa-flag-checkered"></i></div>
@@ -112,12 +120,14 @@
                     semestres.</p>
                 <span class="badge">UEPA Castanhal</span>
             </div>
+
             <div class="card info-card" tabindex="0">
                 <div class="card-icon"><i class="fa-solid fa-bullseye"></i></div>
                 <h3>Critérios</h3>
                 <p>Avaliação técnica de algoritmos, modelagem SQL e gestão estratégica de riscos sob pressão.</p>
                 <span class="badge">Hard + Soft Skills</span>
             </div>
+
             <div class="card info-card" tabindex="0">
                 <div class="card-icon"><i class="fa-solid fa-calendar-check"></i></div>
                 <h3>Data</h3>
@@ -210,7 +220,7 @@
                 <p class="cta-text">Abertura das inscrições em <strong>14 de março</strong> através do portal oficial.
                 </p>
             </div>
-            <a class="btn-neon" href="#"><i class="fa-solid fa-paper-plane"></i> Inscreva-se</a>
+            <a class="btn-neon" href="/inscricao.html"><i class="fa-solid fa-paper-plane"></i> Inscreva-se</a>
         </div>
     </section>
 

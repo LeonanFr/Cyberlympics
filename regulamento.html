@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regulamento Geral — I Copa de Software</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/effects/delorean-anim.css">
+    <link rel="icon" href="assets/starwars.png">
+</head>
+
+<body class="page-rules-content">
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html#info" title="Informações gerais"><i class="fa-solid fa-circle-info"></i> Info</a>
+            <a href="index.html#desafios" title="Modalidades de prova"><i class="fa-solid fa-gamepad"></i> Provas</a>
+            <a href="index.html#matriz" title="Macroáreas de estudo"><i class="fa-solid fa-microchip"></i> Matriz</a>
+            <a href="ranking.html" title="Classificação ao vivo"><i class="fa-solid fa-trophy"></i> Ranking</a>
+            <a href="equipes.html" title="Times confirmados"><i class="fa-solid fa-users"></i> Equipes</a>
+            <a href="inscricao.html" title="Garanta sua vaga"><i class="fa-solid fa-user-plus"></i> Inscrição</a>
+        </div>
+    </nav>
+
+    <header class="sub-hero">
+        <div class="sub-hero-inner">
+            <h1 class="sub-title"><i class="fa-solid fa-scroll"></i> Manual de Conduta</h1>
+            <p class="sub-text">As leis que regem o código e a competição.</p>
+        </div>
+    </header>
+
+    <main class="container rules-container">
+        <article class="rules-paper">
+            <section class="rules-section">
+                <h2>01. Objetivo do Torneio</h2>
+                <p>A I Copa de Software visa integrar os alunos de <strong>Engenharia de Software da UEPA</strong>
+                    através de desafios técnicos que simulam situações reais de desenvolvimento, lógica e pressão por
+                    tempo.</p>
+            </section>
+
+            <section class="rules-section">
+                <h2>02. Formação dos Times</h2>
+                <p>A competição é disputada em <strong>trios</strong>. Alunos inscritos individualmente serão alocados
+                    em times sorteados pela organização. Os nomes de todos os times serão <strong>Linguagens de
+                        Programação</strong> (Python, C++, Java, etc.), definidas por sorteio eletrônico.</p>
+            </section>
+
+            <section class="rules-section">
+                <h2>03. Sistema de Pontuação</h2>
+                <p>Cada prova possui uma pontuação máxima específica. O critério de desempate segue a ordem:</p>
+                <ul class="rules-list">
+                    <li>Maior número de problemas resolvidos;</li>
+                    <li>Menor tempo acumulado (Penalty Time);</li>
+                    <li>Qualidade e indentação do código (em casos específicos).</li>
+                </ul>
+            </section>
+
+
+
+            <section class="rules-section">
+                <h2>04. Fair Play e Ética</h2>
+                <p>Qualquer tentativa de plágio, uso de ferramentas de IA não autorizadas ou comunicação externa
+                    resultará em <strong>desclassificação imediata</strong> (Hard Reset) do time.</p>
+            </section>
+
+            <div class="cta-regulamento">
+                <a href="index.html#desafios" class="btn-neon">Entendi, vamos às provas</a>
+                <a href="inscricao.html" class="btn-neon"><i class="fa-solid fa-user-astronaut"></i> Quero me
+                    inscrever!</a>
+            </div>
+        </article>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-visual">
+                <div id="delorean-display"></div>
+            </div>
+            <div class="footer-text">
+                <div class="footer-brand">
+                    <span>Engenharia de Software — UEPA Castanhal</span>
+                    <span class="separator">//</span>
+                    <code><span id="rotating-phrase">Protocolo finalizado...</span></code>
+                </div>
+                <div class="footer-copy">
+                    Desenvolvido por <strong>Leonan Freitas</strong> &copy; 2026
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/effects/hamburger.js"></script>
+    <script src="js/effects/matrix.js"></script>
+    <script src="js/rotating-phrases.js"></script>
+    <script>
+        fetch('assets/delorean-anim.html')
+            .then(res => res.text())
+            .then(data => document.getElementById('delorean-display').innerHTML = data);
+    </script>
+</body>
+
+</html>

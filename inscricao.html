@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inscrição — I Copa de Software</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/effects/delorean-anim.css">
+    <link rel="icon" href="assets/starwars.png">
+</head>
+
+<body class="page-signup">
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html#info" title="Informações gerais"><i class="fa-solid fa-circle-info"></i> Info</a>
+            <a href="index.html#desafios" title="Modalidades de prova"><i class="fa-solid fa-gamepad"></i> Provas</a>
+            <a href="index.html#matriz" title="Macroáreas de estudo"><i class="fa-solid fa-microchip"></i> Matriz</a>
+            <a href="ranking.html" title="Classificação ao vivo"><i class="fa-solid fa-trophy"></i> Ranking</a>
+            <a href="equipes.html" title="Times confirmados"><i class="fa-solid fa-users"></i> Equipes</a>
+            <a href="inscricao.html" class="active" title="Garanta sua vaga"><i class="fa-solid fa-user-plus"></i>
+                Inscrição</a>
+        </div>
+    </nav>
+
+    <header class="sub-hero">
+        <div class="sub-hero-inner">
+            <h1 class="sub-title"><i class="fa-solid fa-pen-clip"></i> Garanta sua vaga</h1>
+            <p class="sub-text">
+                Escolha como quer participar. Preencha os dados e prepare o café.
+            </p>
+
+            <div class="signup-toggle">
+                <button class="btn-toggle active" onclick="switchForm('trio')">Temos um time</button>
+                <button class="btn-toggle" onclick="switchForm('individual')">Tô sozinho</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="form-trio" class="signup-box">
+            <h2 class="form-title">Cadastro de Time</h2>
+            <form id="signupTrio">
+                <div class="members-setup">
+                    <div class="member-field">
+                        <label>Participante 1 (Líder)</label>
+                        <div class="input-grid">
+                            <input type="text" name="m1_name" placeholder="Nome Completo" required>
+                            <input type="text" name="m1_mat" placeholder="Matrícula" required>
+                            <select name="m1_sem" required>
+                                <option value="" disabled selected>Semestre</option>
+                                <option value="1">1º Semestre</option>
+                                <option value="2">2º Semestre</option>
+                                <option value="3">3º Semestre</option>
+                                <option value="4">4º Semestre</option>
+                                <option value="5">5º Semestre</option>
+                                <option value="6">6º Semestre</option>
+                                <option value="7">7º Semestre</option>
+                                <option value="8">8º Semestre</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="member-field">
+                        <label>Participante 2</label>
+                        <div class="input-grid">
+                            <input type="text" name="m2_name" placeholder="Nome Completo" required>
+                            <input type="text" name="m2_mat" placeholder="Matrícula" required>
+                            <select name="m2_sem" required>
+                                <option value="" disabled selected>Semestre</option>
+                                <option value="1">1º Semestre</option>
+                                <option value="2">2º Semestre</option>
+                                <option value="3">3º Semestre</option>
+                                <option value="4">4º Semestre</option>
+                                <option value="5">5º Semestre</option>
+                                <option value="6">6º Semestre</option>
+                                <option value="7">7º Semestre</option>
+                                <option value="8">8º Semestre</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="member-field">
+                        <label>Participante 3</label>
+                        <div class="input-grid">
+                            <input type="text" name="m3_name" placeholder="Nome Completo" required>
+                            <input type="text" name="m3_mat" placeholder="Matrícula" required>
+                            <select name="m3_sem" required>
+                                <option value="" disabled selected>Semestre</option>
+                                <option value="1">1º Semestre</option>
+                                <option value="2">2º Semestre</option>
+                                <option value="3">3º Semestre</option>
+                                <option value="4">4º Semestre</option>
+                                <option value="5">5º Semestre</option>
+                                <option value="6">6º Semestre</option>
+                                <option value="7">7º Semestre</option>
+                                <option value="8">8º Semestre</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-neon">Confirmar Inscrição</button>
+            </form>
+        </div>
+
+        <div id="form-individual" class="signup-box" style="display: none;">
+            <h2 class="form-title">Banco de Talentos</h2>
+            <p class="form-note">Tá sem time? Relaxa, a gente te encaixa em um.</p>
+            <form id="signupIndividual">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" name="ind_name" required>
+                </div>
+                <div class="input-row">
+                    <div class="form-group">
+                        <label>Matrícula</label>
+                        <input type="text" name="ind_mat" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Semestre</label>
+                        <select name="ind_sem" required>
+                            <option value="" disabled selected>Selecione</option>
+                            <option value="1">1º Semestre</option>
+                            <option value="2">2º Semestre</option>
+                            <option value="3">3º Semestre</option>
+                            <option value="4">4º Semestre</option>
+                            <option value="5">5º Semestre</option>
+                            <option value="6">6º Semestre</option>
+                            <option value="7">7º Semestre</option>
+                            <option value="8">8º Semestre</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn-neon">Entrar na Lista</button>
+            </form>
+        </div>
+
+        <div id="successMessage" class="table-empty" style="display: none; padding: 4rem 0;">
+            <i class="fa-solid fa-check-double"></i>
+            <h3>Tudo certo!</h3>
+            <p>Sua inscrição foi enviada. Agora é só focar nos estudos e aguardar o dia 16 de maio.</p>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-visual">
+                <div id="delorean-display"></div>
+            </div>
+            <div class="footer-text">
+                <div class="footer-brand">
+                    <span>Engenharia de Software — UEPA Castanhal</span>
+                    <span class="separator">//</span>
+                    <code><span id="rotating-phrase">Aguardando...</span></code>
+                </div>
+                <div class="footer-copy">
+                    Desenvolvido por <strong>Leonan Freitas</strong> &copy; 2026
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/effects/hamburger.js"></script>
+    <script src="js/effects/matrix.js"></script>
+    <script src="js/rotating-phrases.js"></script>
+    <script src="js/signup-logic.js"></script>
+    <script>
+        fetch('assets/delorean-anim.html')
+            .then(res => res.text())
+            .then(data => document.getElementById('delorean-display').innerHTML = data);
+    </script>
+</body>
+
+</html>

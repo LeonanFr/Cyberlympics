@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Equipes — I Copa de Software</title>
+    <meta name="description" content="Confira os times confirmados para a I Copa de Software da UEPA.">
+    <meta property="og:title" content="I Copa de Software — Equipes">
+    <meta property="og:description" content="Quem levará o título de mestre do código? Confira os participantes.">
+    <meta property="og:image" content="assets/starwars.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/effects/delorean-anim.css">
+    <link rel="icon" href="assets/starwars.png">
+</head>
+
+<body class="page-teams">
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html#info" title="Informações gerais"><i class="fa-solid fa-circle-info"></i> Info</a>
+            <a href="index.html#desafios" title="Modalidades de prova"><i class="fa-solid fa-gamepad"></i> Provas</a>
+            <a href="index.html#matriz" title="Macroáreas de estudo"><i class="fa-solid fa-microchip"></i> Matriz</a>
+            <a href="ranking.html" title="Classificação ao vivo"><i class="fa-solid fa-trophy"></i> Ranking</a>
+            <a href="equipes.html" class="active" title="Times confirmados"><i class="fa-solid fa-users"></i>
+                Equipes</a>
+            <a href="inscricao.html" title="Garanta sua vaga"><i class="fa-solid fa-user-plus"></i> Inscrição</a>
+        </div>
+    </nav>
+
+    <header class="sub-hero">
+        <div class="sub-hero-inner">
+            <h1 class="sub-title"><i class="fa-solid fa-users"></i> Times Confirmados</h1>
+            <p class="sub-text">
+                <code>System.out.println("Que comecem os jogos!");</code>
+            </p>
+            <div class="rank-controls">
+                <div class="rank-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input id="searchAll" type="text" placeholder="Buscar por time, integrante ou semestre..."
+                        autocomplete="off" />
+                </div>
+                <div class="rank-actions">
+                    <button class="btn-ghost btn-small" id="resetTeams" type="button">
+                        <i class="fa-solid fa-rotate-left"></i> Limpar
+                    </button>
+                    <a class="btn-neon btn-small" href="index.html">
+                        <i class="fa-solid fa-arrow-left"></i> Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="teamsEmpty" class="table-empty" style="display: none; padding: 4rem 0;">
+            <i class="fa-solid fa-database"></i> Nenhuma equipe cadastrada ainda. Espere a data das inscrições e dos
+            sorteios de times.
+        </div>
+
+        <div id="searchEmpty" class="table-empty" style="display: none; padding: 4rem 0;">
+            <i class="fa-solid fa-search-minus"></i> Nenhum resultado para a busca. Tente outros termos ou limpe o
+            filtro.
+        </div>
+
+        <div id="teamsGrid" class="teams-grid"></div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-visual">
+                <div id="delorean-display"></div>
+            </div>
+            <div class="footer-text">
+                <div class="footer-brand">
+                    <span>Engenharia de Software — UEPA Castanhal</span>
+                    <span class="separator">//</span>
+                    <code><span id="rotating-phrase">Waiting for players...</span></code>
+                </div>
+                <div class="footer-copy">
+                    Desenvolvido por <strong>Leonan Freitas</strong> &copy; 2026
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/effects/hamburger.js"></script>
+    <script src="js/effects/matrix.js"></script>
+    <script src="js/rotating-phrases.js"></script>
+    <script src="js/teams-logic.js"></script>
+    <script>
+        fetch('assets/delorean-anim.html')
+            .then(res => res.text())
+            .then(data => document.getElementById('delorean-display').innerHTML = data);
+    </script>
+</body>
+
+</html>
