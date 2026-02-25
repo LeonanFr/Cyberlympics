@@ -1,3 +1,22 @@
+const INSCRICOES_ABERTAS = false;
+
+(function controlarInscricao() {
+    const closed = document.getElementById('signupClosed');
+    const trio = document.getElementById('form-trio');
+    const individual = document.getElementById('form-individual');
+    const toggle = document.querySelector('.signup-toggle');
+
+    if (!INSCRICOES_ABERTAS) {
+        if (closed) closed.style.display = 'block';
+        if (trio) trio.style.display = 'none';
+        if (individual) individual.style.display = 'none';
+        if (toggle) toggle.style.display = 'none';
+        return;
+    }
+
+    if (closed) closed.style.display = 'none';
+})();
+
 window.switchForm = function (type) {
     const trio = document.getElementById('form-trio');
     const individual = document.getElementById('form-individual');

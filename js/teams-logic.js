@@ -7,37 +7,33 @@
 
     if (!grid || !input) return;
 
-    const mockTeams = [
-        {
-            name: "Bit Hunters",
-            members: [
-                { name: "João Silva", sem: "4º" },
-                { name: "Maria Souza", sem: "2º" },
-                { name: "Pedro Rocha", sem: "6º" }
-            ]
-        },
-        {
-            name: "Kernel Panic",
-            members: [
-                { name: "Lucas Lima", sem: "8º" },
-                { name: "Ana Costa", sem: "8º" },
-                { name: "Carlos Oliveira", sem: "7º" }
-            ]
-        }
-    ];
+    /*
+     * A lista de times será preenchida via API.
+     * Exemplo esperado de retorno:
+     * [
+     *   {
+     *     name: "Nome do Time",
+     *     members: [
+     *       { name: "Aluno 1", sem: "4º" },
+     *       { name: "Aluno 2", sem: "6º" }
+     *     ]
+     *   }
+     * ]
+     */
+    let teams = [];
 
     function renderTeams(filter = '') {
         grid.innerHTML = '';
         const query = filter.toLowerCase();
 
-        if (mockTeams.length === 0) {
+        if (teams.length === 0) {
             grid.style.display = 'none';
             if (teamsEmpty) teamsEmpty.style.display = 'block';
             if (searchEmpty) searchEmpty.style.display = 'none';
             return;
         }
 
-        const filtered = mockTeams.filter(team => {
+        const filtered = teams.filter(team => {
             const matchName = team.name.toLowerCase().includes(query);
             const matchMember = team.members.some(m =>
                 m.name.toLowerCase().includes(query) ||
