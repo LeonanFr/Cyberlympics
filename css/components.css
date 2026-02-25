@@ -7,6 +7,8 @@
 }
 
 .btn-neon {
+    min-width: fit-content;
+    white-space: nowrap;
     background: transparent;
     color: var(--neon-green);
     border: 2px solid var(--neon-green);
@@ -410,6 +412,66 @@
 .reveal {
     opacity: 1 !important;
     transform: translateY(0) !important;
+}
+
+/* TIMELINE */
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 3rem auto;
+    padding-left: 20px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: repeating-linear-gradient(to bottom,
+            var(--neon-green),
+            var(--neon-green) 5px,
+            transparent 5px,
+            transparent 10px);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 30px;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 5px;
+    width: 12px;
+    height: 12px;
+    background: var(--neon-green);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--neon-green);
+}
+
+.time {
+    display: block;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    color: var(--neon-blue);
+    margin-bottom: 0.5rem;
+}
+
+.activity h3 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 0.3rem;
+}
+
+.activity p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
 }
 
 @media (max-width: 640px) {
