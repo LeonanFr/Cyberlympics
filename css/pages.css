@@ -291,10 +291,14 @@
 }
 
 .input-row {
-    display: grid;
-    grid-template-columns: 1fr 100px;
+    display: flex;
+    width: 100%;
     gap: 10px;
     margin-bottom: 1rem;
+}
+
+.input-row .form-group {
+    width: 50%;
 }
 
 input {
