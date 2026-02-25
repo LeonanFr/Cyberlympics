@@ -95,3 +95,69 @@
 
     renderTeams();
 })();
+
+(function () {
+    const tbody = document.getElementById('participantsTableBody');
+    const search = document.getElementById('participantSearch');
+    const empty = document.getElementById('participantsEmpty');
+    const searchEmpty = document.getElementById('participantsSearchEmpty');
+    const table = document.querySelector('#participantsTableBox table');
+
+    if (!tbody || !search || !table) return;
+
+    /*
+     * A lista de participantes será preenchida via API.
+     * Exemplo esperado de retorno:
+     * [
+     *   {
+     *     name: "Nome do Aluno",
+     *     matricula: "202312345",
+     *     semester: 3
+     *   }
+     * ]
+     */
+    let participants = [];
+
+    function renderParticipants(filter = '') {
+        tbody.innerHTML = '';
+        const query = filter.toLowerCase();
+
+        if (participants.length === 0) {
+            table.style.display = 'none';
+            empty.style.display = 'block';
+            searchEmpty.style.display = 'none';
+            return;
+        }
+
+        const filtered = participants.filter(p =>
+            p.name.toLowerCase().includes(query) ||
+            p.matricula.includes(query) ||
+            `${p.semester}`.includes(query)
+        );
+
+        if (query && filtered.length === 0) {
+            table.style.display = 'none';
+            empty.style.display = 'none';
+            searchEmpty.style.display = 'block';
+            return;
+        }
+
+        table.style.display = 'table';
+        empty.style.display = 'none';
+        searchEmpty.style.display = 'none';
+
+        filtered.forEach(p => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${p.name}</td>
+                <td>${p.matricula}</td>
+                <td>${p.semester}º</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    search.addEventListener('input', e => renderParticipants(e.target.value));
+
+    renderParticipants();
+})();

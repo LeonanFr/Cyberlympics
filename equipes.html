@@ -74,7 +74,37 @@
         </div>
 
         <div id="teamsGrid" class="teams-grid"></div>
+
     </main>
+
+    <section class="participants-section">
+        <div class="section-header">
+            <h2 class="section-title">Participantes inscritos</h2>
+            <input type="text" id="participantSearch" class="search-input"
+                placeholder="Buscar por nome, matrícula ou semestre" />
+        </div>
+
+        <div class="table-box" id="participantsTableBox">
+            <table class="participants-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Matrícula</th>
+                        <th>Semestre</th>
+                    </tr>
+                </thead>
+                <tbody id="participantsTableBody"></tbody>
+            </table>
+
+            <div class="empty-state" id="participantsEmpty" style="display: none;">
+                Nenhum participante inscrito no momento.
+            </div>
+
+            <div class="empty-state" id="participantsSearchEmpty" style="display: none;">
+                Nenhum participante encontrado para essa busca.
+            </div>
+        </div>
+    </section>
 
     <footer class="main-footer">
         <div class="footer-content">
