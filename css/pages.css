@@ -325,6 +325,17 @@ input:focus {
     font-family: 'Fira Code', monospace;
 }
 
+.form-error {
+    background: rgba(255, 60, 60, 0.12);
+    width: fit-content;
+    border: 1px solid #ff3c3c;
+    color: #ff3c3c;
+    padding: 0.9rem 1rem;
+    font-size: 0.85rem;
+    margin: 1.2rem 0;
+    font-family: 'Fira Code', monospace;
+}
+
 select {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
