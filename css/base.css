@@ -61,6 +61,69 @@ input:focus-visible,
     border-radius: 10px;
 }
 
+.page-404 {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #05050a;
+}
+
+.centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 2;
+}
+
+.error-box {
+    background: rgba(10, 10, 20, 0.9);
+    padding: 3rem;
+    border: 1px solid var(--neon-red, #ff2b2b);
+    box-shadow: 0 0 20px rgba(255, 43, 43, 0.2);
+    border-radius: 4px;
+}
+
+.error-code {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 5rem;
+    color: var(--neon-red, #ff2b2b);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 15px rgba(255, 43, 43, 0.5);
+}
+
+.error-title {
+    font-family: 'Fira Code', monospace;
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+.error-description {
+    font-family: 'Fira Code', monospace;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    max-width: 500px;
+    line-height: 1.6;
+}
+
+.error-description code {
+    color: var(--neon-red, #ff2b2b);
+}
+
+.error-actions .link-chip {
+    border-color: var(--neon-green);
+    color: var(--neon-green);
+}
+
+.error-actions .link-chip:hover {
+    background: var(--neon-green);
+    color: #000;
+}
+
 @media (max-width: 640px) {
 
     .container {
