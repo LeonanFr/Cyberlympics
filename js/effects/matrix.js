@@ -1,6 +1,6 @@
 (function () {
     const canvas = document.createElement('canvas');
-    canvas.id = 'matrix-canvas';
+    canvas.id = 'matrix-effect-canvas';
     document.body.prepend(canvas);
 
     const ctx = canvas.getContext('2d');

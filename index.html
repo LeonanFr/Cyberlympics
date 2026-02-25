@@ -168,19 +168,67 @@
         </div>
     </section>
 
-    <section id="matriz" class="container">
-        <h2 class="section-title text-center"><i class="fa-solid fa-microchip"></i> > MATRIZ DE CONHECIMENTO</h2>
-        <div class="tags">
-            <span class="tag"><i class="fa-solid fa-jedi"></i> Algoritmos</span>
-            <span class="tag"><i class="fa-solid fa-floppy-disk"></i> Estruturas de Dados</span>
-            <span class="tag"><i class="fa-solid fa-rocket"></i> Arquitetura</span>
-            <span class="tag"><i class="fa-solid fa-robot"></i> Eng. Requisitos</span>
-            <span class="tag"><i class="fa-solid fa-table"></i> Banco de Dados</span>
-            <span class="tag"><i class="fa-solid fa-shield-alt"></i> Qualidade</span>
-            <span class="tag"><i class="fa-solid fa-cogs"></i> DevOps</span>
-            <span class="tag"><i class="fa-solid fa-paint-brush"></i> UI/UX</span>
-            <span class="tag"><i class="fa-solid fa-bug"></i> Debugging</span>
-            <span class="tag"><i class="fa-solid fa-lock"></i> Segurança</span>
+    <section id="matriz" class="matrix-exploration reveal">
+        <div class="container">
+            <div class="section-head-row">
+                <h2 class="section-title"><i class="fa-solid fa-microchip"></i> // MATRIZ DE CONHECIMENTOS</h2>
+
+                <div class="tech-container">
+                    <div class="tech-label">Linguagens suportadas</div>
+                    <div class="tech-stack" title="Clique para curiosidades">
+                        <button class="tech-ico tech-c" type="button" data-lang="C" title="C">
+                            <img class="tech-svg" src="assets/icons/c.svg" alt="C">
+                        </button>
+
+                        <button class="tech-ico tech-cpp" type="button" data-lang="C++" title="C++">
+                            <img class="tech-svg" src="assets/icons/cpp.svg" alt="C++">
+                        </button>
+
+                        <button class="tech-ico tech-java" type="button" data-lang="Java" title="Java">
+                            <img class="tech-svg" src="assets/icons/java.svg" alt="Java">
+                        </button>
+
+                        <button class="tech-ico tech-kotlin" type="button" data-lang="Kotlin" title="Kotlin">
+                            <img class="tech-svg" src="assets/icons/kotlin.svg" alt="Kotlin">
+                        </button>
+
+                        <button class="tech-ico tech-python" type="button" data-lang="Python" title="Python">
+                            <img class="tech-svg" src="assets/icons/python.svg" alt="Python">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="matrix-gallery-wrapper">
+            <div class="mobile-card-nav">
+                <button id="matrixPrevCard" type="button" aria-label="Card anterior"><i
+                        class="fa-solid fa-chevron-left"></i></button>
+                <div class="mobile-card-index" id="matrixCardIndex"></div>
+                <button id="matrixNextCard" type="button" aria-label="Próximo card"><i
+                        class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+            <div id="matrix-canvas">
+                <div id="matrix-items"></div>
+            </div>
+
+            <div id="matrix-timeline">
+                <div class="dialer-wrapper">
+                    <ul class="dialer" id="matrix-dialer">
+                        <li data-topic="algoritmos" class="active"><span>Algoritmos</span></li>
+                        <li data-topic="dados"><span>Estruturas</span></li>
+                        <li data-topic="sql"><span>Banco</span></li>
+                        <li data-topic="arquitetura"><span>Arquitetura</span></li>
+                        <li data-topic="eng-software"><span>Requisitos</span></li>
+                        <li data-topic="qualidade"><span>Qualidade</span></li>
+                        <li data-topic="devops"><span>DevOps</span></li>
+                        <li data-topic="uiux"><span>UI/UX</span></li>
+                        <li data-topic="debugging"><span>Debug</span></li>
+                        <li data-topic="seguranca"><span>Segurança</span></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -348,6 +396,7 @@
     </div>
 
     <script src="js/script.js"></script>
+    <script src="js/matrix-gallery.js"></script>
     <script src="js/effects/hamburger.js"></script>
     <script src="js/effects/matrix.js"></script>
     <script src="js/effects/confetti.js"></script>
