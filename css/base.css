@@ -88,7 +88,9 @@ input:focus-visible,
 
 .error-box {
     background: rgba(10, 10, 20, 0.9);
-    padding: 3rem;
+    padding: 1rem;
+    max-width: 90svw;
+    max-height: 90svh;
     border: 1px solid var(--neon-red, #ff2b2b);
     box-shadow: 0 0 20px rgba(255, 43, 43, 0.2);
     border-radius: 4px;
