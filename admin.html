@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin — I Copa de Software</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="icon" href="assets/starwars.png">
+</head>
+
+<body class="page-admin">
+    <nav class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
+        </div>
+        <div class="menu-toggle" id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Início</a>
+            <a href="ranking.html"><i class="fa-solid fa-trophy"></i> Ranking</a>
+            <a href="equipes.html"><i class="fa-solid fa-users"></i> Equipes</a>
+            <a href="inscricao.html"><i class="fa-solid fa-user-plus"></i> Inscrição</a>
+            <a href="admin.html" class="active"><i class="fa-solid fa-lock"></i> Admin</a>
+        </div>
+    </nav>
+
+    <header class="sub-hero">
+        <div class="sub-hero-inner">
+            <h1 class="sub-title"><i class="fa-solid fa-lock"></i> Painel Administrativo</h1>
+            <p class="sub-text">Acesso restrito à organização.</p>
+        </div>
+    </header>
+
+    <main class="container admin-container">
+
+        <!-- Login Section -->
+        <div id="loginSection" class="admin-section">
+            <div class="admin-card">
+                <h2><i class="fa-solid fa-key"></i> Login</h2>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Usuário</label>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="form-error" id="loginError" style="display: none;"></div>
+                    <button type="submit" class="btn-neon">Entrar</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="adminPanel" style="display: none;">
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="teams">Times Pendentes</button>
+                <button class="tab-btn" data-tab="active-teams">Times Ativos</button>
+                <button class="tab-btn" data-tab="participants">Participantes</button>
+                <button class="tab-btn" data-tab="draw">Sorteio</button>
+                <button class="tab-btn" data-tab="score">Pontuação</button>
+                <button class="tab-btn" data-tab="teamnames">Nomes de Times</button>
+                <button class="tab-btn" data-tab="reserves">Reserva</button>
+            </div>
+
+            <!-- Tab: Times Pendentes -->
+            <div class="tab-content active" id="tab-teams">
+                <h2><i class="fa-solid fa-users"></i> Times Pendentes</h2>
+
+                <!-- Formulário de criação manual -->
+                <div class="manual-team-section">
+                    <h3><i class="fa-solid fa-pen"></i> Criar Time Manual (por matrículas)</h3>
+                    <form id="manualTeamForm">
+                        <div class="input-row">
+                            <div class="form-group">
+                                <label>Matrícula 1</label>
+                                <input type="text" id="mat1" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Matrícula 2</label>
+                                <input type="text" id="mat2" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Matrícula 3</label>
+                                <input type="text" id="mat3" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-neon">Criar Time Pendente</button>
+                    </form>
+                    <div id="manualTeamResult" class="form-alert" style="display: none;"></div>
+                </div>
+
+                <div id="pendingTeamsLoader" class="rank-loader" style="display: none;">
+                    <div class="loader-container">
+                        <div class="loader-circle"></div>
+                        <div class="loader-circle"></div>
+                        <div class="loader-circle"></div>
+                        <div class="loader-circle"></div>
+                        <div class="loader-circle"></div>
+                    </div>
+                    <p>Carregando...</p>
+                </div>
+                <div id="pendingTeamsEmpty" class="table-empty" style="display: none;">Nenhum time pendente.</div>
+                <div id="pendingTeamsList" class="pending-teams-list"></div>
+            </div>
+
+            <!-- Tab: Times Ativos (aprovados) -->
+            <div class="tab-content" id="tab-active-teams">
+                <h2><i class="fa-solid fa-check-circle"></i> Times Aprovados</h2>
+                <div id="activeTeamsList" class="active-teams-list"></div>
+            </div>
+
+            <!-- Tab: Participantes -->
+            <div class="tab-content" id="tab-participants">
+                <h2><i class="fa-solid fa-address-card"></i> Participantes</h2>
+                <div class="participants-list-admin" id="participantsListAdmin"></div>
+            </div>
+
+            <!-- Tab: Sorteio -->
+            <div class="tab-content" id="tab-draw">
+                <h2><i class="fa-solid fa-shuffle"></i> Sorteio</h2>
+                <div class="draw-buttons">
+                    <button id="drawIntermediary" class="btn-neon draw-btn">Sorteio Intermediário</button>
+                    <button id="drawFinal" class="btn-neon draw-btn">Sorteio Final</button>
+                </div>
+                <div id="drawResult" class="draw-result"></div>
+            </div>
+
+            <!-- Tab: Pontuação -->
+            <div class="tab-content" id="tab-score">
+                <h2><i class="fa-solid fa-star"></i> Adicionar Pontuação</h2>
+                <form id="scoreForm">
+                    <div class="form-group">
+                        <label for="teamSelect">Time</label>
+                        <select id="teamSelect" name="teamId" required>
+                            <option value="">Carregando times...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="scoreValue">Valor</label>
+                        <input type="number" id="scoreValue" name="value" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="scoreOrigin">Origem</label>
+                        <select id="scoreOrigin" name="origin" required>
+                            <option value="match">Partida</option>
+                            <option value="penalty">Penalidade</option>
+                            <option value="bonus">Bônus</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="scoreModality">Modalidade (opcional)</label>
+                        <input type="text" id="scoreModality" name="modality">
+                    </div>
+                    <div class="form-group">
+                        <label for="scoreDescription">Descrição</label>
+                        <input type="text" id="scoreDescription" name="description" required>
+                    </div>
+                    <button type="submit" class="btn-neon">Adicionar Pontuação</button>
+                </form>
+            </div>
+
+            <!-- Tab: Nomes de Times -->
+            <div class="tab-content" id="tab-teamnames">
+                <h2><i class="fa-solid fa-font"></i> Nomes de Times</h2>
+                <form id="teamNameForm" class="teamname-form">
+                    <div class="form-group">
+                        <label for="teamName">Novo nome</label>
+                        <input type="text" id="teamName" name="name" required>
+                    </div>
+                    <button type="submit" class="btn-neon">Adicionar Nome</button>
+                </form>
+                <h3>Nomes disponíveis</h3>
+                <div id="availableNames" class="available-names"></div>
+            </div>
+
+            <!-- Tab: Reserva -->
+            <div class="tab-content" id="tab-reserves">
+                <h2><i class="fa-solid fa-clock"></i> Lista de Reserva</h2>
+                <div id="reservesList" class="reserves-list"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-visual">
+                <div id="delorean-display"></div>
+            </div>
+            <div class="footer-text">
+                <div class="footer-brand">
+                    <span>Engenharia de Software — UEPA Castanhal</span>
+                    <span class="separator">//</span>
+                    <code><span id="rotating-phrase">Admin mode activated</span></code>
+                </div>
+                <div class="footer-copy">Desenvolvido por <strong>Leonan Freitas</strong> &copy; 2026</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/effects/hamburger.js"></script>
+    <script src="js/effects/matrix.js"></script>
+    <script src="js/rotating-phrases.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+        fetch('assets/delorean-anim.html')
+            .then(res => res.text())
+            .then(data => document.getElementById('delorean-display').innerHTML = data);
+    </script>
+</body>
+
+</html>

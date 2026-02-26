@@ -418,8 +418,6 @@
     transform: translateY(0) !important;
 }
 
-/* TIMELINE */
-
 .timeline {
     position: relative;
     max-width: 800px;
@@ -479,8 +477,6 @@
 }
 
 @media (max-width: 640px) {
-
-
     .hero-cta a {
         padding: 15px 28px;
         width: 80%;
@@ -494,7 +490,6 @@
     .col-score {
         font-size: 0.7rem;
     }
-
 
     .cta-box {
         flex-direction: column;

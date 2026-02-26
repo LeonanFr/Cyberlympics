@@ -63,6 +63,17 @@
     </header>
 
     <main class="container">
+        <div id="teamsLoader" class="rank-loader" style="display: flex;">
+            <div class="loader-container">
+                <div class="loader-circle"></div>
+                <div class="loader-circle"></div>
+                <div class="loader-circle"></div>
+                <div class="loader-circle"></div>
+                <div class="loader-circle"></div>
+            </div>
+            <p>Carregando times...</p>
+        </div>
+
         <div id="teamsEmpty" class="table-empty" style="display: none; padding: 4rem 0;">
             <i class="fa-solid fa-database"></i> Nenhuma equipe cadastrada ainda. Espere a data das inscrições e dos
             sorteios de times.
@@ -73,8 +84,27 @@
             filtro.
         </div>
 
-        <div id="teamsGrid" class="teams-grid"></div>
+        <div class="teams-wrapper">
 
+            <div id="teamsDesktop" class="teams-grid-desktop"></div>
+
+            <div id="teamsMobile" class="teams-mobile">
+                <div id="teamMobileCard"></div>
+
+                <div class="teams-mobile-nav">
+                    <button id="teamPrevCard" class="btn-ghost btn-small">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <span id="teamCardIndex"></span>
+
+                    <button id="teamNextCard" class="btn-ghost btn-small">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     <section class="participants-section">
@@ -99,9 +129,18 @@
             <div class="empty-state" id="participantsEmpty" style="display: none;">
                 Nenhum participante inscrito no momento.
             </div>
-
             <div class="empty-state" id="participantsSearchEmpty" style="display: none;">
                 Nenhum participante encontrado para essa busca.
+            </div>
+
+            <div class="pagination" id="participantsPagination" style="display: none;">
+                <button id="prevPage" class="btn-ghost btn-small" disabled>
+                    <i class="fa-solid fa-chevron-left"></i> Anterior
+                </button>
+                <span id="pageInfo">Página 1 de 1</span>
+                <button id="nextPage" class="btn-ghost btn-small" disabled>
+                    Próximo <i class="fa-solid fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -129,6 +168,7 @@
     <script src="js/effects/matrix.js"></script>
     <script src="js/rotating-phrases.js"></script>
     <script src="js/teams-logic.js"></script>
+    <script src="js/participants-logic.js"></script>
     <script>
         fetch('assets/delorean-anim.html')
             .then(res => res.text())

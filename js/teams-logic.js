@@ -1,89 +1,194 @@
 (function () {
-    const grid = document.getElementById('teamsGrid');
+    const API_BASE = 'https://copadesoftware-r000.onrender.com';
+    const TEAMS_ENDPOINT = '/teams?status=approved';
+
+    const desktopContainer = document.getElementById('teamsDesktop');
+    const mobileContainer = document.getElementById('teamMobileCard');
+
     const input = document.getElementById('searchAll');
     const reset = document.getElementById('resetTeams');
+
     const teamsEmpty = document.getElementById('teamsEmpty');
     const searchEmpty = document.getElementById('searchEmpty');
+    const loader = document.getElementById('teamsLoader');
 
-    if (!grid || !input) return;
+    const prevBtn = document.getElementById('teamPrevCard');
+    const nextBtn = document.getElementById('teamNextCard');
+    const cardIndex = document.getElementById('teamCardIndex');
 
-    /*
-     * A lista de times será preenchida via API.
-     * Exemplo esperado de retorno:
-     * [
-     *   {
-     *     name: "Nome do Time",
-     *     members: [
-     *       { name: "Aluno 1", sem: "4º" },
-     *       { name: "Aluno 2", sem: "6º" }
-     *     ]
-     *   }
-     * ]
-     */
+    if (!desktopContainer || !mobileContainer) return;
+
     let teams = [];
+    let filteredTeams = [];
+    let currentMobileIndex = 0;
+
+    const mediaQuery = window.matchMedia('(max-width: 640px)');
+
+    function isMobile() {
+        return mediaQuery.matches;
+    }
+
+    async function fetchTeams() {
+        try {
+            const response = await fetch(API_BASE + TEAMS_ENDPOINT);
+            if (!response.ok) throw new Error();
+
+            const json = await response.json();
+            teams = json.success ? json.data : json;
+
+            loader.style.display = 'none';
+            renderTeams();
+        } catch (error) {
+            loader.style.display = 'none';
+            teamsEmpty.innerHTML =
+                '<i class="fa-solid fa-triangle-exclamation"></i> Erro ao carregar times.';
+            teamsEmpty.style.display = 'block';
+        }
+    }
 
     function renderTeams(filter = '') {
-        grid.innerHTML = '';
         const query = filter.toLowerCase();
 
-        if (teams.length === 0) {
-            grid.style.display = 'none';
-            if (teamsEmpty) teamsEmpty.style.display = 'block';
-            if (searchEmpty) searchEmpty.style.display = 'none';
+        if (!teams || teams.length === 0) {
+            teamsEmpty.style.display = 'block';
+            searchEmpty.style.display = 'none';
             return;
         }
 
-        const filtered = teams.filter(team => {
+        filteredTeams = teams.filter(team => {
             const matchName = team.name.toLowerCase().includes(query);
-            const matchMember = team.members.some(m =>
-                m.name.toLowerCase().includes(query) ||
-                m.sem.toLowerCase().includes(query)
-            );
+            const matchMember =
+                team.participantData?.some(m =>
+                    m.nome.toLowerCase().includes(query) ||
+                    m.semestre.toString().includes(query)
+                ) || false;
+
             return matchName || matchMember;
         });
 
-        if (query.length > 0 && filtered.length === 0) {
-            grid.style.display = 'none';
-            if (teamsEmpty) teamsEmpty.style.display = 'none';
-            if (searchEmpty) searchEmpty.style.display = 'block';
+        if (query.length > 0 && filteredTeams.length === 0) {
+            teamsEmpty.style.display = 'none';
+            searchEmpty.style.display = 'block';
+            clearContainers();
             return;
         }
 
-        grid.style.display = 'grid';
-        if (teamsEmpty) teamsEmpty.style.display = 'none';
-        if (searchEmpty) searchEmpty.style.display = 'none';
+        teamsEmpty.style.display = 'none';
+        searchEmpty.style.display = 'none';
 
-        filtered.forEach(team => {
-            const card = document.createElement('div');
-            card.className = 'team-card';
+        currentMobileIndex = 0;
+        updateView();
+    }
 
-            const membersHtml = team.members.map(m => `
-                <div class="member-item">
-                    <span class="m-name">${m.name}</span>
-                    <span class="m-info">${m.sem} Semestre</span>
-                </div>
-            `).join('');
+    function updateView() {
+        desktopContainer.innerHTML = '';
+        mobileContainer.innerHTML = '';
 
-            card.innerHTML = `
-                <div class="team-header">
-                    <div class="team-icon"><i class="fa-solid fa-code"></i></div>
-                    <h3>${team.name}</h3>
-                    <i class="fa-solid fa-chevron-down expand-icon"></i>
-                </div>
-                <div class="team-body">
-                    ${membersHtml}
-                </div>
-            `;
+        if (isMobile()) {
+            renderMobile(currentMobileIndex);
+        } else {
+            renderDesktop();
+        }
+    }
 
-            card.addEventListener('click', () => {
-                card.classList.toggle('expanded');
-            });
+    function clearContainers() {
+        desktopContainer.innerHTML = '';
+        mobileContainer.innerHTML = '';
+    }
 
-            grid.appendChild(card);
+    function renderDesktop() {
+        filteredTeams.forEach(team => {
+            desktopContainer.appendChild(createTeamCard(team));
         });
     }
 
-    input.addEventListener('input', (e) => renderTeams(e.target.value));
+    function renderMobile(index) {
+        if (!filteredTeams.length) return;
+
+        const wasExpanded = mobileContainer.querySelector('.team-card')?.classList.contains('expanded');
+
+        mobileContainer.innerHTML = '';
+
+        if (index < 0) index = 0;
+        if (index >= filteredTeams.length) index = filteredTeams.length - 1;
+
+        currentMobileIndex = index;
+
+        const team = filteredTeams[index];
+        const card = createTeamCard(team);
+
+        if (wasExpanded) card.classList.add('expanded');
+
+        mobileContainer.appendChild(card);
+
+        if (cardIndex) {
+            cardIndex.textContent = `${index + 1} / ${filteredTeams.length}`;
+        }
+
+        if (prevBtn) {
+            prevBtn.disabled = index === 0;
+        }
+
+        if (nextBtn) {
+            nextBtn.disabled = index === filteredTeams.length - 1;
+        }
+    }
+
+    function createTeamCard(team) {
+        const card = document.createElement('div');
+        card.className = 'team-card';
+
+        const membersHtml =
+            team.participantData?.map(m => `
+                <div class="member-item">
+                    <span class="m-name">${m.nome}</span>
+                    <span class="m-info">${m.semestre}º Semestre</span>
+                </div>
+            `).join('') || '';
+
+        card.innerHTML = `
+            <div class="team-header">
+                <div class="team-icon">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <h3>${team.name}</h3>
+                <i class="fa-solid fa-chevron-down expand-icon"></i>
+            </div>
+            <div class="team-body">
+                ${membersHtml}
+            </div>
+        `;
+
+        card.addEventListener('click', () => {
+            card.classList.toggle('expanded');
+        });
+
+        return card;
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            if (currentMobileIndex > 0) {
+                currentMobileIndex--;
+                renderMobile(currentMobileIndex);
+            }
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            if (currentMobileIndex < filteredTeams.length - 1) {
+                currentMobileIndex++;
+                renderMobile(currentMobileIndex);
+            }
+        });
+    }
+
+    if (input) {
+        input.addEventListener('input', e => {
+            renderTeams(e.target.value);
+        });
+    }
 
     if (reset) {
         reset.addEventListener('click', () => {
@@ -93,71 +198,9 @@
         });
     }
 
-    renderTeams();
-})();
+    mediaQuery.addEventListener('change', () => {
+        updateView();
+    });
 
-(function () {
-    const tbody = document.getElementById('participantsTableBody');
-    const search = document.getElementById('participantSearch');
-    const empty = document.getElementById('participantsEmpty');
-    const searchEmpty = document.getElementById('participantsSearchEmpty');
-    const table = document.querySelector('#participantsTableBox table');
-
-    if (!tbody || !search || !table) return;
-
-    /*
-     * A lista de participantes será preenchida via API.
-     * Exemplo esperado de retorno:
-     * [
-     *   {
-     *     name: "Nome do Aluno",
-     *     matricula: "202312345",
-     *     semester: 3
-     *   }
-     * ]
-     */
-    let participants = [];
-
-    function renderParticipants(filter = '') {
-        tbody.innerHTML = '';
-        const query = filter.toLowerCase();
-
-        if (participants.length === 0) {
-            table.style.display = 'none';
-            empty.style.display = 'block';
-            searchEmpty.style.display = 'none';
-            return;
-        }
-
-        const filtered = participants.filter(p =>
-            p.name.toLowerCase().includes(query) ||
-            p.matricula.includes(query) ||
-            `${p.semester}`.includes(query)
-        );
-
-        if (query && filtered.length === 0) {
-            table.style.display = 'none';
-            empty.style.display = 'none';
-            searchEmpty.style.display = 'block';
-            return;
-        }
-
-        table.style.display = 'table';
-        empty.style.display = 'none';
-        searchEmpty.style.display = 'none';
-
-        filtered.forEach(p => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${p.name}</td>
-                <td>${p.matricula}</td>
-                <td>${p.semester}º</td>
-            `;
-            tbody.appendChild(tr);
-        });
-    }
-
-    search.addEventListener('input', e => renderParticipants(e.target.value));
-
-    renderParticipants();
+    fetchTeams();
 })();
