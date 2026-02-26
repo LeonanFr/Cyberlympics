@@ -616,3 +616,43 @@ select option {
         padding: .5rem 1rem;
     }
 }
+
+.system-link {
+    color: var(--neon-green);
+    font-family: 'Fira Code', monospace;
+    font-size: 0.85rem;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.25s ease;
+}
+
+.system-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--neon-green);
+    opacity: 0.6;
+    transition: opacity 0.25s ease, box-shadow 0.25s ease;
+}
+
+.system-link:hover {
+    color: #ffffff;
+}
+
+.system-link:hover::after {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(0, 255, 102, 0.8);
+}
+
+.system-link:active {
+    color: var(--neon-blue);
+}
+
+.system-link:active::after {
+    background: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 163, 255, 0.9);
+}
