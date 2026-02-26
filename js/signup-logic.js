@@ -1,5 +1,5 @@
 const API_BASE = 'https://copadesoftware-r000.onrender.com';
-const INSCRICOES_ABERTAS = true;
+const INSCRICOES_ABERTAS = false;
 
 async function apiFetch(endpoint, options = {}) {
     const response = await fetch(`${API_BASE}${endpoint}`, {
