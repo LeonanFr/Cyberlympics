@@ -512,6 +512,7 @@ select option {
 
 .cta-regulamento {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     gap: 1rem;
     margin-top: 4rem;
@@ -589,6 +590,10 @@ select option {
 }
 
 @media (max-width: 640px) {
+    .rules-paper {
+        padding: 1rem;
+    }
+
     .teams-grid-desktop {
         display: none;
     }
