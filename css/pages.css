@@ -541,6 +541,53 @@ select option {
     margin-bottom: 2rem;
 }
 
+/* RANKING PREVIEW */
+
+.preview-loader {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.preview-empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 30px;
+}
+
+.preview-rows {
+    width: 100%;
+}
+
+.preview-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 100px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color);
+    align-items: center;
+}
+
+.preview-row:last-child {
+    border-bottom: none;
+}
+
+.preview-row .preview-pos {
+    color: var(--neon-purple);
+    font-weight: bold;
+}
+
+.preview-row .preview-name {
+    font-family: 'Fira Code', monospace;
+}
+
+.preview-row .preview-score {
+    color: var(--neon-green);
+    text-align: right;
+}
+
 @media (max-width: 640px) {
 
     .cta-regulamento {

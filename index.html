@@ -308,21 +308,23 @@
                 <span class="col-name">Equipe</span>
                 <span class="col-score">Créditos</span>
             </div>
-            <div class="lb-item first">
-                <span class="lb-pos"><i class="fa-solid fa-crown"></i> 01</span>
-                <span class="lb-name">Aguardando...</span>
-                <span class="lb-score">0</span>
+
+            <div id="previewLoader" class="rank-loader" style="display: flex;">
+                <div class="loader-container">
+                    <div class="loader-circle"></div>
+                    <div class="loader-circle"></div>
+                    <div class="loader-circle"></div>
+                    <div class="loader-circle"></div>
+                    <div class="loader-circle"></div>
+                </div>
+                <p>Carregando classificação...</p>
             </div>
-            <div class="lb-item">
-                <span class="lb-pos">02</span>
-                <span class="lb-name">Aguardando...</span>
-                <span class="lb-score">0</span>
+
+            <div id="previewEmpty" class="table-empty" style="display: none;">
+                <i class="fa-solid fa-triangle-exclamation"></i> Nenhuma equipe cadastrada.
             </div>
-            <div class="lb-item">
-                <span class="lb-pos">03</span>
-                <span class="lb-name">Aguardando...</span>
-                <span class="lb-score">0</span>
-            </div>
+
+            <div id="previewRows" class="preview-rows"></div>
         </div>
     </section>
 
@@ -401,6 +403,7 @@
     <script src="js/effects/matrix.js"></script>
     <script src="js/effects/confetti.js"></script>
     <script src="js/rotating-phrases.js"></script>
+    <script src="js/ranking-preview.js"></script>
     <script>
         fetch('assets/delorean-anim.html')
             .then(res => res.text())
