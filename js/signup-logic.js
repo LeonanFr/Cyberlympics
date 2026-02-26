@@ -1,4 +1,17 @@
-const INSCRICOES_ABERTAS = false;
+const API_BASE = 'https://copadesoftware-r000.onrender.com';
+const INSCRICOES_ABERTAS = true;
+
+async function apiFetch(endpoint, options = {}) {
+    const response = await fetch(`${API_BASE}${endpoint}`, {
+        headers: { 'Content-Type': 'application/json' },
+        ...options
+    });
+    const json = await response.json();
+    if (!response.ok || (json && json.success === false)) {
+        throw new Error(json.error || `Erro ${response.status}`);
+    }
+    return json.data;
+}
 
 (function controlarInscricao() {
     const closed = document.getElementById('signupClosed');
@@ -22,7 +35,6 @@ window.switchForm = function (type) {
     const individual = document.getElementById('form-individual');
     const btns = document.querySelectorAll('.btn-toggle');
     const success = document.getElementById('successMessage');
-    const error = document.getElementById('formError');
 
     success && (success.style.display = 'none');
     document.querySelectorAll('.form-error').forEach(e => e.remove());
@@ -42,61 +54,83 @@ window.switchForm = function (type) {
 
 function showFormError(form, message) {
     let error = form.querySelector('.form-error');
-
     if (!error) {
         error = document.createElement('div');
         error.className = 'form-error';
-
         const submitBtn = form.querySelector('button[type="submit"]');
         submitBtn.parentNode.insertBefore(error, submitBtn);
     }
-
     error.textContent = message;
 }
 
-document.getElementById('signupTrio')?.addEventListener('submit', function (e) {
+document.getElementById('signupTrio')?.addEventListener('submit', async function (e) {
     e.preventDefault();
-
     const form = e.target;
-    const data = new FormData(form);
+    const formData = new FormData(form);
 
     const semestres = [
-        data.get('m1_sem'),
-        data.get('m2_sem'),
-        data.get('m3_sem')
-    ];
+        formData.get('m1_sem'),
+        formData.get('m2_sem'),
+        formData.get('m3_sem')
+    ].map(s => parseInt(s, 10));
 
     const matriculas = [
-        data.get('m1_mat')?.trim(),
-        data.get('m2_mat')?.trim(),
-        data.get('m3_mat')?.trim()
+        formData.get('m1_mat')?.trim(),
+        formData.get('m2_mat')?.trim(),
+        formData.get('m3_mat')?.trim()
     ];
 
-    const semSet = new Set(semestres);
-    if (semSet.size === 1) {
-        showFormError(form,
-            'O time deve possuir participantes de pelo menos dois semestres diferentes.'
-        );
+    if (new Set(semestres).size < 2) {
+        showFormError(form, 'O time deve possuir participantes de pelo menos dois semestres diferentes.');
         return;
     }
 
-    const matSet = new Set(matriculas);
-    if (matSet.size !== matriculas.length) {
-        showFormError(form,
-            'Não é permitido repetir a mesma matrícula no time.'
-        );
+    if (new Set(matriculas).size !== matriculas.length) {
+        showFormError(form, 'Não é permitido repetir a mesma matrícula no time.');
         return;
     }
 
-    form.style.display = 'none';
-    document.getElementById('successMessage')?.style.setProperty('display', 'block');
+    const participants = [
+        { matricula: matriculas[0], nome: formData.get('m1_name')?.trim(), semestre: semestres[0] },
+        { matricula: matriculas[1], nome: formData.get('m2_name')?.trim(), semestre: semestres[1] },
+        { matricula: matriculas[2], nome: formData.get('m3_name')?.trim(), semestre: semestres[2] }
+    ];
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+
+    try {
+        await apiFetch('/signup/team', { method: 'POST', body: JSON.stringify({ participants }) });
+        form.style.display = 'none';
+        document.getElementById('successMessage')?.style.setProperty('display', 'block');
+    } catch (error) {
+        console.error('Erro no signup de time:', error);
+        showFormError(form, error.message || 'Erro ao realizar inscrição. Tente novamente.');
+        submitBtn.disabled = false;
+    }
 });
 
-document.getElementById('signupIndividual')?.addEventListener('submit', function (e) {
+document.getElementById('signupIndividual')?.addEventListener('submit', async function (e) {
     e.preventDefault();
-
     const form = e.target;
+    const formData = new FormData(form);
 
-    form.style.display = 'none';
-    document.getElementById('successMessage')?.style.setProperty('display', 'block');
+    const payload = {
+        matricula: formData.get('ind_mat')?.trim(),
+        nome: formData.get('ind_name')?.trim(),
+        semestre: parseInt(formData.get('ind_sem'), 10)
+    };
+
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+
+    try {
+        await apiFetch('/signup/individual', { method: 'POST', body: JSON.stringify(payload) });
+        form.style.display = 'none';
+        document.getElementById('successMessage')?.style.setProperty('display', 'block');
+    } catch (error) {
+        console.error('Erro no signup individual:', error);
+        showFormError(form, error.message || 'Erro ao realizar inscrição. Tente novamente.');
+        submitBtn.disabled = false;
+    }
 });

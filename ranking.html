@@ -68,21 +68,22 @@
                                 <span class="col-score">Créditos</span>
                         </div>
 
-                        <div id="rankEmpty" class="table-empty" style="display: none;">
-                                <i class="fa-solid fa-triangle-exclamation"></i> Nenhuma equipe encontrada com esse
-                                nome.
+                        <div id="rankLoader" class="table-loader" style="display: flex;">
+                                <div class="loader-container">
+                                        <div class="loader-circle"></div>
+                                        <div class="loader-circle"></div>
+                                        <div class="loader-circle"></div>
+                                        <div class="loader-circle"></div>
+                                        <div class="loader-circle"></div>
+                                </div>
+                                <p>Carregando ranking...</p>
                         </div>
 
-                        <div class="table-row" data-team="aguardando">
-                                <span class="lb-pos"><i class="fa-solid fa-crown"></i> 01</span>
-                                <span class="lb-name">Aguardando Inscrições</span>
-                                <span class="lb-score">0</span>
+                        <div id="rankEmpty" class="table-empty" style="display: none;">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Nenhuma equipe encontrada.
                         </div>
-                        <div class="table-row" data-team="aguardando">
-                                <span class="lb-pos">02</span>
-                                <span class="lb-name">Aguardando Inscrições</span>
-                                <span class="lb-score">0</span>
-                        </div>
+
+                        <div id="rankRows" class="table-rows"></div>
                 </div>
         </main>
 

@@ -100,10 +100,10 @@
 }
 
 .table-empty {
+    padding: 40px;
+    text-align: center;
     color: var(--text-muted);
-    display: flex;
-    gap: 10px;
-    align-items: center;
+    font-size: 1.2rem;
 }
 
 .teams-grid {
