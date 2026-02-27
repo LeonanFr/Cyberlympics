@@ -9,7 +9,7 @@ const rankRowsContainer = document.getElementById('rankRows');
 let currentRanking = [];
 let previousRanking = [];
 
-const RANK_ANIM_MS = 1200;
+const RANK_ANIM_MS = 2000;
 
 function renderRanking(ranking) {
     if (!ranking || ranking.length === 0) {
