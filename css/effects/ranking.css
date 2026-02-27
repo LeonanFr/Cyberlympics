@@ -1,0 +1,250 @@
+.table-box {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.table-head,
+.table-row {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(100px, 1fr) minmax(200px, 1.5fr) minmax(110px, 1fr);
+    gap: 16px;
+    padding: 18px 24px;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.table-head {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+    background: rgba(10, 10, 15, .35);
+}
+
+.table-head .col-pos {
+    color: #b46bff;
+    text-align: left;
+}
+
+.table-head .col-name {
+    color: rgba(255, 255, 255, .92);
+    text-align: left;
+}
+
+.table-head .col-score {
+    color: rgba(0, 255, 102, .95);
+    text-align: left;
+}
+
+.table-rows {
+    width: 100%;
+}
+
+.table-row {
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .05);
+    transition: background-color .2s;
+}
+
+.table-row span {
+    font-family: 'Press Start 2P', cursive !important;
+}
+
+.table-row:hover {
+    background: rgba(0, 255, 102, .05);
+}
+
+.table-row .col-pos {
+    color: #b46bff;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.table-row .col-name {
+    color: rgba(255, 255, 255, .92);
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 8px;
+}
+
+.table-row .col-score {
+    color: rgba(0, 255, 102, .95);
+    text-align: left;
+    white-space: nowrap;
+    position: relative;
+    display: inline-block;
+    min-width: 6ch;
+}
+
+.col-score.score-up {
+    --c1: #b46bff;
+    --c2: #6a5cff;
+    --glow: rgba(180, 107, 255, .85);
+}
+
+.col-score.score-down {
+    --c1: #ff4d4d;
+    --c2: #ff8a4d;
+    --glow: rgba(255, 77, 77, .85);
+}
+
+.col-score[data-old]::before {
+    content: attr(data-old);
+    position: absolute;
+    inset: 0;
+    text-align: left;
+    color: rgba(0, 255, 102, .95);
+    opacity: 1;
+    pointer-events: none;
+}
+
+.col-score.animating[data-old]::before {
+    animation: scoreOldFade 220ms ease-out forwards;
+}
+
+@keyframes scoreOldFade {
+    to {
+        opacity: 0;
+        filter: blur(1px);
+    }
+}
+
+.col-score .score-text {
+    position: relative;
+    display: inline-block;
+}
+
+.col-score.animating .score-text {
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    text-shadow: 0 0 12px var(--glow), 0 0 26px var(--glow);
+    background-image: linear-gradient(90deg, var(--c1), var(--c2)), linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .55) 50%, rgba(255, 255, 255, 0) 100%);
+    background-repeat: no-repeat, no-repeat;
+    background-size: 0% 100%, 28% 100%;
+    background-position: 0 0, -40% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: scoreFillOnce 1500ms cubic-bezier(.2, .8, .2, 1) forwards;
+}
+
+@keyframes scoreFillOnce {
+    0% {
+        background-size: 0% 100%, 28% 100%;
+        background-position: 0 0, -40% 0;
+        filter: blur(.4px);
+    }
+
+    60% {
+        background-size: 100% 100%, 28% 100%;
+        background-position: 0 0, 120% 0;
+        filter: blur(0);
+    }
+
+    100% {
+        background-size: 100% 100%, 0% 100%;
+        background-position: 0 0, 120% 0;
+    }
+}
+
+.col-score.hold .score-text {
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    text-shadow: 0 0 12px var(--glow), 0 0 26px var(--glow);
+    background-image: linear-gradient(90deg, var(--c1), var(--c2));
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-position: 0 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.col-score.revert .score-text {
+    position: relative;
+    color: rgba(0, 255, 102, .95);
+    background-image: linear-gradient(90deg, rgba(0, 255, 102, .95), rgba(0, 255, 102, .95)), linear-gradient(90deg, var(--c1), var(--c2));
+    background-repeat: no-repeat, no-repeat;
+    background-size: 0% 100%, 100% 100%;
+    background-position: 0 0, 0 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: scoreUnfill 650ms cubic-bezier(.2, .8, .2, 1) forwards;
+}
+
+@keyframes scoreUnfill {
+    0% {
+        background-size: 0% 100%, 100% 100%;
+    }
+
+    100% {
+        background-size: 100% 100%, 100% 100%;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .table-head,
+    .table-row {
+        grid-template-columns: minmax(80px, 1fr) minmax(150px, 1.5fr) minmax(90px, 1fr);
+        gap: 12px;
+        padding: 14px 18px;
+    }
+
+    .table-head {
+        font-size: 0.8rem;
+    }
+
+    .table-row {
+        font-size: 0.85rem;
+    }
+
+    .table-row .col-score {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .table-head,
+    .table-row {
+        grid-template-columns: minmax(70px, 1fr) minmax(120px, 1.5fr) minmax(80px, 1fr);
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .table-head {
+        font-size: 0.65rem;
+    }
+
+    .table-row {
+        font-size: 0.7rem;
+    }
+
+    .table-row .col-score {
+        font-size: 0.8rem;
+    }
+}
+
+.table-row.rank-up>*:not(.pacman-overlay):not(.ghost-overlay),
+.table-row.rank-down>*:not(.pacman-overlay):not(.ghost-overlay) {
+    animation: fadeDuringOverlay var(--rankDur) linear forwards;
+}
+
+@keyframes fadeDuringOverlay {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    10%,
+    90% {
+        opacity: 0;
+    }
+}

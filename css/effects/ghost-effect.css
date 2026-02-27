@@ -1,0 +1,208 @@
+:root {
+    --ghost-logical-size: 56px;
+    --ghost-visual-size: 32px;
+    --ghost-scale: calc(var(--ghost-visual-size) / var(--ghost-logical-size));
+    --ghost-color: orange;
+    --duration: 1.2s;
+}
+
+.ghost-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 60;
+}
+
+.ghost-overlay .ghost {
+    position: absolute;
+    width: var(--ghost-logical-size);
+    height: var(--ghost-logical-size);
+    top: 50%;
+    right: -40px;
+
+    transform:
+        translateY(-50%) scale(var(--ghost-scale));
+
+    transform-origin: left center;
+
+    animation: slideGhostLeft var(--rankDur, 1.2s) linear forwards;
+    overflow: visible;
+}
+
+.ghost-overlay .ghost__body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.ghost-overlay .ghost__body svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--ghost-color);
+    display: block;
+}
+
+.ghost-overlay .ghost__eye--left,
+.ghost-overlay .ghost__eye--right {
+    position: absolute;
+    top: 30%;
+    width: 30%;
+    height: 40%;
+    animation: eyes 6s steps(1) infinite;
+}
+
+.ghost-overlay .ghost__eye--left {
+    left: 15%;
+}
+
+.ghost-overlay .ghost__eye--right {
+    right: 15%;
+}
+
+.ghost-overlay .ghost__eye--left svg,
+.ghost-overlay .ghost__eye--right svg {
+    width: 100%;
+    height: 100%;
+    fill: #fff;
+}
+
+.ghost-overlay .ghost__eye--left::after,
+.ghost-overlay .ghost__eye--right::after {
+    content: '';
+    position: absolute;
+    width: 40%;
+    height: 40%;
+    background: blue;
+    top: 40%;
+    left: 30%;
+    animation: eyeballs 6s steps(1) infinite;
+}
+
+.ghost-overlay .ghost__feet {
+    position: absolute;
+    bottom: -4px;
+    left: 0px;
+    width: 4px;
+    height: 4px;
+    background: var(--ghost-color);
+    pointer-events: none;
+    animation: feet 0.3s steps(1) infinite;
+}
+
+@keyframes slideGhostLeft {
+    to {
+        right: 100%;
+    }
+}
+
+@keyframes eyes {
+
+    0%,
+    100% {
+        top: 30%;
+    }
+
+    10% {
+        top: 20%;
+    }
+
+    50% {
+        top: 30%;
+    }
+
+    70% {
+        top: 20%;
+    }
+}
+
+@keyframes eyeballs {
+
+    0%,
+    100% {
+        top: 40%;
+        left: 30%;
+    }
+
+    10% {
+        top: 60%;
+        left: 20%;
+    }
+
+    20% {
+        top: 70%;
+        left: 40%;
+    }
+
+    40% {
+        top: 60%;
+        left: 20%;
+    }
+
+    50% {
+        top: 40%;
+        left: 30%;
+    }
+
+    70% {
+        top: 60%;
+        left: 50%;
+    }
+
+    90% {
+        top: 70%;
+        left: 40%;
+    }
+}
+
+
+@keyframes feet {
+
+    0%,
+    100% {
+        box-shadow:
+            4px 0 var(--ghost-color),
+            8px 0 var(--ghost-color),
+            12px 0 var(--ghost-color),
+
+            4px 4px var(--ghost-color),
+            8px 4px var(--ghost-color),
+
+            20px 0 var(--ghost-color),
+            24px 0 var(--ghost-color),
+            28px 0 var(--ghost-color),
+            32px 0 var(--ghost-color),
+
+            24px 4px var(--ghost-color),
+            28px 4px var(--ghost-color),
+
+            40px 0 var(--ghost-color),
+            44px 0 var(--ghost-color),
+            48px 0 var(--ghost-color),
+            52px 0 var(--ghost-color),
+
+            44px 4px var(--ghost-color),
+            48px 4px var(--ghost-color);
+    }
+
+    50% {
+        box-shadow:
+            0 4px var(--ghost-color),
+            4px 0 var(--ghost-color),
+
+            12px 0 var(--ghost-color),
+            16px 0 var(--ghost-color),
+            20px 0 var(--ghost-color),
+            16px 4px var(--ghost-color),
+            20px 4px var(--ghost-color),
+
+            32px 0 var(--ghost-color),
+            36px 0 var(--ghost-color),
+            40px 0 var(--ghost-color),
+            32px 4px var(--ghost-color),
+            36px 4px var(--ghost-color),
+
+            48px 0 var(--ghost-color),
+            52px 0 var(--ghost-color),
+            52px 4px var(--ghost-color);
+    }
+}

@@ -288,8 +288,11 @@
     box-shadow: 0 0 18px rgba(0, 255, 102, .1);
 }
 
-#rankEmpty {
+#rankEmpty,
+#previewEmpty {
     padding: 1rem;
+    gap: 1rem;
+    align-items: center;
 }
 
 .modal {
