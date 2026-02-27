@@ -1,6 +1,6 @@
 :root {
     --ghost-logical-size: 56px;
-    --ghost-visual-size: 32px;
+    --ghost-visual-size: 24px;
     --ghost-scale: calc(var(--ghost-visual-size) / var(--ghost-logical-size));
     --ghost-color: orange;
     --duration: 1.2s;
