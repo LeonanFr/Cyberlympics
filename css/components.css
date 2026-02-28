@@ -389,14 +389,13 @@
     padding: 10px 15px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
-    min-width: 80px;
+    min-width: fit-content;
 }
 
 .countdown-number {
     font-size: 2rem;
     color: var(--neon-green);
     text-shadow: 0 0 10px var(--neon-green);
-    line-height: 1.2;
 }
 
 .countdown-label {
@@ -498,7 +497,7 @@
     .hero-cta a {
         width: 100%;
         gap: 0.5rem;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         text-align: center;
         white-space: normal;
         word-break: break-word;
@@ -530,19 +529,18 @@
 
     .countdown-modern {
         gap: 10px;
-        flex-wrap: no-wrap;
+        flex-wrap: nowrap;
     }
 
     .countdown-item {
-        min-width: 60px;
         padding: 5px 10px;
     }
 
     .countdown-number {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .countdown-label {
-        font-size: 0.6rem;
+        font-size: 0.4rem;
     }
 }
