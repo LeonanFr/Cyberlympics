@@ -11,19 +11,7 @@ let previousRanking = [];
 
 const RANK_ANIM_MS = 1200;
 let isAnimating = false;
-
 let pendingRanking = null;
-
-const DEFAULT_MOCK_TEAMS = [
-    { teamId: 1, teamName: 'Equipe CodeMasters', total: 120 },
-    { teamId: 2, teamName: 'ByteBusters', total: 95 },
-    { teamId: 3, teamName: 'DevOps Dinosaurs', total: 82 },
-    { teamId: 4, teamName: 'Frontend Falcons', total: 78 },
-    { teamId: 5, teamName: 'Backend Bears', total: 67 },
-    { teamId: 6, teamName: 'Database Dragons', total: 54 },
-    { teamId: 7, teamName: 'Cloud Cowboys', total: 43 },
-    { teamId: 8, teamName: 'Security Snakes', total: 31 },
-];
 
 function buildOverlayHTML(type) {
     if (type === 'up') {
@@ -138,6 +126,7 @@ function animateScoreCells() {
         }, 3200);
     });
 }
+
 function flipAnimate(oldRects, rankUpSet) {
     rankRowsContainer.querySelectorAll('.table-row').forEach(el => {
         const id = el.dataset.teamId;
@@ -272,7 +261,6 @@ function renderRanking(ranking) {
     rankRowsContainer.appendChild(frag);
 
     flipAnimate(oldRects, rankUp);
-
     animateScoreCells();
 
     rankRowsContainer.querySelectorAll('.table-row.rank-up, .table-row.rank-down').forEach(row => {
@@ -310,13 +298,12 @@ async function fetchInitialRanking() {
         const ranking = json && json.success ? json.data : json;
         currentRanking = Array.isArray(ranking) ? ranking : [];
         renderRanking(currentRanking);
-        setupSSE();
     } catch {
-        currentRanking = DEFAULT_MOCK_TEAMS;
-        renderRanking(currentRanking);
+        emptyMessage.style.display = 'flex';
+        rankRowsContainer.innerHTML = '';
+        previousRanking = [];
     } finally {
         if (loader) loader.style.display = 'none';
-        startMockUpdates();
     }
 }
 
@@ -335,34 +322,9 @@ function setupSSE() {
     } catch { }
 }
 
-function startMockUpdates() {
-    let mockRanking = currentRanking.length > 0
-        ? currentRanking.map(t => ({ ...t }))
-        : DEFAULT_MOCK_TEAMS.map(t => ({ ...t }));
-
-    function updateMock() {
-        if (isAnimating) {
-            setTimeout(updateMock, 500);
-            return;
-        }
-
-        mockRanking = mockRanking.map(team => {
-            const delta = Math.floor(Math.random() * 20) - 10;
-            return { ...team, total: Math.max(0, team.total + delta) };
-        });
-
-        mockRanking.sort((a, b) => b.total - a.total);
-        currentRanking = mockRanking;
-        safeRender(mockRanking);
-
-        setTimeout(updateMock, 4000);
-    }
-
-    setTimeout(updateMock, 4000);
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     fetchInitialRanking();
+    setupSSE();
 });
 
 const searchInput = document.getElementById('rankSearch');
