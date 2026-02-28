@@ -9,6 +9,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
                 rel="stylesheet">
         <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/ranking.css" />
         <link rel="stylesheet" href="css/effects/ghost-effect.css">
         <link rel="stylesheet" href="css/effects/pacman-effect.css">
         <link rel="stylesheet" href="css/effects/delorean-anim.css">
@@ -62,44 +63,33 @@
                 </div>
         </header>
 
-        <main class="container main-ranking-content">
-
-                <div class=" ray">
-                        <div class="yellow"></div>
-                        <div class="shadow"></div>
-                </div>
-                <div class="kinto centered">
-                        <ul>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                        </ul>
-                </div>
-
-                <div class="table-box">
-                        <div class="table-head">
-                                <span class="col-pos">Posição</span>
-                                <span class="col-name">Equipe</span>
-                                <span class="col-score">Créditos</span>
-                        </div>
-
-                        <div id="rankLoader" class="rank-loader" style="display: flex;">
-                                <div class="loader-container">
-                                        <div class="loader-circle"></div>
-                                        <div class="loader-circle"></div>
-                                        <div class="loader-circle"></div>
-                                        <div class="loader-circle"></div>
-                                        <div class="loader-circle"></div>
+        <main class="main-ranking-content">
+                <canvas id="dragons-canvas" class="dragons-bg"></canvas>
+                <div class="container">
+                        <div class="table-box">
+                                <div class="table-head">
+                                        <span class="col-pos">Posição</span>
+                                        <span class="col-name">Equipe</span>
+                                        <span class="col-score">Créditos</span>
                                 </div>
-                                <p>Carregando ranking...</p>
-                        </div>
 
-                        <div id="rankEmpty" class="table-empty" style="display: none;">
-                                <i class="fa-solid fa-triangle-exclamation"></i> Nenhuma equipe encontrada.
-                        </div>
+                                <div id="rankLoader" class="rank-loader" style="display: flex;">
+                                        <div class="loader-container">
+                                                <div class="loader-circle"></div>
+                                                <div class="loader-circle"></div>
+                                                <div class="loader-circle"></div>
+                                                <div class="loader-circle"></div>
+                                                <div class="loader-circle"></div>
+                                        </div>
+                                        <p>Carregando ranking...</p>
+                                </div>
 
-                        <div id="rankRows" class="table-rows"></div>
+                                <div id="rankEmpty" class="table-empty" style="display: none;">
+                                        <i class="fa-solid fa-triangle-exclamation"></i> Nenhuma equipe encontrada.
+                                </div>
+
+                                <div id="rankRows" class="table-rows"></div>
+                        </div>
                 </div>
         </main>
 
@@ -126,6 +116,7 @@
         <script src="js/effects/matrix.js"></script>
         <script src="js/rotating-phrases.js"></script>
         <script src="js/ranking-script.js"></script>
+        <script src="js/effects/dragons.js"></script>
         <script>
                 fetch('assets/delorean-anim.html')
                         .then(res => res.text())
