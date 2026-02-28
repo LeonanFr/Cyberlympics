@@ -10,6 +10,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
     <link rel="icon" href="assets/starwars.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
     <meta name="description"
         content="A maior competição de Engenharia de Software da UEPA Castanhal. Algoritmos, SQL e estratégia sob pressão.">
     <meta name="keywords" content="Engenharia de Software, UEPA, Competição, Programação, Algoritmos, SQL">
@@ -49,6 +50,7 @@
 
     <header class="hero" id="topo">
         <div class="hero-overlay"></div>
+        <div id="bb8-container" class="bb8-container"></div>
         <div class="terminal-hero">
             <div class="terminal-bar">
                 <span class="dot red"></span>
@@ -65,7 +67,7 @@
                     <span id="typing"></span><span class="caret">█</span>
                 </p>
                 <div class="hero-pills">
-                    <span class="pill"><i class="fa-regular fa-calendar-days"></i> 16 de maio de 2026</span>
+                    <span class="pill"><i class="fa-regular fa-calendar-days"></i> 16/05/26</span>
                     <span class="pill"><i class="fa-regular fa-clock"></i> 08:00 – 12:00</span>
                     <span class="pill"><i class="fa-solid fa-location-dot"></i> Campus XX</span>
                     <span class="pill"><i class="fa-solid fa-users"></i> Disputa em trio</span>
@@ -408,6 +410,16 @@
         fetch('assets/delorean-anim.html')
             .then(res => res.text())
             .then(data => document.getElementById('delorean-display').innerHTML = data);
+    </script>
+    <script src="js/effects/bb8.js"></script>
+
+    <script>
+        fetch('assets/bb8-anim.svg')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('bb8-container').innerHTML = data;
+            })
+            .catch(err => console.error('Erro ao carregar BB-8:', err));
     </script>
 </body>
 

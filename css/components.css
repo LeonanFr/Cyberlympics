@@ -488,9 +488,29 @@
 }
 
 @media (max-width: 640px) {
+    .hero-cta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        padding: 0 10px;
+    }
+
     .hero-cta a {
-        padding: 15px 28px;
-        width: 80%;
+        width: 100%;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        text-align: center;
+        white-space: normal;
+        word-break: break-word;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-neon,
+    .btn-ghost {
+        padding: 12px 10px;
+        font-size: 0.85rem;
     }
 
     .lb-score,
@@ -510,7 +530,7 @@
 
     .countdown-modern {
         gap: 10px;
-        flex-wrap: wrap;
+        flex-wrap: no-wrap;
     }
 
     .countdown-item {

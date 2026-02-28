@@ -14,7 +14,6 @@ ul {
     margin: 0;
 }
 
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -171,6 +170,7 @@ input:focus-visible,
 }
 
 @media (max-width: 640px) {
+    
     .container {
         padding: 40px 16px;
     }
