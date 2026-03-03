@@ -22,7 +22,7 @@
             localStorage.removeItem('adminToken');
             loginSection.style.display = 'flex';
             adminPanel.style.display = 'none';
-            loginError.textContent = 'Sessão expirada. Faça login novamente.';
+            loginError.textContent = 'Sessão expirada. Faça login novamente';
             loginError.style.display = 'block';
             throw new Error('Sessão expirada');
         }
