@@ -6,6 +6,30 @@
     const loginForm = document.getElementById('loginForm');
     const loginError = document.getElementById('loginError');
 
+    async function apiRequest(url, options = {}) {
+        const token = localStorage.getItem('adminToken');
+        const headers = { ...(options.headers || {}) };
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+
+        const response = await fetch(API_BASE + url, {
+            ...options,
+            headers
+        });
+
+        if (response.status === 401) {
+            localStorage.removeItem('adminToken');
+            loginSection.style.display = 'flex';
+            adminPanel.style.display = 'none';
+            loginError.textContent = 'Sessão expirada. Faça login novamente.';
+            loginError.style.display = 'block';
+            throw new Error('Sessão expirada');
+        }
+
+        return response;
+    }
+
     const token = localStorage.getItem('adminToken');
     if (token) {
         loginSection.style.display = 'none';
@@ -80,9 +104,7 @@
         list.innerHTML = '';
 
         try {
-            const response = await fetch(API_BASE + '/teams?status=pending', {
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
-            });
+            const response = await apiRequest('/teams?status=pending');
             if (!response.ok) throw new Error('Erro ao carregar times');
             const json = await response.json();
             const teams = json.success ? json.data : json;
@@ -137,10 +159,7 @@
     async function approveTeam(teamId) {
         if (!confirm('Aprovar este time?')) return;
         try {
-            const response = await fetch(API_BASE + `/admin/teams/${teamId}/approve`, {
-                method: 'POST',
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
-            });
+            const response = await apiRequest(`/admin/teams/${teamId}/approve`, { method: 'POST' });
             if (!response.ok) {
                 const err = await response.json();
                 throw new Error(err.error || 'Erro ao aprovar');
@@ -155,10 +174,7 @@
     async function rejectTeam(teamId) {
         if (!confirm('Rejeitar este time?')) return;
         try {
-            const response = await fetch(API_BASE + `/admin/teams/${teamId}/reject`, {
-                method: 'POST',
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
-            });
+            const response = await apiRequest(`/admin/teams/${teamId}/reject`, { method: 'POST' });
             if (!response.ok) {
                 const err = await response.json();
                 throw new Error(err.error || 'Erro ao rejeitar');
@@ -181,12 +197,9 @@
         resultDiv.style.display = 'none';
 
         try {
-            const response = await fetch(API_BASE + '/admin/teams', {
+            const response = await apiRequest('/admin/teams', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ matriculas })
             });
 
@@ -212,9 +225,7 @@
         list.innerHTML = '<div class="rank-loader" style="display:flex;"><div class="loader-container">...</div><p>Carregando...</p></div>';
 
         try {
-            const response = await fetch(API_BASE + '/teams?status=approved', {
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
-            });
+            const response = await fetch(API_BASE + '/teams?status=approved');
             if (!response.ok) throw new Error('Erro ao carregar');
             const json = await response.json();
             const teams = json.success ? json.data : json;
@@ -248,10 +259,7 @@
     window.cancelTeam = async (teamId) => {
         if (!confirm('Tem certeza que deseja cancelar este time? Os participantes serão liberados.')) return;
         try {
-            const response = await fetch(API_BASE + `/admin/teams/${teamId}/cancel`, {
-                method: 'POST',
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
-            });
+            const response = await apiRequest(`/admin/teams/${teamId}/cancel`, { method: 'POST' });
             if (!response.ok) {
                 const err = await response.json();
                 throw new Error(err.error || 'Erro ao cancelar');
@@ -336,9 +344,7 @@
     async function loadAvailableNames() {
         const container = document.getElementById('availableNames');
         try {
-            const response = await fetch(API_BASE + '/admin/team-names/available', {
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
-            });
+            const response = await apiRequest('/admin/team-names/available');
             if (!response.ok) throw new Error('Erro ao carregar');
             const json = await response.json();
             const names = json.success ? json.data : json;
@@ -360,12 +366,9 @@
         if (!name) return;
 
         try {
-            const response = await fetch(API_BASE + '/admin/team-names', {
+            const response = await apiRequest('/admin/team-names', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name })
             });
             if (!response.ok) {
@@ -384,9 +387,7 @@
         container.innerHTML = '<div class="rank-loader">Carregando...</div>';
 
         try {
-            const response = await fetch(API_BASE + '/admin/reserves', {
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
-            });
+            const response = await apiRequest('/admin/reserves');
             if (!response.ok) throw new Error('Erro ao carregar reservas');
             const json = await response.json();
             const reserves = json.success ? json.data : json;
@@ -398,9 +399,7 @@
 
             const reservesWithParticipants = await Promise.all(reserves.map(async (r) => {
                 try {
-                    const resp = await fetch(API_BASE + `/admin/participants/id/${r.participantId}`, {
-                        headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
-                    });
+                    const resp = await apiRequest(`/admin/participants/id/${r.participantId}`);
                     if (!resp.ok) return { ...r, nome: 'Desconhecido', matricula: r.participantId };
                     const json = await resp.json();
                     const p = json.success ? json.data : json;
@@ -411,11 +410,11 @@
             }));
 
             container.innerHTML = reservesWithParticipants.map(r => `
-            <div class="reserve-item">
-                <span class="reserve-info"><strong>${r.nome}</strong> (${r.matricula})</span>
-                <span class="reserve-semester">${r.semestre}º semestre</span>
-            </div>
-        `).join('');
+                <div class="reserve-item">
+                    <span class="reserve-info"><strong>${r.nome}</strong> (${r.matricula})</span>
+                    <span class="reserve-semester">${r.semestre}º semestre</span>
+                </div>
+            `).join('');
 
         } catch (err) {
             container.innerHTML = `<p class="form-error">${err.message}</p>`;
@@ -454,10 +453,7 @@
         const resultDiv = document.getElementById('drawResult');
         resultDiv.innerHTML = '<p>Executando sorteio...</p>';
         try {
-            const response = await fetch(API_BASE + `/admin/draw?final=${isFinal}`, {
-                method: 'POST',
-                headers: { 'Authorization': `Bearer ${localStorage.getItem('adminToken')}` }
-            });
+            const response = await apiRequest(`/admin/draw?final=${isFinal}`, { method: 'POST' });
             const json = await response.json();
             if (!response.ok) {
                 throw new Error(json.error || 'Erro no sorteio');
@@ -500,12 +496,9 @@
         }
 
         try {
-            const response = await fetch(API_BASE + '/admin/ranking/score', {
+            const response = await apiRequest('/admin/ranking/score', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
             });
             if (!response.ok) {
