@@ -1,54 +1,213 @@
 (() => {
     const topicData = {
         algoritmos: [
-            { title: "Busca Binária & Ordenação", icon: "fa-arrow-down-a-z", desc: "Encontrar agulhas em palheiros gigantes em O(log n).", details: "Se o problema pede 'o menor valor que satisfaz uma condição', é busca binária. Ordenar com Quick/Merge sort é pré‑requisito para dois ponteiros e eliminar força bruta. A função sort() da linguagem já é otimizada – use‑a!" },
-            { title: "Recursão & Backtracking", icon: "fa-infinity", desc: "Pense como uma matrioska: resolva o pequeno e confie no resto.", details: "Base de backtracking (rainhas, labirintos) e divisão e conquista. Cuidado com a pilha – problemas grandes podem estourar. Prefira recursão quando a árvore de chamadas for limitada." },
-            { title: "Programação Dinâmica", icon: "fa-bolt", desc: "Se já calculou, não recalcule – guarde!", details: "Transforma exponencial em polinomial. Domine os clássicos: mochila, LCS, subsequência máxima. Comece definindo o estado e a transição. Se o problema pede mínimo/máximo ou contagem, PD é forte candidata." }
+            {
+                title: "Busca Binária & Ordenação",
+                icon: "fa-arrow-down-a-z",
+                desc: "Reduza o problema pela metade.",
+                details: "Se o enunciado pede 'o menor valor que satisfaz uma condição', pense em busca binária. Ordenar antes de resolver pode transformar força bruta em solução eficiente."
+            },
+            {
+                title: "Recursão & Backtracking",
+                icon: "fa-infinity",
+                desc: "Explore todas as possibilidades… com controle.",
+                details: "Use quando o problema pede gerar combinações, caminhos ou arranjos. Sempre defina bem o caso base e corte caminhos impossíveis cedo."
+            },
+            {
+                title: "Programação Dinâmica",
+                icon: "fa-bolt",
+                desc: "Evite recalcular o que já sabe.",
+                details: "Se o problema tem subproblemas repetidos, guarde resultados. Pense em 'estado' e 'transição'. Muitos problemas de máximo, mínimo ou contagem usam PD."
+            }
         ],
+
         dados: [
-            { title: "Pilhas, Filas e Deques", icon: "fa-layer-group", desc: "LIFO, FIFO, e o melhor dos dois mundos.", details: "Pilha para expressões, parênteses balanceados e DFS iterativo. Filas são a alma do BFS. Em sliding window, um deque resolve em O(n)." },
-            { title: "Árvores Binárias e Heap", icon: "fa-network-wired", desc: "Organização hierárquica com buscas rápidas.", details: "BST permite busca O(log n) se balanceada. Heap (priority queue) é essencial para Dijkstra, Huffman e para manter o menor/maior elemento dinamicamente. Preciso do mínimo? → heap." },
-            { title: "Grafos – Conexões", icon: "fa-circle-nodes", desc: "Represente qualquer relação como vértices e arestas.", details: "BFS para distâncias em grafos não‑ponderados, DFS para detectar ciclos e componentes. Dijkstra (com heap) para caminho mínimo com pesos positivos. Grafos estão em mapas, dependências, jogos." }
+            {
+                title: "Pilhas, Filas e Deques",
+                icon: "fa-layer-group",
+                desc: "Estruturas simples resolvem muito.",
+                details: "Pilha resolve parênteses e DFS. Fila é base do BFS. Deque é ótimo para sliding window e filas monotônicas."
+            },
+            {
+                title: "Árvores e Heap",
+                icon: "fa-network-wired",
+                desc: "Acesso rápido ao menor ou maior.",
+                details: "Priority queue mantém sempre o menor elemento disponível. Essencial para algoritmos como Dijkstra ou para problemas de ordenação dinâmica."
+            },
+            {
+                title: "Grafos",
+                icon: "fa-circle-nodes",
+                desc: "Problemas de conexão quase sempre são grafos.",
+                details: "BFS encontra menor caminho em grafos sem peso. DFS detecta ciclos e componentes. Com pesos positivos, Dijkstra resolve caminhos mínimos."
+            }
         ],
+
         sql: [
-            { title: "Modelagem Relacional", icon: "fa-database", desc: "Projete para não se arrepender depois.", details: "Evite redundância: normalize até a 3FN. Consultas complexas exigem esquemas bem pensados. Chaves estrangeiras e índices adequados fazem diferença." },
-            { title: "Consultas Poderosas", icon: "fa-magnifying-glass-chart", desc: "Combine tabelas como peças de lego.", details: "Domine JOINs (INNER, LEFT, SELF) e subqueries correlacionadas. Window functions (ROW_NUMBER, LAG) resolvem ranking e séries temporais em uma passada." },
-            { title: "Índices – O Turbo", icon: "fa-gauge-high", desc: "Sem índice, o banco varre a tabela inteira.", details: "Índices aceleram buscas, mas custam escrita. Use EXPLAIN para ver se o índice está sendo usado. Uma query bem indexada pode ser a diferença entre lento e rápido." }
+            {
+                title: "Modelagem Relacional",
+                icon: "fa-database",
+                desc: "Dados bem organizados facilitam queries.",
+                details: "Separe entidades corretamente e evite duplicação. Chaves primárias e estrangeiras ajudam a manter consistência."
+            },
+            {
+                title: "JOINs",
+                icon: "fa-magnifying-glass-chart",
+                desc: "Conecte tabelas para extrair informação.",
+                details: "INNER JOIN cruza registros relacionados. LEFT JOIN mantém registros mesmo sem correspondência. Muitas queries de competição dependem de combinar tabelas."
+            },
+            {
+                title: "Índices",
+                icon: "fa-gauge-high",
+                desc: "Aceleradores do banco de dados.",
+                details: "Índices tornam buscas muito mais rápidas. Sem eles, o banco precisa percorrer toda a tabela."
+            }
         ],
+
         arquitetura: [
-            { title: "Arquitetura Limpa", icon: "fa-soap", desc: "Separe o que muda do que é estável.", details: "Regras de negócio no centro, frameworks na periferia. Útil para projetos grandes, mas em olimpíadas manter funções curtas e coesas ajuda na depuração." },
-            { title: "Microserviços", icon: "fa-cubes", desc: "Nem tudo são flores.", details: "Serviços independentes, cada um com seu banco. O desafio é a comunicação e consistência eventual. Ótimo para escalar, complexo para coordenar." },
-            { title: "Padrões de Projeto", icon: "fa-chess-board", desc: "Reutilize soluções consagradas.", details: "Strategy para algoritmos intercambiáveis, Observer para eventos, Factory para criação de objetos. Usar o padrão certo evita if‑else monstro." }
+            {
+                title: "Arquitetura Limpa",
+                icon: "fa-soap",
+                desc: "Separe responsabilidades.",
+                details: "Código organizado em camadas facilita manutenção. Mesmo em projetos pequenos, funções bem separadas ajudam a evitar bugs."
+            },
+            {
+                title: "Microserviços",
+                icon: "fa-cubes",
+                desc: "Divida sistemas grandes.",
+                details: "Cada serviço resolve um problema específico. Isso facilita escalar partes do sistema sem afetar o todo."
+            },
+            {
+                title: "Padrões de Projeto",
+                icon: "fa-chess-board",
+                desc: "Soluções reutilizáveis.",
+                details: "Padrões ajudam a resolver problemas comuns de design de software. Usar uma estrutura conhecida evita reinventar soluções."
+            }
         ],
+
         "eng-software": [
-            { title: "Métodos Ágeis", icon: "fa-people-group", desc: "Entregue valor rápido, adapte‑se.", details: "Scrum e Kanban organizam o trabalho em ciclos curtos. Feedback constante e melhoria contínua são a chave." },
-            { title: "Controle de Versão", icon: "fa-code-branch", desc: "Histórico do código colaborativo.", details: "Git permite ramificações, merges e volta segura. Commits semânticos e pull requests facilitam a revisão." },
-            { title: "Gestão de Requisitos", icon: "fa-list-check", desc: "O que construir e por quê.", details: "Histórias de usuário, critérios de aceite e priorização. Foco no essencial evita retrabalho." }
+            {
+                title: "Métodos Ágeis",
+                icon: "fa-people-group",
+                desc: "Entregas rápidas e iterativas.",
+                details: "Divida o trabalho em pequenas etapas e ajuste o plano conforme aprende mais sobre o problema."
+            },
+            {
+                title: "Controle de Versão",
+                icon: "fa-code-branch",
+                desc: "Histórico do projeto.",
+                details: "Git permite trabalhar em equipe sem perder mudanças. Branches e commits organizados evitam confusão."
+            },
+            {
+                title: "Gestão de Requisitos",
+                icon: "fa-list-check",
+                desc: "Entenda o problema antes de codar.",
+                details: "Definir claramente o que precisa ser feito evita retrabalho e soluções erradas."
+            }
         ],
+
         qualidade: [
-            { title: "Testes e TDD", icon: "fa-vial", desc: "Se não testou, está quebrado.", details: "Teste primeiro garante que o código faz o que deve. Em olimpíadas, teste mentalmente casos limite: vetor vazio, valor máximo, entradas repetidas." },
-            { title: "Code Review", icon: "fa-glasses", desc: "Quatro olhos veem mais que dois.", details: "Outro programador enxerga o que você não vê. Procure bugs lógicos, variáveis não inicializadas e complexidade desnecessária." },
-            { title: "Integração Contínua", icon: "fa-robot", desc: "Automatize o óbvio.", details: "A cada commit, rode testes e linters. Evita que código quebrado chegue à versão final." }
+            {
+                title: "Testes",
+                icon: "fa-vial",
+                desc: "Confirme que funciona.",
+                details: "Teste casos extremos: entradas vazias, valores máximos, dados repetidos e limites do problema."
+            },
+            {
+                title: "Code Review",
+                icon: "fa-glasses",
+                desc: "Outra pessoa vê novos erros.",
+                details: "Revisar código ajuda a encontrar bugs lógicos e melhorar clareza."
+            },
+            {
+                title: "Integração Contínua",
+                icon: "fa-robot",
+                desc: "Automatize verificações.",
+                details: "Ferramentas podem rodar testes automaticamente a cada mudança no código."
+            }
         ],
+
         devops: [
-            { title: "Containerização", icon: "fa-box-open", desc: "Empacote com tudo que precisa.", details: "Garante que o código rode igual em qualquer ambiente. Isolamento e reprodutibilidade são os benefícios." },
-            { title: "Orquestração", icon: "fa-ship", desc: "Gerencie múltiplos containers.", details: "Escalonamento automático, cura de falhas e atualizações sem downtime. Conceito útil para sistemas distribuídos." },
-            { title: "Monitoramento", icon: "fa-chart-line", desc: "Veja o invisível.", details: "Métricas, logs e rastreamento mostram a saúde do sistema. Saber o que medir ajuda a detectar gargalos." }
+            {
+                title: "Containerização",
+                icon: "fa-box-open",
+                desc: "O mesmo ambiente em qualquer máquina.",
+                details: "Containers garantem que o código rode da mesma forma em desenvolvimento e produção."
+            },
+            {
+                title: "Orquestração",
+                icon: "fa-ship",
+                desc: "Gerencie muitos serviços.",
+                details: "Ferramentas de orquestração distribuem carga e reiniciam serviços que falham."
+            },
+            {
+                title: "Monitoramento",
+                icon: "fa-chart-line",
+                desc: "Saiba o que está acontecendo.",
+                details: "Logs e métricas ajudam a detectar problemas antes que afetem usuários."
+            }
         ],
+
         uiux: [
-            { title: "Design de Interfaces", icon: "fa-pen-nib", desc: "Crie interfaces que funcionam.", details: "Componentes reutilizáveis, layouts responsivos e prototipagem rápida. Um bom design economiza horas de implementação." },
-            { title: "Acessibilidade", icon: "fa-universal-access", desc: "Inclusão não é opcional.", details: "Contraste mínimo, navegação por teclado, textos alternativos. Um site acessível alcança mais usuários." },
-            { title: "Heurísticas de Nielsen", icon: "fa-check-double", desc: "10 regras de ouro.", details: "Visibilidade do estado, correspondência com o mundo real, controle do usuário. Aplicar essas regras evita frustração." }
+            {
+                title: "Design de Interfaces",
+                icon: "fa-pen-nib",
+                desc: "Interfaces claras ajudam o usuário.",
+                details: "Layouts consistentes e componentes reutilizáveis tornam aplicações mais fáceis de usar."
+            },
+            {
+                title: "Acessibilidade",
+                icon: "fa-universal-access",
+                desc: "Tecnologia para todos.",
+                details: "Boa acessibilidade inclui contraste adequado, navegação por teclado e textos alternativos."
+            },
+            {
+                title: "Usabilidade",
+                icon: "fa-check-double",
+                desc: "Menos fricção para o usuário.",
+                details: "Interfaces devem comunicar claramente o que está acontecendo e como agir."
+            }
         ],
+
         debugging: [
-            { title: "Stack Trace", icon: "fa-bug", desc: "O mapa do erro.", details: "Leia a pilha de chamadas de baixo para cima. A primeira linha é o efeito; a causa está algumas chamadas acima." },
-            { title: "Breakpoints", icon: "fa-pause", desc: "Pare e examine.", details: "Use o debugger para inspecionar variáveis passo a passo. Melhor que mil prints." },
-            { title: "Método do Patinho", icon: "fa-duck", desc: "Explique em voz alta.", details: "Descreva linha por linha o que o programa deveria fazer. A contradição entre o que você diz e o que o código faz salta aos olhos." }
+            {
+                title: "Stack Trace",
+                icon: "fa-bug",
+                desc: "Siga o rastro do erro.",
+                details: "A pilha de chamadas mostra onde o erro ocorreu e qual caminho levou até ele."
+            },
+            {
+                title: "Breakpoints",
+                icon: "fa-pause",
+                desc: "Pare o programa e investigue.",
+                details: "Executar passo a passo ajuda a descobrir exatamente onde algo sai do esperado."
+            },
+            {
+                title: "Rubber Duck Debugging",
+                icon: "fa-duck",
+                desc: "Explique o problema em voz alta.",
+                details: "Ao explicar o código linha por linha, inconsistências ficam mais evidentes."
+            }
         ],
+
         seguranca: [
-            { title: "OWASP Top 10", icon: "fa-shield-halved", desc: "Conheça o inimigo.", details: "SQL Injection, XSS, CSRF – jamais concatene strings em queries, escape toda saída. Prepared statements e validação são essenciais." },
-            { title: "Criptografia", icon: "fa-key", desc: "Segredos bem guardados.", details: "Use bcrypt, scrypt ou Argon2 para senhas. Para dados em trânsito, TLS. Não invente sua própria criptografia." },
-            { title: "Autenticação", icon: "fa-id-card", desc: "Quem é você e o que pode fazer?", details: "Sessões com cookies HttpOnly ou tokens JWT. Autenticação identifica, autorização define permissões. Nunca confie em dados do cliente sem validação." }
+            {
+                title: "OWASP Top 10",
+                icon: "fa-shield-halved",
+                desc: "Principais falhas de segurança.",
+                details: "Ataques como SQL Injection e XSS exploram entradas mal validadas. Sempre valide e escape dados."
+            },
+            {
+                title: "Criptografia",
+                icon: "fa-key",
+                desc: "Proteja informações sensíveis.",
+                details: "Use algoritmos seguros para armazenar senhas e proteger dados em trânsito."
+            },
+            {
+                title: "Autenticação",
+                icon: "fa-id-card",
+                desc: "Controle de acesso.",
+                details: "Identifique usuários com segurança e verifique permissões antes de permitir ações."
+            }
         ]
     };
 
