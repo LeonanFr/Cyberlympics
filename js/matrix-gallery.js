@@ -134,30 +134,40 @@
 
     const techFacts = {
         "C": [
-            "C é a linguagem da performance. Controle total da memória, mas um erro de ponteiro e tudo desaba.",
-            "Em problemas de maratona, C é escolha para quem precisa de velocidade bruta e não quer surpresas de runtime.",
-            "Entender alocação dinâmica e aritmética de ponteiros é o rito de passagem."
+            "C compila extremamente rápido e gera executáveis leves — ótimo quando cada milissegundo conta.",
+            "Sem STL ou garbage collector: em C você controla tudo manualmente, inclusive memória.",
+            "Arrays estáticos e manipulação direta de memória fazem C ser muito rápido em algoritmos simples."
         ],
+
         "C++": [
-            "C++ tem STL pronta para uso: vector, map, sort, e algoritmos prontos. Aproveite!",
-            "Com C++, você pode escrever código orientado a objetos e genérico, mas cuidado com o tempo de compilação.",
-            "A STL é sua melhor amiga: priority_queue para Dijkstra, set para buscas ordenadas."
+            "C++ é a linguagem mais usada em maratonas de programação por causa da STL.",
+            "std::sort roda em O(n log n) e costuma ser altamente otimizado — use sempre que puder.",
+            "priority_queue, vector, set e map resolvem metade dos problemas clássicos de algoritmos."
         ],
+
         "Java": [
-            "Java tem Collection Framework rica: ArrayList, HashMap, TreeSet. E a JVM otimiza em tempo real.",
-            "Cuidado com o tempo de inicialização da JVM – em problemas com muitas entradas, prefira leitura bufferizada.",
-            "Em olimpíadas, Java exige que você gerencie memória e use FastReader para evitar TLE."
+            "Java tem estruturas prontas como ArrayList, HashMap e PriorityQueue no Collection Framework.",
+            "Para evitar TLE em competições, use BufferedReader e StringBuilder em vez de Scanner.",
+            "A JVM faz otimizações em runtime, então loops pesados podem ficar mais rápidos após aquecimento."
         ],
+
         "Kotlin": [
-            "Kotlin é conciso e seguro contra nulls. Ótimo para escrever menos boilerplate.",
-            "Interoperabilidade total com Java – você pode usar qualquer biblioteca Java existente.",
-            "Em competições, Kotlin pode ser uma escolha moderna e produtiva."
+            "Kotlin roda na JVM e pode usar todas as bibliotecas do Java.",
+            "Funções como map, filter e sorted deixam o código de algoritmos muito mais conciso.",
+            "Apesar da sintaxe moderna, o desempenho costuma ser parecido com Java."
         ],
+
         "Python": [
-            "Python é produtividade pura, mas lento para loops pesados. Use compreensão de listas e funções nativas (sort, map).",
-            "Para problemas grandes, troque loops por vetorização com NumPy (se permitido) ou migre para PyPy.",
-            "Em maratonas, Python é ótimo para prototipar, mas cuidado com recursão profunda – use sys.setrecursionlimit."
-        ]
+            "Python é muito rápido para escrever soluções — ideal quando o tempo de codar é curto.",
+            "sorted(), heapq e collections resolvem muitos problemas clássicos de maratona.",
+            "Use sys.stdin.readline() para leitura rápida quando a entrada for muito grande."
+        ],
+
+        "JavaScript": [
+            "Com Node.js, JavaScript também pode resolver problemas de algoritmos no backend.",
+            "Arrays dinâmicos e objetos funcionam como mapas hash de forma natural.",
+            "Para leitura rápida em competições, use fs.readFileSync(0, 'utf8')."
+        ],
     };
 
     function pick(arr) {
@@ -215,6 +225,12 @@
                         iconSvg: "assets/icons/python.svg",
                         desc: pick(techFacts["Python"]),
                         details: "Automação, back-end, dados e IA."
+                    },
+                    "JavaScript": {
+                        title: "JavaScript",
+                        iconSvg: "assets/icons/javascript.svg",
+                        desc: pick(techFacts["JavaScript"]),
+                        details: "Linguagem versátil: front-end, back-end (Node.js), mobile (React Native), e até desktop (Electron)."
                     }
                 };
 
