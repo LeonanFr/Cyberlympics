@@ -673,6 +673,16 @@
     filter: drop-shadow(0 0 6px #f89820);
 }
 
+.tech-stack .tech-javascript:hover {
+    border-color: rgba(247, 223, 30, 0.8);
+    background: rgba(247, 223, 30, 0.15);
+    box-shadow: 0 10px 20px rgba(247, 223, 30, 0.25);
+}
+
+.tech-stack .tech-javascript:hover .tech-svg {
+    filter: drop-shadow(0 0 6px #F7DF1E);
+}
+
 .tech-stack .tech-python:hover {
     border-color: rgba(48, 105, 152, 0.8);
     background: rgba(48, 105, 152, 0.15);
