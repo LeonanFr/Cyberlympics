@@ -1,5 +1,5 @@
 (function () {
-    const API_BASE = 'https://copadesoftware-r000.onrender.com';
+    const API_BASE = 'https://copa-de-software.onrender.com';
     const RANKING_ENDPOINT = '/ranking';
 
     const loader = document.getElementById('previewLoader');

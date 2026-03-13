@@ -1,5 +1,5 @@
 (function () {
-    const API_BASE = 'https://copadesoftware-r000.onrender.com';
+    const API_BASE = 'https://copa-de-software.onrender.com';
     const PARTICIPANTS_ENDPOINT = '/participants';
 
     const tbody = document.getElementById('participantsTableBody');

@@ -1,5 +1,5 @@
 (function () {
-    const API_BASE = 'https://copadesoftware-r000.onrender.com';
+    const API_BASE = 'https://copa-de-software.onrender.com';
     const TEAMS_ENDPOINT = '/teams?status=approved';
 
     const desktopContainer = document.getElementById('teamsDesktop');
