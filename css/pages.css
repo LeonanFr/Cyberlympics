@@ -663,3 +663,36 @@ select option {
     background: var(--neon-blue);
     box-shadow: 0 0 10px rgba(0, 163, 255, 0.9);
 }
+
+.sub-hero-chips {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+}
+
+.hero-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    font-size: 0.72rem;
+    font-family: 'Fira Code', monospace;
+    border-radius: 6px;
+}
+
+.hero-chip-accent {
+    color: var(--neon-green);
+    border: 1px solid rgba(0, 255, 102, .35);
+    background: rgba(0, 255, 102, .08);
+    box-shadow: 0 0 8px rgba(0, 255, 102, .15);
+}
+
+.hero-chip-accent i {
+    color: var(--neon-green);
+}
+
+.hero-chip-accent:hover {
+    background: rgba(0, 255, 102, .15);
+    box-shadow: 0 0 12px rgba(0, 255, 102, .35);
+}
