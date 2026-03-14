@@ -243,32 +243,55 @@
 
                 const header = document.createElement('div');
                 header.className = 'team-header';
-                header.innerHTML = `
+
+                const titleDiv = document.createElement('div');
+                titleDiv.style.display = 'flex';
+                titleDiv.style.alignItems = 'center';
+                titleDiv.style.gap = '10px';
+                titleDiv.innerHTML = `
+                <div class="team-icon"><i class="fa-solid fa-code"></i></div>
                 <h3>${team.name} (${team.code || 'sem código'})</h3>
-                <div>
-                    <button class="btn-ghost btn-small expand-btn">Expandir</button>
-                    <button class="btn-ghost btn-small" onclick="cancelTeam('${team.id}')">Cancelar Time</button>
-                </div>
             `;
+
+                const cancelBtn = document.createElement('button');
+                cancelBtn.className = 'btn-ghost btn-small';
+                cancelBtn.textContent = 'Cancelar Time';
+                cancelBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    cancelTeam(team.id);
+                };
+
+                const expandIcon = document.createElement('i');
+                expandIcon.className = 'fa-solid fa-chevron-down expand-icon';
+
+                header.appendChild(titleDiv);
+                header.appendChild(cancelBtn);
+                header.appendChild(expandIcon);
 
                 const body = document.createElement('div');
                 body.className = 'team-body';
-                body.style.display = 'none';
 
                 if (team.participantData && team.participantData.length) {
                     body.innerHTML = team.participantData.map(m =>
-                        `<p>${m.nome} (${m.matricula}) - ${m.semestre}º semestre</p>`
+                        `<div class="member-item">
+                        <span class="m-name">${m.nome}</span>
+                        <span class="m-info">${m.matricula} · ${m.semestre}º semestre</span>
+                    </div>`
                     ).join('');
                 } else {
-                    body.innerHTML = '<p>Sem dados de participantes</p>';
+                    body.innerHTML = '<p class="text-muted">Sem dados de participantes</p>';
                 }
 
-                const expandBtn = header.querySelector('.expand-btn');
-                expandBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const isHidden = body.style.display === 'none';
-                    body.style.display = isHidden ? 'block' : 'none';
-                    expandBtn.textContent = isHidden ? 'Recolher' : 'Expandir';
+
+                card.addEventListener('click', (e) => {
+
+                    if (e.target.closest('button')) return;
+                    card.classList.toggle('expanded');
+
+                    const icon = card.querySelector('.expand-icon');
+                    if (icon) {
+                        icon.style.transform = card.classList.contains('expanded') ? 'rotate(180deg)' : 'rotate(0)';
+                    }
                 });
 
                 card.appendChild(header);
