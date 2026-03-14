@@ -289,3 +289,11 @@
         flex-direction: column;
     }
 }
+
+.team-card .expand-icon {
+    transition: transform 0.3s ease;
+}
+
+.team-card.expanded .expand-icon {
+    transform: rotate(180deg);
+}
