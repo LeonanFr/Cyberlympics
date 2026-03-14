@@ -235,22 +235,47 @@
                 return;
             }
 
-            list.innerHTML = teams.map(team => {
-                const membersHtml = (team.participantData || []).map(m =>
-                    `<p>${m.nome} - ${m.semestre}º</p>`
-                ).join('');
-                return `
-                    <div class="team-card">
-                        <div class="team-header">
-                            <h3>${team.name} (${team.code || 'sem código'})</h3>
-                            <button class="btn-ghost btn-small" onclick="cancelTeam('${team.id}')">Cancelar Time</button>
-                        </div>
-                        <div class="team-body">
-                            ${membersHtml}
-                        </div>
-                    </div>
-                `;
-            }).join('');
+            list.innerHTML = '';
+
+            teams.forEach(team => {
+                const card = document.createElement('div');
+                card.className = 'team-card';
+
+                const header = document.createElement('div');
+                header.className = 'team-header';
+                header.innerHTML = `
+                <h3>${team.name} (${team.code || 'sem código'})</h3>
+                <div>
+                    <button class="btn-ghost btn-small expand-btn">Expandir</button>
+                    <button class="btn-ghost btn-small" onclick="cancelTeam('${team.id}')">Cancelar Time</button>
+                </div>
+            `;
+
+                const body = document.createElement('div');
+                body.className = 'team-body';
+                body.style.display = 'none';
+
+                if (team.participantData && team.participantData.length) {
+                    body.innerHTML = team.participantData.map(m =>
+                        `<p>${m.nome} (${m.matricula}) - ${m.semestre}º semestre</p>`
+                    ).join('');
+                } else {
+                    body.innerHTML = '<p>Sem dados de participantes</p>';
+                }
+
+                const expandBtn = header.querySelector('.expand-btn');
+                expandBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isHidden = body.style.display === 'none';
+                    body.style.display = isHidden ? 'block' : 'none';
+                    expandBtn.textContent = isHidden ? 'Recolher' : 'Expandir';
+                });
+
+                card.appendChild(header);
+                card.appendChild(body);
+                list.appendChild(card);
+            });
+
         } catch (err) {
             list.innerHTML = `<p class="form-error">${err.message}</p>`;
         }
@@ -509,6 +534,32 @@
             document.getElementById('scoreForm').reset();
         } catch (err) {
             alert('Erro: ' + err.message);
+        }
+    });
+
+    document.getElementById('recalculateRankingBtn')?.addEventListener('click', async () => {
+        const btn = document.getElementById('recalculateRankingBtn');
+        const msgDiv = document.getElementById('recalcMessage');
+        btn.disabled = true;
+        msgDiv.style.display = 'none';
+        try {
+            const response = await apiRequest('/admin/ranking/recalculate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const json = await response.json();
+            if (!response.ok) {
+                throw new Error(json.error || 'Erro ao recalcular');
+            }
+            msgDiv.className = 'form-alert';
+            msgDiv.textContent = '✅ Ranking recalculado com sucesso!';
+            msgDiv.style.display = 'block';
+        } catch (err) {
+            msgDiv.className = 'form-error';
+            msgDiv.textContent = '❌ Erro: ' + err.message;
+            msgDiv.style.display = 'block';
+        } finally {
+            btn.disabled = false;
         }
     });
 })();
