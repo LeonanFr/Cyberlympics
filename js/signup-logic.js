@@ -1,5 +1,5 @@
 const API_BASE = 'https://copa-de-software.onrender.com';
-const INSCRICOES_ABERTAS = false;
+const INSCRICOES_ABERTAS = true;
 
 async function apiFetch(endpoint, options = {}) {
     const response = await fetch(`${API_BASE}${endpoint}`, {
