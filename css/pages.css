@@ -446,9 +446,16 @@ select option {
 
 .input-grid {
     display: grid;
-    grid-template-columns: 1fr 150px 140px;
+    grid-template-columns: minmax(0, 1fr) minmax(120px, 150px) minmax(120px, 140px);
     gap: 10px;
+    margin-top: 0.5rem;
     margin-bottom: 1.2rem;
+}
+
+@media (max-width: 640px) {
+    .input-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .members-setup {
