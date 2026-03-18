@@ -296,7 +296,7 @@ async function fetchInitialRanking() {
         if (!response.ok) throw new Error();
         const json = await response.json();
         const ranking = json && json.success ? json.data : json;
-        currentRanking = Array.isArray(ranking) ? ranking : [];
+        currentRanking = sortRanking(Array.isArray(ranking) ? ranking : []);
         renderRanking(currentRanking);
     } catch {
         emptyMessage.style.display = 'flex';
@@ -314,7 +314,7 @@ function setupSSE() {
             try {
                 const data = JSON.parse(event.data);
                 const ranking = Array.isArray(data) ? data : (data && data.data ? data.data : []);
-                currentRanking = Array.isArray(ranking) ? ranking : [];
+                currentRanking = sortRanking(ranking);
                 safeRender(currentRanking);
             } catch { }
         };
@@ -337,7 +337,9 @@ if (searchInput) {
             renderRanking(currentRanking);
             return;
         }
-        const filtered = currentRanking.filter(team => (team.teamName || '').toLowerCase().includes(term));
+        const filtered = currentRanking.filter(team =>
+            (team.teamName || '').toLowerCase().includes(term)
+        );
         renderRanking(filtered);
     });
 }
@@ -348,4 +350,9 @@ if (resetBtn) {
         searchInput.value = '';
         renderRanking(currentRanking);
     });
+}
+
+function sortRanking(ranking) {
+    if (!Array.isArray(ranking)) return [];
+    return [...ranking].sort((a, b) => b.total - a.total);
 }
