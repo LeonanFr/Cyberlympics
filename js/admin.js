@@ -567,35 +567,15 @@
         msgDiv.style.display = 'none';
 
         try {
-            const startResponse = await apiRequest('/admin/ranking/recalculate', {
+            const response = await apiRequest('/admin/ranking/recalculate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            const { jobId } = startResponse;
             msgDiv.className = 'form-alert';
-            msgDiv.textContent = 'Recálculo iniciado. Aguarde...';
+            msgDiv.textContent = response.message || 'Recálculo iniciado!';
             msgDiv.style.display = 'block';
 
-            let completed = false;
-            let attempts = 0;
-            const maxAttempts = 12;
-            while (!completed && attempts < maxAttempts) {
-                await new Promise(r => setTimeout(r, 5000));
-                const statusResponse = await apiRequest(`/admin/ranking/recalculate/status/${jobId}`);
-                if (statusResponse.done) {
-                    completed = true;
-                    if (statusResponse.error) {
-                        throw new Error(statusResponse.error);
-                    }
-                    msgDiv.className = 'form-alert';
-                    msgDiv.textContent = `✅ Ranking recalculado! Falhas: ${statusResponse.falhas?.length || 0}`;
-                }
-                attempts++;
-            }
-            if (!completed) {
-                throw new Error('Tempo limite excedido. O recálculo pode ainda estar em andamento.');
-            }
         } catch (err) {
             msgDiv.className = 'form-error';
             msgDiv.textContent = '❌ Erro: ' + err.message;
