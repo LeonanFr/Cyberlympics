@@ -222,7 +222,7 @@
 
     async function loadActiveTeams() {
         const list = document.getElementById('activeTeamsList');
-        list.innerHTML = '<div class="rank-loader" style="display:flex;"><div class="loader-container">...</div><p>Carregando...</p></div>';
+        list.innerHTML = '<div class="rank-loader" style="display:flex;"><p>Carregando...</p></div>';
 
         try {
             const response = await fetch(API_BASE + '/teams?status=approved');
