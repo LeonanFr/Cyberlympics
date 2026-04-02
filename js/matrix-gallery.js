@@ -2,211 +2,162 @@
     const topicData = {
         algoritmos: [
             {
-                title: "Busca Binária & Ordenação",
+                title: "Busca e Exploração",
+                icon: "fa-route",
+                desc: "Navegue por espaços dimensionais massivos.",
+                details: "Dominar metodologias como travessia em profundidade (DFS) e largura (BFS) é vital. Dividir para conquistar transforma cenários brutais em execuções otimizadas."
+            },
+            {
+                title: "Ordenação e Complexidade",
                 icon: "fa-arrow-down-a-z",
-                desc: "Reduza o problema pela metade.",
-                details: "Se o enunciado pede 'o menor valor que satisfaz uma condição', pense em busca binária. Ordenar antes de resolver pode transformar força bruta em solução eficiente."
+                desc: "Organize conjuntos informacionais rapidamente.",
+                details: "Compreender Quick Sort e Merge Sort vai além da teoria base. Avaliar a notação Big-O certifica que sua solução não exceda o tempo limite nas disputas matemáticas."
             },
             {
-                title: "Recursão & Backtracking",
-                icon: "fa-infinity",
-                desc: "Explore todas as possibilidades… com controle.",
-                details: "Use quando o problema pede gerar combinações, caminhos ou arranjos. Sempre defina bem o caso base e corte caminhos impossíveis cedo."
-            },
-            {
-                title: "Programação Dinâmica",
+                title: "Dinâmica e Gulosos",
                 icon: "fa-bolt",
-                desc: "Evite recalcular o que já sabe.",
-                details: "Se o problema tem subproblemas repetidos, guarde resultados. Pense em 'estado' e 'transição'. Muitos problemas de máximo, mínimo ou contagem usam PD."
+                desc: "Memorize passos antigos e faça escolhas locais ótimas.",
+                details: "Otimize execuções armazenando resultados parciais. Estratégias pragmáticas ajudam a encontrar picos máximos sem precisar recalcular rotas inteiras a cada iteração."
             }
         ],
-
         dados: [
             {
-                title: "Pilhas, Filas e Deques",
+                title: "Estruturas Lineares",
                 icon: "fa-layer-group",
-                desc: "Estruturas simples resolvem muito.",
-                details: "Pilha resolve parênteses e DFS. Fila é base do BFS. Deque é ótimo para sliding window e filas monotônicas."
+                desc: "O alicerce da manipulação sequencial.",
+                details: "Pilhas avaliam expressões lógicas; filas gerenciam fluxos; deques operam janelas deslizantes. O domínio fundacional desbloqueia o entendimento de arquiteturas complexas."
             },
             {
-                title: "Árvores e Heap",
+                title: "Árvores e Dispersão",
                 icon: "fa-network-wired",
-                desc: "Acesso rápido ao menor ou maior.",
-                details: "Priority queue mantém sempre o menor elemento disponível. Essencial para algoritmos como Dijkstra ou para problemas de ordenação dinâmica."
+                desc: "Acesso direto e ramificações hierárquicas.",
+                details: "Árvores binárias aceleram pesquisas. Hash Tables oferecem consultas imediatas, poupando preciosos milissegundos sob pressão extrema durante os desafios."
             },
             {
-                title: "Grafos",
+                title: "Teoria dos Grafos",
                 icon: "fa-circle-nodes",
-                desc: "Problemas de conexão quase sempre são grafos.",
-                details: "BFS encontra menor caminho em grafos sem peso. DFS detecta ciclos e componentes. Com pesos positivos, Dijkstra resolve caminhos mínimos."
+                desc: "Mapeie conexões e descubra rotas mínimas.",
+                details: "Redes viárias, interações sociais e mapas dependem de vértices interligados. Conhecer lógicas clássicas como Dijkstra traz vantagem absurda em modelagens visuais."
             }
         ],
-
         sql: [
             {
-                title: "Modelagem Relacional",
-                icon: "fa-database",
-                desc: "Dados bem organizados facilitam queries.",
-                details: "Separe entidades corretamente e evite duplicação. Chaves primárias e estrangeiras ajudam a manter consistência."
+                title: "Fundamentos (CRUD)",
+                icon: "fa-table-list",
+                desc: "O núcleo do gerenciamento relacional.",
+                details: "Inserções, leituras, modificações e remoções formam a base técnica. Executar consultas simples com projeções exatas é o passo inicial para extrair inteligência."
             },
             {
-                title: "JOINs",
-                icon: "fa-magnifying-glass-chart",
-                desc: "Conecte tabelas para extrair informação.",
-                details: "INNER JOIN cruza registros relacionados. LEFT JOIN mantém registros mesmo sem correspondência. Muitas queries de competição dependem de combinar tabelas."
+                title: "Agrupamentos e Filtros",
+                icon: "fa-filter",
+                desc: "Resuma volumes gigantescos de registros.",
+                details: "Agregar linhas com comandos de contagem revela padrões numéricos ocultos. Condicionar esses retornos estruturados refina o trabalho da sua equipe investigativa."
             },
             {
-                title: "Índices",
-                icon: "fa-gauge-high",
-                desc: "Aceleradores do banco de dados.",
-                details: "Índices tornam buscas muito mais rápidas. Sem eles, o banco precisa percorrer toda a tabela."
+                title: "Cruzamento (JOINs)",
+                icon: "fa-link",
+                desc: "Vincule planilhas dispersas logicamente.",
+                details: "Mesclar informações via cruzamentos diretos ou parciais reconstrói quebra-cabeças fragmentados. Compreender identificadores estrangeiros é indispensável nesta etapa."
             }
         ],
-
         arquitetura: [
             {
-                title: "Arquitetura Limpa",
-                icon: "fa-soap",
-                desc: "Separe responsabilidades.",
-                details: "Código organizado em camadas facilita manutenção. Mesmo em projetos pequenos, funções bem separadas ajudam a evitar bugs."
-            },
-            {
-                title: "Microserviços",
+                title: "Orientação a Objetos",
                 icon: "fa-cubes",
-                desc: "Divida sistemas grandes.",
-                details: "Cada serviço resolve um problema específico. Isso facilita escalar partes do sistema sem afetar o todo."
+                desc: "Modele o mundo tangível em scripts.",
+                details: "Encapsulamento, herança, polimorfismo e abstração compõem os pilares desta vertente. Construir artefatos digitais assim promove alta coesão e independência modular."
             },
             {
-                title: "Padrões de Projeto",
-                icon: "fa-chess-board",
-                desc: "Soluções reutilizáveis.",
-                details: "Padrões ajudam a resolver problemas comuns de design de software. Usar uma estrutura conhecida evita reinventar soluções."
+                title: "Princípios SOLID",
+                icon: "fa-gem",
+                desc: "Diretrizes valiosas para sistemas resilientes.",
+                details: "Classes contendo finalidade singular previnem colapsos sistêmicos. Aplicar inversões de controle cria componentes amplamente testáveis e abertos a melhorias futuras."
+            },
+            {
+                title: "Design Patterns",
+                icon: "fa-puzzle-piece",
+                desc: "Receitas consagradas para obstáculos rotineiros.",
+                details: "Moldes criacionais, comportamentais e estruturais evitam a reinvenção de táticas básicas. Adotar padrões globais eleva drasticamente a maturidade semântica do projeto."
             }
         ],
-
-        "eng-software": [
+        eng_software: [
             {
-                title: "Métodos Ágeis",
-                icon: "fa-people-group",
-                desc: "Entregas rápidas e iterativas.",
-                details: "Divida o trabalho em pequenas etapas e ajuste o plano conforme aprende mais sobre o problema."
+                title: "Requisitos",
+                icon: "fa-clipboard-list",
+                desc: "Converta desejos abstratos em funcionalidades concretas.",
+                details: "Elicitação, triagem e validação de demandas. Documentar especificações com exatidão impede que o grupo produza algo completamente distante da necessidade real."
+            },
+            {
+                title: "Metodologias Ágeis",
+                icon: "fa-person-running",
+                desc: "Entregas fatiadas e adaptação orgânica.",
+                details: "Frameworks interativos ditam o compasso corporativo atual. Ciclos curtos e evolução constante costumam ser cobrados fortemente nas rodadas teóricas do torneio."
             },
             {
                 title: "Controle de Versão",
                 icon: "fa-code-branch",
-                desc: "Histórico do projeto.",
-                details: "Git permite trabalhar em equipe sem perder mudanças. Branches e commits organizados evitam confusão."
-            },
-            {
-                title: "Gestão de Requisitos",
-                icon: "fa-list-check",
-                desc: "Entenda o problema antes de codar.",
-                details: "Definir claramente o que precisa ser feito evita retrabalho e soluções erradas."
+                desc: "Linha do tempo segura para o seu repositório.",
+                details: "Rastrear alterações, separar ramificações divergentes e solucionar conflitos de integração resguardam o esforço coletivo contra perdas catastróficas imprevistas."
             }
         ],
-
         qualidade: [
             {
-                title: "Testes",
-                icon: "fa-vial",
-                desc: "Confirme que funciona.",
-                details: "Teste casos extremos: entradas vazias, valores máximos, dados repetidos e limites do problema."
+                title: "Baterias de Testes",
+                icon: "fa-vial-virus",
+                desc: "Auditoria automática sob alto estresse.",
+                details: "Inspeções unitárias, avaliações integradas e checagens ponta-a-ponta. O fluxo guiado por validações garante a blindagem de lógicas computacionais vitais."
             },
             {
-                title: "Code Review",
-                icon: "fa-glasses",
-                desc: "Outra pessoa vê novos erros.",
-                details: "Revisar código ajuda a encontrar bugs lógicos e melhorar clareza."
+                title: "Refatoração Profunda",
+                icon: "fa-broom",
+                desc: "Clareza textual significa sobrevivência longa.",
+                details: "Extirpar imperfeições silenciosas, manter nomenclaturas óbvias e mitigar complexidades exageradas. A elegância gramatical é fator de desempate técnico na análise."
             },
             {
                 title: "Integração Contínua",
-                icon: "fa-robot",
-                desc: "Automatize verificações.",
-                details: "Ferramentas podem rodar testes automaticamente a cada mudança no código."
+                icon: "fa-infinity",
+                desc: "Automação do fluxo de deploy da aplicação.",
+                details: "Pipelines robóticos constroem, verificam e publicam pacotes instantaneamente. Esse maquinário previne que falhas humanas afetem o ambiente principal dos usuários."
             }
         ],
-
-        devops: [
+        hardware_so: [
             {
-                title: "Containerização",
-                icon: "fa-box-open",
-                desc: "O mesmo ambiente em qualquer máquina.",
-                details: "Containers garantem que o código rode da mesma forma em desenvolvimento e produção."
+                title: "Arquitetura Física",
+                icon: "fa-microchip",
+                desc: "O corpo material por trás do pensamento virtual.",
+                details: "Microprocessadores, hierarquia de memórias e canais de transferência. Conhecer a fundo a máquina potencializa a maneira como seu programa aloca recursos limitados."
             },
             {
-                title: "Orquestração",
-                icon: "fa-ship",
-                desc: "Gerencie muitos serviços.",
-                details: "Ferramentas de orquestração distribuem carga e reiniciam serviços que falham."
+                title: "Sistemas Operacionais",
+                icon: "fa-server",
+                desc: "A maestria sobre os periféricos computacionais.",
+                details: "Distribuição de tarefas, concorrência, rotinas paralelas e impasses simultâneos (deadlocks). Entender essas fundações é requisito obrigatório na competição relâmpago."
             },
             {
-                title: "Monitoramento",
-                icon: "fa-chart-line",
-                desc: "Saiba o que está acontecendo.",
-                details: "Logs e métricas ajudam a detectar problemas antes que afetem usuários."
+                title: "História e Evolução",
+                icon: "fa-hourglass-half",
+                desc: "O caminho cronológico da nossa profissão.",
+                details: "Desde os primeiros equipamentos calculistas até os semicondutores modernos. Ter bagagem intelectual nesse tema rende pontuações extras nas disputas de cultura geral."
             }
         ],
-
-        uiux: [
-            {
-                title: "Design de Interfaces",
-                icon: "fa-pen-nib",
-                desc: "Interfaces claras ajudam o usuário.",
-                details: "Layouts consistentes e componentes reutilizáveis tornam aplicações mais fáceis de usar."
-            },
-            {
-                title: "Acessibilidade",
-                icon: "fa-universal-access",
-                desc: "Tecnologia para todos.",
-                details: "Boa acessibilidade inclui contraste adequado, navegação por teclado e textos alternativos."
-            },
-            {
-                title: "Usabilidade",
-                icon: "fa-check-double",
-                desc: "Menos fricção para o usuário.",
-                details: "Interfaces devem comunicar claramente o que está acontecendo e como agir."
-            }
-        ],
-
-        debugging: [
-            {
-                title: "Stack Trace",
-                icon: "fa-bug",
-                desc: "Siga o rastro do erro.",
-                details: "A pilha de chamadas mostra onde o erro ocorreu e qual caminho levou até ele."
-            },
-            {
-                title: "Breakpoints",
-                icon: "fa-pause",
-                desc: "Pare o programa e investigue.",
-                details: "Executar passo a passo ajuda a descobrir exatamente onde algo sai do esperado."
-            },
-            {
-                title: "Rubber Duck Debugging",
-                icon: "fa-duck",
-                desc: "Explique o problema em voz alta.",
-                details: "Ao explicar o código linha por linha, inconsistências ficam mais evidentes."
-            }
-        ],
-
         seguranca: [
             {
-                title: "OWASP Top 10",
-                icon: "fa-shield-halved",
-                desc: "Principais falhas de segurança.",
-                details: "Ataques como SQL Injection e XSS exploram entradas mal validadas. Sempre valide e escape dados."
+                title: "Brechas Frequentes",
+                icon: "fa-shield-virus",
+                desc: "Reconheça as franquezas para neutralizá-las.",
+                details: "Injeções maliciosas, interceptações invasivas e exposição de propriedades confidenciais figuram entre os riscos cruciais. A defesa inicia na higienização severa de parâmetros."
             },
             {
-                title: "Criptografia",
-                icon: "fa-key",
-                desc: "Proteja informações sensíveis.",
-                details: "Use algoritmos seguros para armazenar senhas e proteger dados em trânsito."
+                title: "Criptografia Analítica",
+                icon: "fa-lock",
+                desc: "Ocultação matemática de conteúdos valiosos.",
+                details: "Diferenciar encriptação reversível do embaralhamento estático mostra senioridade. Técnicas sólidas garantem a integridade irrestrita das senhas operacionais cadastradas."
             },
             {
-                title: "Autenticação",
-                icon: "fa-id-card",
-                desc: "Controle de acesso.",
-                details: "Identifique usuários com segurança e verifique permissões antes de permitir ações."
+                title: "Identidade e Permissão",
+                icon: "fa-passport",
+                desc: "Triagem rigorosa de acesso interno.",
+                details: "Mecanismos de autenticação confirmam que apenas credenciados consigam disparar gatilhos administrativos de alta prioridade dentro do ecossistema restrito."
             }
         ]
     };
@@ -406,7 +357,7 @@
     }
 
     function isMobile() {
-        return window.matchMedia("(max-width: 768px)").matches;
+        return window.matchMedia("(max-width: 1080px)").matches;
     }
 
     function hashCode(str) {
