@@ -1,5 +1,7 @@
 (function () {
     const API_BASE = 'https://copa-de-software.onrender.com';
+    const ORCHESTRATOR_URL = 'https://orquestradoralgoritmos.onrender.com';
+    const ORCHESTRATOR_TOKEN = 'cWcG1T82qiJk';
 
     const loginSection = document.getElementById('loginSection');
     const adminPanel = document.getElementById('adminPanel');
@@ -83,6 +85,7 @@
             if (tab === 'teamnames') loadAvailableNames();
             if (tab === 'reserves') loadReserves();
             if (tab === 'score') loadTeamsForSelect();
+            if (tab === 'relay') loadRelayTournaments();
         });
     });
 
@@ -93,6 +96,7 @@
         loadAvailableNames();
         loadReserves();
         loadTeamsForSelect();
+        loadRelayTournaments();
     }
 
     async function loadPendingTeams() {
@@ -282,12 +286,9 @@
                     body.innerHTML = '<p class="text-muted">Sem dados de participantes</p>';
                 }
 
-
                 card.addEventListener('click', (e) => {
-
                     if (e.target.closest('button')) return;
                     card.classList.toggle('expanded');
-
                     const icon = card.querySelector('.expand-icon');
                     if (icon) {
                         icon.style.transform = card.classList.contains('expanded') ? 'rotate(180deg)' : 'rotate(0)';
@@ -584,11 +585,6 @@
             btn.disabled = false;
         }
     });
-
-    const ORCHESTRATOR_URL = 'https://orquestradoralgoritmos.onrender.com';
-    const ORCHESTRATOR_TOKEN = 'cWcG1T82qiJk';
-
-    if (tab === 'relay') loadRelayTournaments();
 
     async function loadRelayTournaments() {
         const list = document.getElementById('relayTournamentsList');
