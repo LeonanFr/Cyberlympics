@@ -640,7 +640,7 @@
         btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processando...';
 
         try {
-            const response = await fetch(`${ORCHESTRATOR_URL}/api/admin/start`, {
+            const response = await fetch(`${ORCHESTRATOR_URL}/api/admin/tournament/start`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
