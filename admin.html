@@ -70,6 +70,7 @@
                 <button class="tab-btn" data-tab="score">Pontuação</button>
                 <button class="tab-btn" data-tab="teamnames">Nomes de Times</button>
                 <button class="tab-btn" data-tab="reserves">Reserva</button>
+                <button class="tab-btn" data-tab="relay">Torneio Relay</button>
             </div>
 
             <!-- Tab: Times Pendentes -->
@@ -193,6 +194,20 @@
             <div class="tab-content" id="tab-reserves">
                 <h2><i class="fa-solid fa-clock"></i> Lista de Reserva</h2>
                 <div id="reservesList" class="reserves-list"></div>
+            </div>
+
+            <!-- Tab: Algoritmos em Revezamento-->
+            <div class="tab-content" id="tab-relay">
+                <div class="section-header-relay">
+                    <h2><i class="fa-solid fa-microchip"></i> Controle do Relay</h2>
+                    <button id="refreshRelay" class="btn-ghost btn-small"><i class="fa-solid fa-sync"></i>
+                        Atualizar</button>
+                </div>
+                <div id="relayTournamentsList" class="relay-grid">
+                    <div class="rank-loader" style="display:flex;">
+                        <p>Carregando torneios do orquestrador...</p>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

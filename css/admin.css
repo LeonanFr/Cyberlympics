@@ -297,3 +297,67 @@
 .team-card.expanded .expand-icon {
     transform: rotate(180deg);
 }
+
+.section-header-relay {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.relay-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.relay-card {
+    background: rgba(15, 15, 25, 0.8);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.relay-card h3 {
+    color: var(--neon-green);
+    font-family: 'Fira Code', monospace;
+    margin-bottom: 0.5rem;
+}
+
+.relay-card code {
+    font-size: 0.8rem;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.bg-green {
+    background: rgba(0, 255, 102, 0.2);
+    color: var(--neon-green);
+    border: 1px solid var(--neon-green);
+}
+
+.bg-red {
+    background: rgba(255, 60, 60, 0.2);
+    color: #ff3c3c;
+    border: 1px solid #ff3c3c;
+}
+
+.relay-card-actions {
+    display: flex;
+    justify-content: flex-end;
+}

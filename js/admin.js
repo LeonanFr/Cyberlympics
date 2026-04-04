@@ -584,4 +584,85 @@
             btn.disabled = false;
         }
     });
+
+    const ORCHESTRATOR_URL = 'https://orquestradoralgoritmos.onrender.com';
+    const ORCHESTRATOR_TOKEN = 'cWcG1T82qiJk';
+
+    if (tab === 'relay') loadRelayTournaments();
+
+    async function loadRelayTournaments() {
+        const list = document.getElementById('relayTournamentsList');
+        list.innerHTML = '<div class="rank-loader" style="display:flex;"><p>Buscando dados...</p></div>';
+
+        try {
+            const response = await fetch(`${ORCHESTRATOR_URL}/api/tournaments`, {
+                headers: { 'Authorization': `Bearer ${ORCHESTRATOR_TOKEN}` }
+            });
+
+            if (!response.ok) throw new Error('Falha ao conectar com o Orquestrador');
+            const json = await response.json();
+            const tournaments = json.success ? json.data : json;
+
+            if (!tournaments || tournaments.length === 0) {
+                list.innerHTML = '<p class="text-muted">Nenhum torneio encontrado no orquestrador.</p>';
+                return;
+            }
+
+            list.innerHTML = '';
+            tournaments.forEach(t => {
+                const card = document.createElement('div');
+                card.className = 'relay-card';
+                card.innerHTML = `
+                <div class="relay-card-info">
+                    <h3>${t.name}</h3>
+                    <p>ID: <code>${t.id}</code></p>
+                    <span class="badge ${t.status === 'active' ? 'bg-green' : 'bg-red'}">${t.status}</span>
+                </div>
+                <div class="relay-card-actions">
+                    <button class="btn-neon btn-start-relay" data-id="${t.id}" ${t.status === 'active' ? 'disabled' : ''}>
+                        <i class="fa-solid fa-play"></i> Iniciar Torneio
+                    </button>
+                </div>
+            `;
+                list.appendChild(card);
+            });
+
+            document.querySelectorAll('.btn-start-relay').forEach(btn => {
+                btn.addEventListener('click', () => startRelayTournament(btn.dataset.id, btn));
+            });
+
+        } catch (err) {
+            list.innerHTML = `<p class="form-error">Erro: ${err.message}</p>`;
+        }
+    }
+
+    async function startRelayTournament(id, btn) {
+        if (!confirm('Deseja iniciar o cronômetro e liberar o acesso para este torneio agora?')) return;
+
+        const originalContent = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processando...';
+
+        try {
+            const response = await fetch(`${ORCHESTRATOR_URL}/api/admin/start`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${ORCHESTRATOR_TOKEN}`
+                },
+                body: JSON.stringify({ tournamentId: id })
+            });
+
+            if (!response.ok) throw new Error(await response.text());
+
+            alert('Torneio iniciado com sucesso!');
+            loadRelayTournaments();
+        } catch (err) {
+            alert('Erro ao iniciar: ' + err.message);
+            btn.disabled = false;
+            btn.innerHTML = originalContent;
+        }
+    }
+
+    document.getElementById('refreshRelay').addEventListener('click', loadRelayTournaments);
 })();
