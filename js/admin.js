@@ -606,17 +606,19 @@
 
             list.innerHTML = '';
             tournaments.forEach(t => {
+                const isActive = t.status === 'active';
                 const card = document.createElement('div');
                 card.className = 'relay-card';
                 card.innerHTML = `
                 <div class="relay-card-info">
                     <h3>${t.name}</h3>
                     <p>ID: <code>${t.id}</code></p>
-                    <span class="badge ${t.status === 'active' ? 'bg-green' : 'bg-red'}">${t.status}</span>
+                    <span class="badge ${isActive ? 'bg-green' : 'bg-red'}">${t.status}</span>
                 </div>
                 <div class="relay-card-actions">
-                    <button class="btn-neon btn-start-relay" data-id="${t.id}" ${t.status === 'active' ? 'disabled' : ''}>
-                        <i class="fa-solid fa-play"></i> Iniciar Torneio
+                    <button class="btn-neon btn-start-relay" data-id="${t.id}" ${isActive ? 'disabled' : ''}>
+                        <i class="fa-solid ${isActive ? 'fa-check' : 'fa-play'}"></i> 
+                        ${isActive ? 'Em Andamento' : 'Iniciar Torneio'}
                     </button>
                 </div>
             `;
@@ -624,7 +626,9 @@
             });
 
             document.querySelectorAll('.btn-start-relay').forEach(btn => {
-                btn.addEventListener('click', () => startRelayTournament(btn.dataset.id, btn));
+                if (!btn.disabled) {
+                    btn.addEventListener('click', () => startRelayTournament(btn.dataset.id, btn));
+                }
             });
 
         } catch (err) {
