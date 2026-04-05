@@ -74,18 +74,37 @@
                         Requisitos").</li>
                     <li><strong>Aposta:</strong> Os times definem quanto querem arriscar (pingo + aposta livre). Uma vez
                         confirmada, a aposta não pode ser alterada.</li>
-                    <li><strong>Seleção:</strong> O grupo indica qual integrante irá para o botão.</li>
-                    <li><strong>O Botão:</strong> A pergunta surge na tela. O primeiro a apertar ganha o direito de
-                        responder. Se ninguém acionar o botão em até 15 segundos, o montante apostado volta para os
-                        donos e uma nova rodada começa.</li>
+                    <li><strong>Seleção:</strong> O grupo indica qual integrante será o responsável por escrever a
+                        resposta da rodada.</li>
+                    <li><strong>Resposta em Post-it:</strong> Assim que a pergunta completa for exibida no telão,
+                        <strong>todas as equipes</strong> escrevem sua resposta em um post-it e o colocam sobre a mesa,
+                        formando uma única pilha. A ordem de colocação define a prioridade: o post-it que estiver
+                        <strong>embaixo</strong> (colocado primeiro) é o primeiro a ser verificado.
+                    </li>
+                    <li><strong>Leitura da pilha:</strong> A organização lê as respostas na ordem da pilha (de baixo
+                        para cima).
+                        <ul style="margin-top: 0.25rem; list-style-type: circle; padding-left: 1.5rem;">
+                            <li>Se a resposta do primeiro post-it estiver correta, aquela equipe vence a rodada e recebe
+                                o pote (líquido após taxas). As demais equipes perdem o valor que apostaram.</li>
+                            <li>Se estiver errada, aquela equipe perde o valor apostado e a verificação passa para o
+                                próximo post-it.</li>
+                            <li>O processo continua até que uma resposta correta seja encontrada ou até que todos os
+                                post-its tenham sido verificados.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Se nenhuma equipe acertar:</strong> Todas as equipes perdem o valor que apostaram. O
+                        montante total perdido forma um <strong>Pote de Acúmulo</strong> que é transferido para a rodada
+                        seguinte (acrescido ao pote daquela rodada). Se na rodada seguinte ninguém vencer, o Pote de
+                        Acúmulo é removido do jogo.</li>
                 </ol>
             </section>
 
             <section class="rules-section">
                 <h2>// RODÍZIO DE INTEGRANTES</h2>
                 <ul class="rules-list">
-                    <li><strong>Descanso:</strong> O membro que responder a uma pergunta deve ficar fora das duas
-                        rodadas seguintes da sua equipe.</li>
+                    <li><strong>Descanso:</strong> O membro da equipe vencedora que escreveu a resposta correta deve
+                        ficar fora da <strong>uma rodada seguinte</strong> da sua equipe. As demais equipes não têm
+                        restrição (a menos que vençam em outra rodada).</li>
                     <li><strong>Gestão:</strong> Cabe ao grupo planejar qual parceiro é mais apto para cada assunto,
                         evitando gastar seus melhores jogadores em temas menos valiosos.</li>
                     <li><strong>Ausência no início:</strong> Se o time não estiver com seus 3 membros presentes no
@@ -97,15 +116,18 @@
             <section class="rules-section">
                 <h2>// SISTEMA DE GANHOS E PERDAS</h2>
                 <ul class="rules-list">
-                    <li><strong>Vitória:</strong> O acerto garante a devolução do valor apostado mais o lucro da mesa. A
+                    <li><strong>Vitória (acerto):</strong> A equipe vencedora recebe de volta o valor apostado mais o
+                        lucro da mesa. A
                         banca <strong>soma 30% ao pote total</strong> (soma de todas as apostas da rodada). Sobre o
                         lucro (valor recebido menos a aposta), a organização retém uma <strong>taxa de 20%</strong>. O
-                        time vencedor recebe: <code>aposta + 0,8 × (pote_total − aposta)</code>.</li>
-                    <li><strong>Erro:</strong> Se quem apertou o botão errar, ele perde tudo o que apostou. Esse valor
-                        perdido forma um <strong>Pote de Acúmulo</strong> válido apenas para a rodada seguinte. Se
-                        ninguém ganhar a rodada seguinte, o valor acumulado é retirado do jogo.</li>
-                    <li><strong>Recuperação:</strong> Caso o respondente da vez erre, os outros times que apenas
-                        apostaram (mas não apertaram o botão) recebem suas fichas de volta.</li>
+                        time vencedor recebe: <code>aposta + 0,8 x (pote_total - aposta)</code>.</li>
+                    <li><strong>Derrota (erro ou nenhum acerto):</strong> Qualquer equipe que não tenha sido a vencedora
+                        (incluindo aquelas cuja resposta foi verificada e considerada errada, bem como aquelas que não
+                        acertaram) perde integralmente o valor que apostou na rodada. Não há devolução parcial.</li>
+                    <li><strong>Pote de Acúmulo:</strong> Quando nenhuma equipe acerta, o valor total apostado por todas
+                        as equipes naquela rodada é acumulado em um pote especial. Esse pote é adicionado ao pote da
+                        rodada seguinte. Se na rodada seguinte ainda não houver vencedor, o pote acumulado é retirado do
+                        jogo (não é devolvido a ninguém).</li>
                 </ul>
             </section>
 
@@ -113,7 +135,7 @@
                 <h2>// PONTUAÇÃO NO PLACAR GERAL (MÁXIMO 180 PONTOS)</h2>
                 <ul class="rules-list">
                     <li><strong>Por acerto:</strong> Cada resposta correta dada pelo time soma <strong>10
-                            pontos</strong> diretos no placar geral. (15 rodadas × 10 = 150 pontos potenciais)</li>
+                            pontos</strong> diretos no placar geral. (15 rodadas x 10 = 150 pontos potenciais)</li>
                     <li><strong>Pelo saldo final:</strong> As fichas são contabilizadas e os times ganham bônus de
                         acordo com a posição no ranking de créditos:
                         <ul style="margin-top: 0.25rem; list-style-type: circle; padding-left: 1.5rem;">
@@ -138,8 +160,12 @@
             <section class="rules-section">
                 <h2>// REGRAS DE CONDUTA E DESEMPATE</h2>
                 <ul class="rules-list">
-                    <li>É proibido trocar o jogador da vez após a pergunta aparecer no telão.</li>
-                    <li>A resposta deve ser falada em voz alta assim que o botão for pressionado.</li>
+                    <li>É proibido trocar o integrante responsável pela resposta após a pergunta aparecer no telão.</li>
+                    <li>A resposta deve ser escrita no post-it de forma legível. Post-its rasurados ou com mais de uma
+                        opção assinalada serão considerados inválidos (equivalente a erro).</li>
+                    <li>A ordem de empilhamento dos post-its é determinada pelo momento em que cada equipe coloca seu
+                        post-it na mesa. Não é permitido recolocar ou trocar a posição após o término do tempo de
+                        resposta.</li>
                     <li>Atitudes que visem distrair ou atrapalhar o raciocínio dos adversários causarão punição
                         financeira (perda de fichas) a critério da organização.</li>
                     <li>O uso de qualquer ferramenta de IA ou consulta externa é vedado.</li>
