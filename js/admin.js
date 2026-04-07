@@ -1,6 +1,6 @@
 (function () {
     const API_BASE = 'https://copa-de-software.onrender.com';
-    const ORCHESTRATOR_URL = 'https://orquestradoralgoritmos-sfjr.onrender.com/';
+    const ORCHESTRATOR_URL = 'https://orquestradoralgoritmos-sfjr.onrender.com';
     const ORCHESTRATOR_TOKEN = 'cWcG1T82qiJk';
 
     const loginSection = document.getElementById('loginSection');
