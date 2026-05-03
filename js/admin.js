@@ -8,6 +8,11 @@
     const loginForm = document.getElementById('loginForm');
     const loginError = document.getElementById('loginError');
 
+    let currentParticipantSubTab = null;
+    let quickRoundActive = false;
+    let quickTeams = [];
+    let selectedTeamIds = new Set();
+
     async function apiRequest(url, options = {}) {
         const token = localStorage.getItem('adminToken');
         const headers = { ...(options.headers || {}) };
@@ -89,6 +94,20 @@
         });
     });
 
+    document.querySelectorAll('#scoreSubTabs .sub-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#scoreSubTabs .sub-tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('#tab-score .sub-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`sub-${btn.dataset.subtab}`).classList.add('active');
+
+            if (btn.dataset.subtab === 'quick' && !quickRoundActive) {
+                loadQuickTeams();
+            }
+        });
+    });
+
     function loadAllSections() {
         loadPendingTeams();
         loadActiveTeams();
@@ -97,6 +116,7 @@
         loadReserves();
         loadTeamsForSelect();
         loadRelayTournaments();
+        loadQuickTeams();
     }
 
     async function loadPendingTeams() {
@@ -321,33 +341,114 @@
     };
 
     async function loadParticipantsAdmin() {
-        const container = document.getElementById('participantsListAdmin');
-        container.innerHTML = '<div class="rank-loader" style="display:flex;"><div class="loader-container">...</div><p>Carregando...</p></div>';
+        const subTabsContainer = document.getElementById('participantSubTabs');
+        const listContainer = document.getElementById('participantsListAdmin');
+
+        subTabsContainer.innerHTML = '';
+        listContainer.innerHTML = '<div class="rank-loader" style="display:flex;"><p>Carregando...</p></div>';
 
         try {
-            const response = await fetch(API_BASE + '/participants');
-            if (!response.ok) throw new Error('Erro ao carregar participantes');
-            const json = await response.json();
-            const participants = json.success ? json.data : json;
+            const [teamsRes, partsRes] = await Promise.all([
+                fetch(API_BASE + '/teams?status=approved'),
+                fetch(API_BASE + '/participants')
+            ]);
 
-            if (!participants || participants.length === 0) {
-                container.innerHTML = '<p class="text-muted">Nenhum participante inscrito.</p>';
-                return;
+            if (!teamsRes.ok || !partsRes.ok) throw new Error('Erro ao carregar dados');
+
+            const teamsJson = await teamsRes.json();
+            const teams = teamsJson.success ? teamsJson.data : teamsJson;
+
+            const partsJson = await partsRes.json();
+            const participants = partsJson.success ? partsJson.data : partsJson;
+
+            const matriculaToTeamId = new Map();
+            if (teams) {
+                teams.forEach(team => {
+                    if (team.participantData) {
+                        team.participantData.forEach(member => {
+                            matriculaToTeamId.set(member.matricula, team.id);
+                        });
+                    }
+                });
             }
 
-            container.innerHTML = participants.map(p => `
-                <div class="participant-admin-item">
-                    <span><strong>${p.nome}</strong> (${p.matricula}) - ${p.semestre}º</span>
-                    <div>
-                        <button class="btn-ghost btn-small" onclick="editParticipant('${p.matricula}')">Editar</button>
-                        <button class="btn-ghost btn-small" onclick="cancelParticipant('${p.matricula}')">Cancelar</button>
-                    </div>
-                </div>
-            `).join('');
+            const teamMap = new Map();
+            const noTeam = [];
+
+            participants.forEach(p => {
+                const teamId = matriculaToTeamId.get(p.matricula);
+                if (teamId) {
+                    if (!teamMap.has(teamId)) teamMap.set(teamId, []);
+                    teamMap.get(teamId).push(p);
+                } else {
+                    noTeam.push(p);
+                }
+            });
+
+            const subTabDefs = [];
+            if (teams && teams.length) {
+                teams.forEach(team => {
+                    subTabDefs.push({
+                        id: team.id,
+                        label: team.name,
+                        participants: teamMap.get(team.id) || []
+                    });
+                });
+            }
+            subTabDefs.push({ id: 'none', label: 'Sem Time', participants: noTeam });
+
+            subTabsContainer.innerHTML = '';
+            subTabDefs.forEach(def => {
+                const btn = document.createElement('button');
+                btn.className = 'sub-tab-btn';
+                btn.dataset.tab = def.id;
+                btn.textContent = def.label;
+                btn.addEventListener('click', () => switchParticipantSubTab(def.id, subTabDefs));
+                subTabsContainer.appendChild(btn);
+            });
+
+            const activeId = currentParticipantSubTab && subTabDefs.some(d => d.id === currentParticipantSubTab)
+                ? currentParticipantSubTab
+                : (subTabDefs[0]?.id || 'none');
+
+            switchParticipantSubTab(activeId, subTabDefs);
 
         } catch (err) {
-            container.innerHTML = `<p class="form-error">${err.message}</p>`;
+            subTabsContainer.innerHTML = '';
+            listContainer.innerHTML = `<p class="form-error">${err.message}</p>`;
         }
+    }
+
+    function switchParticipantSubTab(tabId, subTabDefs) {
+        currentParticipantSubTab = tabId;
+
+        document.querySelectorAll('#participantSubTabs .sub-tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.tab === tabId);
+        });
+
+        const def = subTabDefs.find(d => d.id === tabId);
+        const listContainer = document.getElementById('participantsListAdmin');
+
+        if (!def) {
+            listContainer.innerHTML = '<p class="text-muted">Nenhum participante encontrado.</p>';
+            return;
+        }
+
+        const participants = def.participants;
+        if (!participants || participants.length === 0) {
+            listContainer.innerHTML = '<p class="text-muted">Nenhum participante neste grupo.</p>';
+            return;
+        }
+
+        listContainer.innerHTML = participants.map(p => `
+            <div class="participant-admin-item">
+                <span><strong>${p.nome}</strong> (${p.matricula}) - ${p.semestre}º</span>
+                <div>
+                    <button class="btn-ghost btn-small" onclick="editParticipant('${p.matricula}')">Editar</button>
+                    <button class="btn-ghost btn-small" onclick="cancelParticipant('${p.matricula}')">Cancelar</button>
+                </div>
+            </div>
+        `).join('');
     }
 
     window.editParticipant = (matricula) => {
@@ -495,11 +596,170 @@
         }
     }
 
+    async function loadQuickTeams() {
+        try {
+            const response = await fetch(API_BASE + '/teams?status=approved');
+            if (!response.ok) throw new Error('Erro ao carregar times');
+            const json = await response.json();
+            quickTeams = json.success ? json.data : json || [];
+            renderQuickGrid();
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    function renderQuickGrid() {
+        const grid = document.getElementById('quickGrid');
+        if (!grid) return;
+
+        grid.innerHTML = quickTeams.map(team => `
+            <div class="team-row ${selectedTeamIds.has(team.id) ? 'selected' : ''}" data-team-id="${team.id}">
+                <div class="team-info">
+                    <div class="acerto-indicator">
+                        ${selectedTeamIds.has(team.id) ? '<i class="fa-solid fa-check"></i>' : ''}
+                    </div>
+                    <span class="team-name">${team.name}</span>
+                    ${team.code ? `<span class="team-code">${team.code}</span>` : ''}
+                </div>
+                <span class="text-muted" style="font-size:0.8rem;">
+                    ${selectedTeamIds.has(team.id) ? 'Acerto registrado' : 'Clique para marcar acerto'}
+                </span>
+            </div>
+        `).join('');
+
+        grid.querySelectorAll('.team-row').forEach(row => {
+            row.addEventListener('click', () => toggleTeamSelection(row.dataset.teamId));
+        });
+    }
+
+    function toggleTeamSelection(teamId) {
+        if (selectedTeamIds.has(teamId)) {
+            selectedTeamIds.delete(teamId);
+        } else {
+            selectedTeamIds.add(teamId);
+        }
+        renderQuickGrid();
+    }
+
+    document.getElementById('startRoundBtn').addEventListener('click', () => {
+        const modality = document.getElementById('quickModality').value;
+        const description = document.getElementById('quickDescription').value.trim();
+        const value = parseInt(document.getElementById('quickValue').value);
+
+        if (!description) {
+            alert('Informe a descrição do round.');
+            return;
+        }
+        if (isNaN(value) || value <= 0) {
+            alert('Valor do acerto deve ser positivo.');
+            return;
+        }
+
+        quickRoundActive = true;
+        document.getElementById('quickGridContainer').style.display = 'block';
+        document.getElementById('startRoundBtn').style.display = 'none';
+        document.getElementById('resetConfigBtn').style.display = 'inline-block';
+        document.getElementById('quickModality').disabled = true;
+        document.getElementById('quickDescription').disabled = true;
+        document.getElementById('quickValue').disabled = true;
+
+        if (quickTeams.length === 0) {
+            loadQuickTeams();
+        }
+    });
+
+    document.getElementById('resetConfigBtn').addEventListener('click', () => {
+        if (selectedTeamIds.size > 0 && !confirm('Existem seleções não enviadas. Deseja resetar mesmo assim?')) return;
+        resetQuickConfig();
+    });
+
+    function resetQuickConfig() {
+        quickRoundActive = false;
+        selectedTeamIds.clear();
+        document.getElementById('quickGridContainer').style.display = 'none';
+        document.getElementById('startRoundBtn').style.display = 'inline-block';
+        document.getElementById('resetConfigBtn').style.display = 'none';
+        document.getElementById('quickModality').disabled = false;
+        document.getElementById('quickDescription').disabled = false;
+        document.getElementById('quickValue').disabled = false;
+        document.getElementById('batchResult').style.display = 'none';
+        document.getElementById('batchResult').textContent = '';
+        renderQuickGrid();
+    }
+
+    document.getElementById('selectAllBtn').addEventListener('click', () => {
+        quickTeams.forEach(t => selectedTeamIds.add(t.id));
+        renderQuickGrid();
+    });
+
+    document.getElementById('deselectAllBtn').addEventListener('click', () => {
+        selectedTeamIds.clear();
+        renderQuickGrid();
+    });
+
+    document.getElementById('submitBatchBtn').addEventListener('click', async () => {
+        if (selectedTeamIds.size === 0) {
+            alert('Selecione pelo menos um time.');
+            return;
+        }
+
+        const modality = document.getElementById('quickModality').value;
+        const description = document.getElementById('quickDescription').value.trim();
+        const value = parseInt(document.getElementById('quickValue').value);
+
+        const scores = [];
+        selectedTeamIds.forEach(teamId => {
+            const team = quickTeams.find(t => t.id === teamId);
+            scores.push({
+                teamId: teamId,
+                value: value,
+                origin: 'match',
+                modality: modality,
+                description: `${modality} - ${description} - Acerto`
+            });
+        });
+
+        const batchResult = document.getElementById('batchResult');
+        batchResult.style.display = 'none';
+        document.getElementById('submitBatchBtn').disabled = true;
+        document.getElementById('submitBatchBtn').innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+
+        try {
+            const response = await apiRequest('/admin/ranking/scores/batch', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ scores })
+            });
+
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.error || 'Erro ao enviar pontuações');
+            }
+
+            const json = await response.json();
+            batchResult.className = 'form-alert';
+            batchResult.textContent = `Sucesso! ${json.data?.processed || scores.length} pontuações registradas.`;
+            batchResult.style.display = 'block';
+
+            selectedTeamIds.clear();
+            renderQuickGrid();
+
+        } catch (err) {
+            batchResult.className = 'form-error';
+            batchResult.textContent = `Erro: ${err.message}. Nenhuma pontuação foi salva.`;
+            batchResult.style.display = 'block';
+        } finally {
+            document.getElementById('submitBatchBtn').disabled = false;
+            document.getElementById('submitBatchBtn').innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Pontuações do Round';
+        }
+    });
+
     document.getElementById('drawIntermediary').addEventListener('click', () => runDraw(false));
     document.getElementById('drawFinal').addEventListener('click', () => runDraw(true));
 
     async function runDraw(isFinal) {
         const resultDiv = document.getElementById('drawResult');
+        resultDiv.style.display = 'block';
         resultDiv.innerHTML = '<p>Executando sorteio...</p>';
         try {
             const response = await apiRequest(`/admin/draw?final=${isFinal}`, { method: 'POST' });

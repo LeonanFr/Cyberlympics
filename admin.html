@@ -77,7 +77,6 @@
             <div class="tab-content active" id="tab-teams">
                 <h2><i class="fa-solid fa-users"></i> Times Pendentes</h2>
 
-                <!-- Formulário de criação manual -->
                 <div class="manual-team-section">
                     <h3><i class="fa-solid fa-pen"></i> Criar Time Manual (por matrículas)</h3>
                     <form id="manualTeamForm">
@@ -114,7 +113,7 @@
                 <div id="pendingTeamsList" class="pending-teams-list"></div>
             </div>
 
-            <!-- Tab: Times Ativos (aprovados) -->
+            <!-- Tab: Times Ativos -->
             <div class="tab-content" id="tab-active-teams">
                 <h2><i class="fa-solid fa-check-circle"></i> Times Aprovados</h2>
                 <div id="activeTeamsList" class="active-teams-list"></div>
@@ -123,6 +122,7 @@
             <!-- Tab: Participantes -->
             <div class="tab-content" id="tab-participants">
                 <h2><i class="fa-solid fa-address-card"></i> Participantes</h2>
+                <div class="sub-tabs" id="participantSubTabs"></div>
                 <div class="participants-list-admin" id="participantsListAdmin"></div>
             </div>
 
@@ -133,47 +133,101 @@
                     <button id="drawIntermediary" class="btn-neon draw-btn">Sorteio Intermediário</button>
                     <button id="drawFinal" class="btn-neon draw-btn">Sorteio Final</button>
                 </div>
-                <div id="drawResult" class="draw-result"></div>
+                <div id="drawResult" class="draw-result" style="display: none;"></div>
             </div>
 
             <!-- Tab: Pontuação -->
             <div class="tab-content" id="tab-score">
+                <!-- Manutenção do Ranking -->
                 <div class="recalc-section"
                     style="margin-bottom: 2rem; padding: 1rem; background: rgba(0,0,0,0.3); border-radius: 8px;">
                     <h3><i class="fa-solid fa-rotate"></i> Manutenção do Ranking</h3>
                     <button id="recalculateRankingBtn" class="btn-neon">Recalcular Ranking de Todos os Times</button>
                     <div id="recalcMessage" class="form-alert" style="display: none; margin-top: 10px;"></div>
                 </div>
-                <h2><i class="fa-solid fa-star"></i> Adicionar Pontuação</h2>
-                <form id="scoreForm">
-                    <div class="form-group">
-                        <label for="teamSelect">Time</label>
-                        <select id="teamSelect" name="teamId" required>
-                            <option value="">Carregando times...</option>
-                        </select>
+
+                <!-- Sub-abas de Pontuação -->
+                <div class="sub-tabs" id="scoreSubTabs">
+                    <button class="sub-tab-btn active" data-subtab="quick">Lançamento Rápido</button>
+                    <button class="sub-tab-btn" data-subtab="single">Lançamento Avulso</button>
+                </div>
+
+                <!-- Sub-aba: Lançamento Rápido -->
+                <div class="sub-content active" id="sub-quick">
+                    <h3><i class="fa-solid fa-bolt"></i> Configuração do Round</h3>
+                    <div class="quick-config">
+                        <div class="config-row">
+                            <div class="form-group">
+                                <label>Modalidade</label>
+                                <select id="quickModality">
+                                    <option value="quiz">Quiz</option>
+                                    <option value="burnout">Burnout</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Descrição do Round</label>
+                                <input type="text" id="quickDescription" placeholder="Ex: Rodada 1, Final...">
+                            </div>
+                            <div class="form-group">
+                                <label>Valor do Acerto</label>
+                                <input type="number" id="quickValue" value="10" min="1">
+                            </div>
+                        </div>
+                        <button id="startRoundBtn" class="btn-neon"><i class="fa-solid fa-play"></i> Iniciar
+                            Round</button>
+                        <button id="resetConfigBtn" class="btn-ghost" style="display:none;">Nova Configuração</button>
                     </div>
-                    <div class="form-group">
-                        <label for="scoreValue">Valor</label>
-                        <input type="number" id="scoreValue" name="value" required>
+
+                    <div id="quickGridContainer" style="display:none;">
+                        <div class="grid-header">
+                            <h3><i class="fa-solid fa-list-check"></i> Times</h3>
+                            <div class="grid-actions">
+                                <button id="selectAllBtn" class="btn-ghost btn-small">Marcar Todos</button>
+                                <button id="deselectAllBtn" class="btn-ghost btn-small">Desmarcar Todos</button>
+                            </div>
+                        </div>
+                        <div id="quickGrid" class="quick-grid"></div>
+                        <div class="grid-footer">
+                            <button id="submitBatchBtn" class="btn-neon"><i class="fa-solid fa-paper-plane"></i> Enviar
+                                Pontuações do Round</button>
+                        </div>
+                        <div id="batchResult" class="form-alert" style="display:none; margin-top: 10px;"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="scoreOrigin">Origem</label>
-                        <select id="scoreOrigin" name="origin" required>
-                            <option value="match">Partida</option>
-                            <option value="penalty">Penalidade</option>
-                            <option value="bonus">Bônus</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="scoreModality">Modalidade (opcional)</label>
-                        <input type="text" id="scoreModality" name="modality">
-                    </div>
-                    <div class="form-group">
-                        <label for="scoreDescription">Descrição</label>
-                        <input type="text" id="scoreDescription" name="description" required>
-                    </div>
-                    <button type="submit" class="btn-neon">Adicionar Pontuação</button>
-                </form>
+                </div>
+
+                <!-- Sub-aba: Lançamento Avulso -->
+                <div class="sub-content" id="sub-single">
+                    <h3><i class="fa-solid fa-pen"></i> Bônus / Penalidade</h3>
+                    <form id="scoreForm">
+                        <div class="form-group">
+                            <label for="teamSelect">Time</label>
+                            <select id="teamSelect" name="teamId" required>
+                                <option value="">Carregando times...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="scoreValue">Valor</label>
+                            <input type="number" id="scoreValue" name="value" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="scoreOrigin">Origem</label>
+                            <select id="scoreOrigin" name="origin" required>
+                                <option value="match">Partida</option>
+                                <option value="penalty">Penalidade</option>
+                                <option value="bonus">Bônus</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="scoreModality">Modalidade (opcional)</label>
+                            <input type="text" id="scoreModality" name="modality">
+                        </div>
+                        <div class="form-group">
+                            <label for="scoreDescription">Descrição</label>
+                            <input type="text" id="scoreDescription" name="description" required>
+                        </div>
+                        <button type="submit" class="btn-neon">Adicionar Pontuação</button>
+                    </form>
+                </div>
             </div>
 
             <!-- Tab: Nomes de Times -->
@@ -196,7 +250,7 @@
                 <div id="reservesList" class="reserves-list"></div>
             </div>
 
-            <!-- Tab: Algoritmos em Revezamento-->
+            <!-- Tab: Torneio Relay -->
             <div class="tab-content" id="tab-relay">
                 <div class="section-header-relay">
                     <h2><i class="fa-solid fa-microchip"></i> Controle do Relay</h2>
