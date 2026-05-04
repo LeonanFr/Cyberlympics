@@ -8,6 +8,8 @@
     const loginForm = document.getElementById('loginForm');
     const loginError = document.getElementById('loginError');
 
+    let checkinList = [];
+    let participantsList = [];
     let currentParticipantSubTab = null;
     let quickRoundActive = false;
     let quickTeams = [];
@@ -91,6 +93,7 @@
             if (tab === 'reserves') loadReserves();
             if (tab === 'score') loadTeamsForSelect();
             if (tab === 'relay') loadRelayTournaments();
+            if (tab === 'checkin') loadCheckinData();
         });
     });
 
@@ -117,6 +120,7 @@
         loadTeamsForSelect();
         loadRelayTournaments();
         loadQuickTeams();
+        loadCheckinData();
     }
 
     async function loadPendingTeams() {
@@ -922,6 +926,157 @@
             btn.disabled = false;
             btn.innerHTML = originalContent;
         }
+    }
+
+    // ========== CHECK‑IN ==========
+
+    async function loadCheckinData() {
+        const checkinLoader = document.getElementById('checkinListLoader');
+        const checkinEmpty = document.getElementById('checkinListEmpty');
+        const checkinListEl = document.getElementById('checkinList');
+        const pendingLoader = document.getElementById('pendingCheckinLoader');
+        const pendingListEl = document.getElementById('pendingCheckinList');
+
+        checkinLoader.style.display = 'flex';
+        checkinEmpty.style.display = 'none';
+        checkinListEl.innerHTML = '';
+        pendingLoader.style.display = 'flex';
+        pendingListEl.innerHTML = '';
+
+        try {
+            const [checkinRes, participantsRes] = await Promise.all([
+                apiRequest('/admin/checkin'),
+                fetch(API_BASE + '/participants')
+            ]);
+
+            const checkinJson = await checkinRes.json();
+            const checkins = checkinJson.success ? checkinJson.data : checkinJson;
+            checkinList = checkins || [];
+
+            const partsJson = await participantsRes.json();
+            const participants = partsJson.success ? partsJson.data : partsJson;
+            participantsList = participants || [];
+
+            checkinLoader.style.display = 'none';
+            if (checkinList.length === 0) {
+                checkinEmpty.style.display = 'block';
+            } else {
+                checkinListEl.innerHTML = checkinList.map(c => {
+                    const isCompetidor = c.tipo === 'competidor';
+                    return `
+                    <div class="checkin-item">
+                        <span class="checkin-info">
+                            ${escapeHtml(c.nome)}
+                            <span class="tipo-badge ${isCompetidor ? 'competidor' : 'ouvinte'}">
+                                ${isCompetidor ? 'Competidor' : 'Ouvinte'}
+                            </span>
+                        </span>
+                        <button class="btn-ghost btn-small" onclick="removeCheckin('${c.id}')">
+                            <i class="fa-solid fa-trash"></i> Remover
+                        </button>
+                    </div>
+                `;
+                }).join('');
+            }
+
+            pendingLoader.style.display = 'none';
+            const checkedParticipantIds = new Set(
+                checkinList
+                    .filter(c => c.participantId)
+                    .map(c => c.participantId)
+            );
+            const pendingParticipants = participantsList.filter(p => !checkedParticipantIds.has(p.id));
+
+            if (pendingParticipants.length === 0) {
+                pendingListEl.innerHTML = '<p class="text-muted">Todos os competidores já fizeram check-in.</p>';
+            } else {
+                pendingListEl.innerHTML = pendingParticipants.map(p => `
+                <div class="checkin-pending-item">
+                    <span>${escapeHtml(p.nome)} (${escapeHtml(p.matricula)}) - ${p.semestre}º</span>
+                    <button class="btn-neon btn-small" onclick="checkinParticipant('${p.id}')">
+                        <i class="fa-solid fa-check"></i> Check-in
+                    </button>
+                </div>
+            `).join('');
+            }
+        } catch (err) {
+            checkinLoader.style.display = 'none';
+            pendingLoader.style.display = 'none';
+            checkinListEl.innerHTML = '<p class="form-error">Erro ao carregar check-ins.</p>';
+            pendingListEl.innerHTML = '<p class="form-error">Erro ao carregar participantes.</p>';
+        }
+    }
+
+    window.checkinParticipant = async (participantId) => {
+        try {
+            const response = await apiRequest(`/admin/checkin/participant/${participantId}`, { method: 'POST' });
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.error || 'Erro ao realizar check-in');
+            }
+            loadCheckinData();
+        } catch (err) {
+            alert('Erro: ' + err.message);
+        }
+    };
+
+    window.removeCheckin = async (checkinId) => {
+        if (!confirm('Remover este check-in?')) return;
+        try {
+            const response = await apiRequest(`/admin/checkin/${checkinId}`, { method: 'DELETE' });
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.error || 'Erro ao remover check-in');
+            }
+            loadCheckinData();
+        } catch (err) {
+            alert('Erro: ' + err.message);
+        }
+    };
+
+    document.getElementById('checkinManualForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const nomeInput = document.getElementById('checkinManualName');
+        const nome = nomeInput.value.trim();
+        const resultDiv = document.getElementById('checkinManualResult');
+
+        if (!nome) return;
+
+        resultDiv.style.display = 'none';
+
+        try {
+            const response = await apiRequest('/admin/checkin/manual', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nome })
+            });
+            if (!response.ok) {
+                const err = await response.json();
+                throw new Error(err.error || 'Erro ao adicionar');
+            }
+
+            resultDiv.className = 'form-alert';
+            resultDiv.textContent = 'Ouvinte/ajudante adicionado com sucesso!';
+            resultDiv.style.display = 'block';
+            nomeInput.value = '';
+            loadCheckinData();
+        } catch (err) {
+            resultDiv.className = 'form-error';
+            resultDiv.textContent = 'Erro: ' + err.message;
+            resultDiv.style.display = 'block';
+        }
+    });
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>"']/g, function (m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            if (m === '"') return '&quot;';
+            if (m === "'") return '&#39;';
+            return m;
+        });
     }
 
     document.getElementById('refreshRelay').addEventListener('click', loadRelayTournaments);

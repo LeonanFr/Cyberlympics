@@ -71,6 +71,7 @@
                 <button class="tab-btn" data-tab="teamnames">Nomes de Times</button>
                 <button class="tab-btn" data-tab="reserves">Reserva</button>
                 <button class="tab-btn" data-tab="relay">Torneio Relay</button>
+                <button class="tab-btn" data-tab="checkin">Check-in</button>
             </div>
 
             <!-- Tab: Times Pendentes -->
@@ -262,6 +263,40 @@
                         <p>Carregando torneios do orquestrador...</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- Tab: Check-in -->
+            <div class="tab-content" id="tab-checkin">
+                <h2><i class="fa-solid fa-clipboard-check"></i> Check-in Presencial</h2>
+
+                <!-- Seção de ouvintes/ajudantes -->
+                <div class="checkin-manual-section">
+                    <h3><i class="fa-solid fa-user-plus"></i> Adicionar ouvinte / ajudante</h3>
+                    <form id="checkinManualForm">
+                        <div class="form-group">
+                            <input type="text" id="checkinManualName" placeholder="Nome completo" required>
+                        </div>
+                        <button type="submit" class="btn-neon">Adicionar</button>
+                    </form>
+                    <div id="checkinManualResult" class="form-alert" style="display: none;"></div>
+                </div>
+
+                <!-- Lista de checkins (competidores + ouvintes) -->
+                <h3><i class="fa-solid fa-list-ul"></i> Presenças registradas</h3>
+                <div id="checkinListLoader" class="rank-loader" style="display: none;">
+                    <p>Carregando...</p>
+                </div>
+                <div id="checkinListEmpty" class="table-empty" style="display: none;">
+                    Nenhum check-in realizado ainda.
+                </div>
+                <div id="checkinList" class="checkin-list"></div>
+
+                <!-- Lista de competidores pendentes de check-in -->
+                <h3><i class="fa-solid fa-user-clock"></i> Competidores ainda não confirmados</h3>
+                <div id="pendingCheckinLoader" class="rank-loader" style="display: none;">
+                    <p>Carregando...</p>
+                </div>
+                <div id="pendingCheckinList" class="checkin-pending-list"></div>
             </div>
         </div>
     </main>
