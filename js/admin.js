@@ -935,18 +935,21 @@
         const checkinEmpty = document.getElementById('checkinListEmpty');
         const checkinListEl = document.getElementById('checkinList');
         const pendingLoader = document.getElementById('pendingCheckinLoader');
+        const pendingSubTabs = document.getElementById('pendingCheckinSubTabs');
         const pendingListEl = document.getElementById('pendingCheckinList');
 
         checkinLoader.style.display = 'flex';
         checkinEmpty.style.display = 'none';
         checkinListEl.innerHTML = '';
         pendingLoader.style.display = 'flex';
+        pendingSubTabs.innerHTML = '';
         pendingListEl.innerHTML = '';
 
         try {
-            const [checkinRes, participantsRes] = await Promise.all([
+            const [checkinRes, participantsRes, teamsRes] = await Promise.all([
                 apiRequest('/admin/checkin'),
-                fetch(API_BASE + '/participants')
+                fetch(API_BASE + '/participants'),
+                fetch(API_BASE + '/teams?status=approved')
             ]);
 
             const checkinJson = await checkinRes.json();
@@ -956,6 +959,9 @@
             const partsJson = await participantsRes.json();
             const participants = partsJson.success ? partsJson.data : partsJson;
             participantsList = participants || [];
+
+            const teamsJson = await teamsRes.json();
+            const teams = teamsJson.success ? teamsJson.data : teamsJson || [];
 
             checkinLoader.style.display = 'none';
             if (checkinList.length === 0) {
@@ -980,31 +986,93 @@
             }
 
             pendingLoader.style.display = 'none';
-            const checkedParticipantIds = new Set(
-                checkinList
-                    .filter(c => c.participantId)
-                    .map(c => c.participantId)
-            );
-            const pendingParticipants = participantsList.filter(p => !checkedParticipantIds.has(p.id));
 
-            if (pendingParticipants.length === 0) {
+            const matriculaToTeamId = new Map();
+            const teamMap = new Map();
+            if (teams) {
+                teams.forEach(team => {
+                    teamMap.set(team.id, { name: team.name, members: [] });
+                    if (team.participantData) {
+                        team.participantData.forEach(m => {
+                            matriculaToTeamId.set(m.matricula, team.id);
+                        });
+                    }
+                });
+            }
+
+            const checkedParticipantIds = new Set(
+                checkinList.filter(c => c.participantId).map(c => c.participantId)
+            );
+
+            const noTeamPending = [];
+            participantsList.forEach(p => {
+                if (checkedParticipantIds.has(p.id)) return;
+
+                const teamId = matriculaToTeamId.get(p.matricula);
+                if (teamId && teamMap.has(teamId)) {
+                    teamMap.get(teamId).members.push(p);
+                } else {
+                    noTeamPending.push(p);
+                }
+            });
+
+            const subTabDefs = [];
+            teamMap.forEach((info, teamId) => {
+                if (info.members.length > 0) {
+                    subTabDefs.push({
+                        id: teamId,
+                        label: info.name,
+                        participants: info.members
+                    });
+                }
+            });
+            if (noTeamPending.length > 0) {
+                subTabDefs.push({ id: 'none', label: 'Sem Time', participants: noTeamPending });
+            }
+
+            if (subTabDefs.length === 0) {
+                pendingSubTabs.innerHTML = '';
                 pendingListEl.innerHTML = '<p class="text-muted">Todos os competidores já fizeram check-in.</p>';
             } else {
-                pendingListEl.innerHTML = pendingParticipants.map(p => `
-                <div class="checkin-pending-item">
-                    <span>${escapeHtml(p.nome)} (${escapeHtml(p.matricula)}) - ${p.semestre}º</span>
-                    <button class="btn-neon btn-small" onclick="checkinParticipant('${p.id}')">
-                        <i class="fa-solid fa-check"></i> Check-in
-                    </button>
-                </div>
-            `).join('');
+                pendingSubTabs.innerHTML = subTabDefs.map((def, idx) => {
+                    const activeClass = idx === 0 ? ' active' : '';
+                    return `<button class="sub-tab-btn${activeClass}" data-pending-tab="${def.id}">${def.label}</button>`;
+                }).join('');
+
+                renderPendingGroup(subTabDefs[0]);
+
+                pendingSubTabs.querySelectorAll('.sub-tab-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        pendingSubTabs.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        const def = subTabDefs.find(d => d.id === btn.dataset.pendingTab);
+                        if (def) renderPendingGroup(def);
+                    });
+                });
             }
+
         } catch (err) {
             checkinLoader.style.display = 'none';
             pendingLoader.style.display = 'none';
             checkinListEl.innerHTML = '<p class="form-error">Erro ao carregar check-ins.</p>';
             pendingListEl.innerHTML = '<p class="form-error">Erro ao carregar participantes.</p>';
         }
+    }
+
+    function renderPendingGroup(def) {
+        const listEl = document.getElementById('pendingCheckinList');
+        if (!def || def.participants.length === 0) {
+            listEl.innerHTML = '<p class="text-muted">Nenhum pendente neste grupo.</p>';
+            return;
+        }
+        listEl.innerHTML = def.participants.map(p => `
+        <div class="checkin-pending-item">
+            <span>${escapeHtml(p.nome)}</span>
+            <button class="btn-neon btn-small" onclick="checkinParticipant('${p.id}')">
+                <i class="fa-solid fa-check"></i> Check-in
+            </button>
+        </div>
+    `).join('');
     }
 
     window.checkinParticipant = async (participantId) => {
@@ -1067,16 +1135,13 @@
         }
     });
 
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>"']/g, function (m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            if (m === '"') return '&quot;';
-            if (m === "'") return '&#39;';
-            return m;
-        });
+    if (typeof escapeHtml === 'undefined') {
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>"']/g, m => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            })[m]);
+        }
     }
 
     document.getElementById('refreshRelay').addEventListener('click', loadRelayTournaments);

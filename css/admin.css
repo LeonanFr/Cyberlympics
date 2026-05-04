@@ -1,5 +1,5 @@
 .page-admin .admin-container {
-    max-width: 1200px;
+    max-width: 60vw;
 }
 
 .admin-section {
@@ -20,8 +20,8 @@
 }
 
 .admin-tabs {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
     margin-bottom: 30px;
     border-bottom: 1px solid var(--border-color);
@@ -35,12 +35,14 @@
     background: transparent;
     border: 1px solid var(--border-color);
     color: var(--text-muted);
-    padding: 10px 20px;
+    padding: 10px 12px;
     font-family: 'Fira Code', monospace;
     cursor: pointer;
     transition: all 0.2s;
     border-radius: 6px;
-    flex: 1 1 auto;
+    text-align: center;
+    font-size: 0.85rem;
+    white-space: nowrap;
 }
 
 .tab-btn:hover {
@@ -374,9 +376,18 @@
     border-bottom: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
+    .page-admin .admin-container {
+        max-width: none;
+    }
+
+    .form-group {
+        width: 100% !important;
+    }
+
     .admin-tabs {
         flex-direction: column;
+        grid-template-columns: 1fr;
     }
 
     .tab-btn {
@@ -527,6 +538,10 @@
     border: 1px solid var(--border-color);
 }
 
+#checkinManualResult {
+    margin-top: 15px;
+}
+
 .checkin-manual-section .form-group {
     margin-bottom: 15px;
 }
@@ -594,6 +609,14 @@
     align-items: center;
     padding: 8px 0;
     border-bottom: 1px dashed var(--border-color);
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkin-pending-item span {
+    flex: 1;
+    word-break: break-word;
+    min-width: 0;
 }
 
 .checkin-pending-item:last-child {
@@ -603,4 +626,36 @@
 .checkin-pending-item button {
     padding: 4px 12px;
     font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+
+.checkin-list::-webkit-scrollbar,
+.checkin-pending-list::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.checkin-list::-webkit-scrollbar-track,
+.checkin-pending-list::-webkit-scrollbar-track {
+    background: var(--bg-header);
+    border-radius: 4px;
+}
+
+.checkin-list::-webkit-scrollbar-thumb,
+.checkin-pending-list::-webkit-scrollbar-thumb {
+    background: var(--neon-purple);
+    border-radius: 4px;
+    box-shadow: 0 0 6px var(--neon-purple);
+}
+
+.checkin-list::-webkit-scrollbar-thumb:hover,
+.checkin-pending-list::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-green);
+    box-shadow: 0 0 8px var(--neon-green);
+}
+
+.checkin-list,
+.checkin-pending-list {
+    scrollbar-color: var(--neon-purple) var(--bg-header);
 }
