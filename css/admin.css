@@ -659,3 +659,7 @@
 .checkin-pending-list {
     scrollbar-color: var(--neon-purple) var(--bg-header);
 }
+
+#downloadCheckinCsv {
+    padding: 8px 16px;
+}

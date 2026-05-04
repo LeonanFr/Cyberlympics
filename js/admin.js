@@ -1144,5 +1144,29 @@
         }
     }
 
+    function gerarCSV() {
+        if (!checkinList || checkinList.length === 0) {
+            alert('Nenhum check-in registrado para exportar.');
+            return;
+        }
+        const header = 'Nome,Tipo,Data/Hora';
+        const rows = checkinList.map(c => {
+            const nome = c.nome.replace(/"/g, '""');
+            const tipo = c.tipo === 'competidor' ? 'Competidor' : 'Ouvinte/Ajudante';
+            const data = c.createdAt ? new Date(c.createdAt).toLocaleString('pt-BR') : '';
+            return `"${nome}","${tipo}","${data}"`;
+        });
+        const csvContent = [header, ...rows].join('\n');
+        const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'checkin_copa_software.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('downloadCheckinCsv').addEventListener('click', gerarCSV);
+
     document.getElementById('refreshRelay').addEventListener('click', loadRelayTournaments);
 })();
