@@ -14,6 +14,7 @@
     let quickRoundActive = false;
     let quickTeams = [];
     let selectedTeamIds = new Set();
+    let relayTimerHandles = [];
 
     async function apiRequest(url, options = {}) {
         const token = localStorage.getItem('adminToken');
@@ -850,8 +851,159 @@
         }
     });
 
+    function clearRelayTimers() {
+        relayTimerHandles.forEach(handle => clearInterval(handle));
+        relayTimerHandles = [];
+    }
+
+    function formatRelayClock(ms) {
+        const safeMs = Math.max(0, ms);
+        const totalSeconds = Math.floor(safeMs / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    function getRelayTimerState(tournament) {
+        const config = tournament.rotationConfig || {};
+
+        const startMs = new Date(tournament.startTime).getTime();
+        const endMs = new Date(tournament.endTime).getTime();
+
+        const playerMinutes = Number(config.playerMinutes || 0);
+        const playerCount = Number(config.playerCount || 0);
+        const rotationRounds = Number(config.rotationRounds || 0);
+        const handoverSeconds = Number(config.handoverSeconds || 0);
+        const finalExtraMinutes = Number(config.finalExtraMinutes ?? config.finalExtraMin ?? 0);
+
+        if (
+            !Number.isFinite(startMs) ||
+            !Number.isFinite(endMs) ||
+            !playerMinutes ||
+            !playerCount ||
+            !rotationRounds
+        ) {
+            return {
+                total: '--',
+                swap: '--',
+                ended: false
+            };
+        }
+
+        const now = Date.now();
+
+        if (now < startMs) {
+            return {
+                total: '--',
+                swap: 'Aguardando início',
+                ended: false
+            };
+        }
+
+        if (now >= endMs) {
+            return {
+                total: '0:00',
+                swap: 'Encerrado',
+                ended: true
+            };
+        }
+
+        const totalRemainingMs = endMs - now;
+
+        const playerDurationMs = playerMinutes * 60 * 1000;
+        const handoverDurationMs = handoverSeconds * 1000;
+        const totalCycleMs = playerDurationMs + handoverDurationMs;
+        const finalExtraMs = finalExtraMinutes * 60 * 1000;
+        const totalPlayerTurns = playerCount * rotationRounds;
+
+        if (totalRemainingMs <= finalExtraMs) {
+            return {
+                total: formatRelayClock(totalRemainingMs),
+                swap: 'Final',
+                ended: false
+            };
+        }
+
+        const elapsed = now - startMs;
+        const cycleIndex = Math.floor(elapsed / totalCycleMs);
+
+        if (cycleIndex >= totalPlayerTurns) {
+            return {
+                total: formatRelayClock(totalRemainingMs),
+                swap: 'Final',
+                ended: false
+            };
+        }
+
+        const cyclePos = elapsed % totalCycleMs;
+
+        let msUntilSwap;
+        if (cyclePos < playerDurationMs) {
+            msUntilSwap = playerDurationMs - cyclePos;
+        } else {
+            msUntilSwap = totalCycleMs - cyclePos;
+        }
+
+        const totalSecs = Math.ceil(msUntilSwap / 1000);
+        const displaySecs = Math.max(0, totalSecs - 1);
+
+        return {
+            total: formatRelayClock(totalRemainingMs),
+            swap: `Troca em ${formatRelayClock(displaySecs * 1000)}`,
+            ended: false
+        };
+    }
+
+    async function fetchRelayTournamentDetails(id) {
+        const response = await fetch(`${ORCHESTRATOR_URL}/api/tournaments/${id}`, {
+            headers: { 'Authorization': `Bearer ${ORCHESTRATOR_TOKEN}` }
+        });
+
+        if (!response.ok) return null;
+
+        const json = await response.json();
+        return json.success ? json.data : json;
+    }
+
+    async function startRelayCardTimer(tournament, card) {
+        const totalEl = card.querySelector('.relay-total-timer');
+        const swapEl = card.querySelector('.relay-swap-timer');
+
+        if (!totalEl || !swapEl) return;
+
+        let fullTournament = tournament;
+
+        if (!fullTournament.startTime || !fullTournament.endTime || !fullTournament.rotationConfig) {
+            const details = await fetchRelayTournamentDetails(tournament.id);
+            if (details) fullTournament = details;
+        }
+
+        function renderTimer() {
+            const state = getRelayTimerState(fullTournament);
+
+            totalEl.innerHTML = `<i class="fa-regular fa-clock"></i> ${state.total}`;
+            swapEl.innerHTML = `<i class="fa-solid fa-exchange-alt"></i> ${state.swap}`;
+
+            if (state.ended && timerHandle) {
+                clearInterval(timerHandle);
+                relayTimerHandles = relayTimerHandles.filter(handle => handle !== timerHandle);
+            }
+        }
+
+        let timerHandle = null;
+
+        renderTimer();
+
+        timerHandle = setInterval(renderTimer, 500);
+        relayTimerHandles.push(timerHandle);
+    }
+
     async function loadRelayTournaments() {
         const list = document.getElementById('relayTournamentsList');
+
+        clearRelayTimers();
+
         list.innerHTML = '<div class="rank-loader" style="display:flex;"><p>Buscando dados...</p></div>';
 
         try {
@@ -860,6 +1012,7 @@
             });
 
             if (!response.ok) throw new Error('Falha ao conectar com o Orquestrador');
+
             const json = await response.json();
             const tournaments = json.success ? json.data : json;
 
@@ -869,16 +1022,36 @@
             }
 
             list.innerHTML = '';
+
             tournaments.forEach(t => {
                 const isActive = t.status === 'active';
+
                 const card = document.createElement('div');
                 card.className = 'relay-card';
+
                 card.innerHTML = `
                 <div class="relay-card-info">
                     <h3>${t.name}</h3>
                     <p>ID: <code>${t.id}</code></p>
                     <span class="badge ${isActive ? 'bg-green' : 'bg-red'}">${t.status}</span>
                 </div>
+
+                <div class="relay-card-timers ${isActive ? '' : 'is-disabled'}">
+                    <div class="relay-timer-item">
+                        <span class="relay-timer-label">Tempo total faltante</span>
+                        <strong class="relay-total-timer">
+                            <i class="fa-regular fa-clock"></i> ${isActive ? '--' : '--'}
+                        </strong>
+                    </div>
+
+                    <div class="relay-timer-item">
+                        <span class="relay-timer-label">Próxima troca</span>
+                        <strong class="relay-swap-timer">
+                            <i class="fa-solid fa-exchange-alt"></i> ${isActive ? '--' : 'Aguardando'}
+                        </strong>
+                    </div>
+                </div>
+
                 <div class="relay-card-actions">
                     <button class="btn-neon btn-start-relay" data-id="${t.id}" ${isActive ? 'disabled' : ''}>
                         <i class="fa-solid ${isActive ? 'fa-check' : 'fa-play'}"></i> 
@@ -886,7 +1059,12 @@
                     </button>
                 </div>
             `;
+
                 list.appendChild(card);
+
+                if (isActive) {
+                    startRelayCardTimer(t, card);
+                }
             });
 
             document.querySelectorAll('.btn-start-relay').forEach(btn => {
