@@ -1,284 +1,528 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Regulamento — Copa de Software</title>
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/effects/delorean-anim.css" />
+        <link rel="icon" href="assets/starwars.png" />
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Regulamento — Copa de Software</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/effects/delorean-anim.css">
-    <link rel="icon" href="assets/starwars.png">
-</head>
+    <body class="page-rules-content">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
+            </div>
+            <div class="menu-toggle" id="menuToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html#info" title="Informações gerais"
+                    ><i class="fa-solid fa-circle-info"></i> Info</a
+                >
+                <a href="index.html#desafios" title="Modalidades de prova"
+                    ><i class="fa-solid fa-gamepad"></i> Provas</a
+                >
+                <a href="index.html#matriz" title="Macroáreas de estudo"
+                    ><i class="fa-solid fa-microchip"></i> Matriz</a
+                >
+                <a href="ranking.html" title="Classificação ao vivo"
+                    ><i class="fa-solid fa-trophy"></i> Ranking</a
+                >
+                <a href="equipes.html" title="Times confirmados"
+                    ><i class="fa-solid fa-users"></i> Equipes</a
+                >
+                <a href="inscricao.html" title="Garanta sua vaga"
+                    ><i class="fa-solid fa-user-plus"></i> Inscrição</a
+                >
+            </div>
+        </nav>
 
-<body class="page-rules-content">
-    <nav class="navbar">
-        <div class="logo">
-            <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
-        </div>
-        <div class="menu-toggle" id="menuToggle">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-        <div class="nav-links" id="navLinks">
-            <a href="index.html#info" title="Informações gerais"><i class="fa-solid fa-circle-info"></i> Info</a>
-            <a href="index.html#desafios" title="Modalidades de prova"><i class="fa-solid fa-gamepad"></i> Provas</a>
-            <a href="index.html#matriz" title="Macroáreas de estudo"><i class="fa-solid fa-microchip"></i> Matriz</a>
-            <a href="ranking.html" title="Classificação ao vivo"><i class="fa-solid fa-trophy"></i> Ranking</a>
-            <a href="equipes.html" title="Times confirmados"><i class="fa-solid fa-users"></i> Equipes</a>
-            <a href="inscricao.html" title="Garanta sua vaga"><i class="fa-solid fa-user-plus"></i> Inscrição</a>
-        </div>
-    </nav>
-
-    <header class="sub-hero">
-        <div class="sub-hero-inner">
-            <h1 class="sub-title"><i class="fa-solid fa-scroll"></i> Regulamento Oficial</h1>
-            <p class="sub-text">O código de conduta que rege a competição.</p>
-        </div>
-    </header>
-
-    <main class="container rules-container">
-        <article class="rules-paper">
-
-            <!-- CAPÍTULO I -->
-
-            <section class="rules-section">
-                <h2>CAPÍTULO I - DAS DISPOSIÇÕES PRELIMINARES E OBJETIVOS</h2>
-                <p><strong>Artigo 1º</strong> - A Copa de Software UEPA, doravante denominada apenas "Evento", é uma
-                    iniciativa organizada pelos discentes do 8º semestre do curso de Engenharia de Software da
-                    Universidade do Estado do Pará (UEPA), Campus XX - Castanhal.</p>
-                <p>• § 1º - O Evento ocorrerá no dia 16 de maio de 2026, de forma presencial, nas dependências do Campus
-                    XX (Castanhal).</p>
-                <p>• § 2º - A participação é aberta a todos os estudantes da UEPA matriculados em Engenharia de Software
-                    ou cursos de áreas afins, independentemente do campus de origem.</p>
-                <p><strong>Artigo 2º</strong> - O Evento tem como objetivos principais:</p>
-                <ul class="rules-list">
-                    <li>I. Fomentar a aplicação prática dos conhecimentos teóricos adquiridos no curso;</li>
-                    <li>II. Estimular o desenvolvimento de competências técnicas (hard skills) e socioemocionais (soft
-                        skills), como trabalho em equipe e resolução de problemas sob pressão;</li>
-                    <li>III. Promover a integração e o espírito de colaboração entre discentes de diferentes períodos do
-                        curso, incentivando a troca de experiências, o networking acadêmico e o fortalecimento dos
-                        vínculos de amizade e união na comunidade estudantil;</li>
-                    <li>IV. Identificar e premiar talentos e soluções de destaque desenvolvidas durante as competições.
-                    </li>
-                </ul>
-                <p><strong>Artigo 3º</strong> - A Comissão Organizadora será composta por uma junta de 03 (três)
-                    discentes concluintes do curso de Engenharia de Software (8º semestre) do campus de Castanhal,
-                    formalmente identificados no Anexo I deste regulamento.</p>
-                <p>• Parágrafo Único: Cabe à Comissão Organizadora a responsabilidade técnica e administrativa pelo
-                    evento, bem como a palavra final sobre a interpretação destas regras.</p>
-            </section>
-
-            <!-- CAPÍTULO II -->
-
-            <section class="rules-section">
-                <h2>CAPÍTULO II - DO CRONOGRAMA E INSCRIÇÕES</h2>
-                <p><strong>Artigo 4º</strong> - O cronograma oficial da Copa de Software UEPA obedecerá rigorosamente às
-                    seguintes etapas e prazos:</p>
-                <ul class="rules-list">
-                    <li>I. Período de Inscrições: De 14/03/2026 a 15/05/2026;</li>
-                    <li>II. Homologação das Inscrições (Divulgação das equipes aptas): Será feito em três lotes
-                        consecutivos, nos dias 28/03, 25/04 e 09/05, com uma divulgação final para casos de inscrições
-                        entre o último lote e o dia do evento;</li>
-                    <li>III. Realização do Evento: Dia 16 de maio de 2026, com início às 08:00 e encerramento às 12:30;
-                    </li>
-                    <li>IV. Cerimônia de Premiação: Imediatamente após a apuração dos resultados no dia do evento.</li>
-                </ul>
-                <p><strong>Artigo 5º</strong> - As inscrições serão realizadas exclusivamente através do site oficial da
-                    Copa de Software UEPA, no endereço: <a class="system-link"
-                        href="https://copadesoftware.onrender.com/" target="_blank">Copa de Software</a></p>
-                <p>• Parágrafo Único: Não serão aceitas inscrições via e-mail, redes sociais ou formulários físicos,
-                    sendo o site a única plataforma oficial para registro e consulta de status.</p>
-            </section>
-
-            <!-- CAPÍTULO III -->
-
-            <section class="rules-section">
-                <h2>CAPÍTULO III - DA ELEGIBILIDADE E FORMAÇÃO DAS EQUIPES</h2>
-                <p><strong>Artigo 6º</strong> - O Evento é aberto a todos os discentes da UEPA matriculados em
-                    Engenharia de Software ou cursos de áreas afins de qualquer unidade acadêmica.</p>
-                <p><strong>Artigo 7º</strong> - As equipes serão compostas obrigatoriamente por 03 (três) integrantes,
-                    podendo ser formadas das seguintes maneiras:</p>
-                <ul class="rules-list">
-                    <li>I. Inscrição por Equipe (Inscrição Coletiva): Realizada pelo líder do grupo, sendo obrigatório
-                        que a equipe possua alunos de ao menos dois semestres diferentes, promovendo a integração entre
-                        turmas.</li>
-                    <li>II. Inscrição Individual (Banco de Talentos): O aluno inscreve-se isoladamente pelo site,
-                        autorizando a Comissão Organizadora a incluí-lo em uma equipe composta por alunos de outros
-                        períodos e/ou campi.</li>
-                </ul>
-                <p><strong>Artigo 8º</strong> - É vedada a participação de membros da Comissão Organizadora como
-                    competidores.</p>
-            </section>
-
-            <!-- CAPÍTULO IV -->
-
-            <section class="rules-section">
-                <h2>CAPÍTULO IV - DAS MODALIDADES E PROVAS</h2>
-                <p><strong>Artigo 9º</strong> - A Copa de Software UEPA será composta por 03 (três) modalidades
-                    distintas, cada uma com regulamento específico disponível no site oficial, conforme síntese abaixo:
+        <header class="sub-hero">
+            <div class="sub-hero-inner">
+                <h1 class="sub-title">
+                    <i class="fa-solid fa-scroll"></i> Regulamento Oficial
+                </h1>
+                <p class="sub-text">
+                    O código de conduta que rege a competição.
                 </p>
-                <p><strong>I. Algoritmos em Revezamento</strong> (Velocidade, lógica e compreensão de código)<br>
-                    • Descrição: Desafio de programação em que os três integrantes se alternam a cada 5 minutos na
-                    construção de uma solução, comunicando-se apenas por comentários no código.<br>
-                    • Pontuação: A pontuação máxima é de 100 pontos por código funcional.</p>
-                <p><strong>II. Casos de Código</strong> (Investigação e SQL)<br>
-                    • Descrição: Um desafio de lógica e investigação onde a progressão depende da manipulação de bancos
-                    de dados.<br>
-                    • Dinâmica: As pistas para os enigmas de um integrante estão contidas nos resultados das consultas
-                    SQL realizadas pelos outros membros. Ninguém avança sozinho.<br>
-                    • Pontuação: São 9 puzzles individuais contando 15 pontos por cada um resolvido. A resolução final e
-                    completa do caso soma mais 45 pontos, totalizando 180 no máximo.</p>
-                <p><strong>III. Grande Burnout</strong> (Estratégia e Quiz)<br>
-                    • Descrição: Prova final de conhecimentos variados em até 25 rodadas de perguntas (V ou F, Múltipla
-                    Escolha, Code Review) com dinâmica baseada em revezamento obrigatório.<br>
-                    • Regra do Intervalo: O aluno que responder a uma pergunta ficará impedido de responder a
-                    rodada seguinte da sua equipe.<br>
-                    • Pontuação: Cada resposta correta vale 10 pontos.</p>
-                <p><strong>Artigo 10º</strong> - Além das regras gerais contidas neste documento, cada modalidade
-                    possuirá um Regulamento Específico detalhando critérios técnicos, ferramentas permitidas e sistema
-                    de pontuação minucioso.</p>
-                <p>• Parágrafo Único: Os regulamentos específicos estarão disponíveis para consulta no site oficial do
-                    Evento e nos links disponibilizados pela Comissão Organizadora.</p>
-                <p><strong>Artigo 11º</strong> - A infraestrutura tecnológica para a realização das provas será composta
-                    pelos computadores disponibilizados pela universidade, com os softwares necessários previamente
-                    instalados. Em algumas modalidades, poderá ser solicitado o uso de dispositivos próprios (como
-                    celulares ou tablets) para funções auxiliares, tais como controle de pontuação ou leitura de
-                    comandos. Recomenda-se que os participantes levem tais dispositivos, porém a organização não se
-                    responsabiliza por fornecê-los, nem eles constituirão o meio principal de resolução das provas.</p>
-                <p><strong>Artigo 12º</strong> - Na modalidade de perguntas e respostas (Grande Burnout),
-                    caso a resposta de uma equipe seja diferente do gabarito oficial, mas tecnicamente aceitável, a
-                    validade será decidida de forma imediata:</p>
-                <ul class="rules-list">
-                    <li>I. A decisão caberá ao Apresentador/Moderador da prova, que avaliará a semântica da resposta;
-                    </li>
-                    <li>II. Em caso de dúvida ou impasse, o Moderador poderá lançar uma Votação em Tempo Real entre os
-                        demais participantes ou plateia para validar a resposta, seguindo o modelo de voto majoritário.
-                    </li>
-                </ul>
-            </section>
-
-            <!-- CAPÍTULO V -->
-
-            <section class="rules-section">
-                <h2>CAPÍTULO V - DA CLASSIFICAÇÃO E PREMIAÇÃO</h2>
-                <p><strong>Artigo 13º</strong> - A classificação final será determinada pelo somatório dos pontos
-                    obtidos nas três modalidades descritas no Capítulo IV.</p>
-                <p><strong>Artigo 14º</strong> - Todos os participantes que completarem as provas receberão um
-                    certificado de participação correspondente a 10 (dez) horas de atividades complementares.</p>
-                <p>• Parágrafo Único: A carga horária de 10 horas poderá ser reduzida proporcionalmente caso o
-                    participante não compareça a uma ou mais modalidades, cabendo à Comissão Organizadora registrar a
-                    falta em cada prova e emitir o certificado com base na efetiva participação.</p>
-                <p><strong>Artigo 15º</strong> - Além do certificado de participação descrito no Artigo 14º, as equipes
-                    classificadas
-                    nos três primeiros lugares receberão certificados de premiação, reconhecendo seu desempenho na
-                    competição.</p>
-
-                <ul class="rules-list">
-                    <li>I. 1º Lugar: Certificado de Premiação - 1º Lugar;</li>
-                    <li>II. 2º Lugar: Certificado de Premiação - 2º Lugar;</li>
-                    <li>III. 3º Lugar: Certificado de Premiação - 3º Lugar.</li>
-                </ul>
-
-                <p>• Parágrafo Único: Os certificados de premiação poderão ser utilizados pelos participantes para fins
-                    de
-                    comprovação de atividades complementares junto à coordenação do curso, conforme as normas vigentes
-                    do PPC e
-                    critérios de validação institucional.</p>
-            </section>
-
-            <!-- CAPÍTULO VI -->
-
-            <section class="rules-section">
-                <h2>CAPÍTULO VI - DAS DISPOSIÇÕES FINAIS</h2>
-                <p><strong>Artigo 16º</strong> - A inscrição no Evento implica na aceitação total e irrestrita de todos
-                    os itens deste regulamento por parte dos participantes.</p>
-                <p><strong>Artigo 17º</strong> - Os participantes autorizam, desde já, o uso de sua imagem e nome em
-                    fotos e vídeos capturados durante o evento para fins de divulgação acadêmica e portfólio da Comissão
-                    Organizadora.</p>
-                <p><strong>Artigo 18º</strong> - Em caso de desistência de um ou mais integrantes de uma equipe após a
-                    homologação, a equipe deverá comunicar imediatamente a Comissão Organizadora. A equipe será então
-                    removida da tabela de classificação, e os membros remanescentes serão automaticamente realocados no
-                    banco de talentos para eventual reinscrição individual, devendo manifestar à Comissão, em até 48
-                    horas, se desejam manter sua participação ou cancelar definitivamente a inscrição.</p>
-                <p><strong>Artigo 19º</strong> - Inscritos individualmente que, por falta de quórum, não forem alocados
-                    em uma equipe no momento da homologação poderão atuar como reservas durante o evento, substituindo
-                    eventuais ausências de membros de equipes já formadas. Nessa condição, o reserva receberá a carga
-                    horária correspondente à posição do integrante substituído, desde que efetivamente participe das
-                    provas em que atuar.</p>
-                <p><strong>Artigo 20º</strong> - As regras de W.O. (abandono ou não comparecimento) serão definidas
-                    separadamente para cada modalidade nos respectivos regulamentos específicos, podendo implicar desde
-                    a perda de pontuação naquela prova até a desclassificação sumária da equipe, a critério da Comissão
-                    Organizadora.</p>
-                <p><strong>Artigo 21º</strong> - Alegações de desconhecimento das regras estabelecidas neste regulamento
-                    ou nos regulamentos específicos não serão aceitas como justificativa para seu descumprimento,
-                    cabendo aos participantes a obrigação de se inteirarem de todo o conteúdo publicado no site oficial.
-                </p>
-                <p><strong>Artigo 22º</strong> - Em caso de empate na pontuação final entre duas ou mais equipes
-                    candidatas às três primeiras colocações, será realizado um desempate na modalidade Burnout, com
-                    as seguintes regras:</p>
-                <ul class="rules-list">
-                    <li>I. As equipes empatadas participarão de uma rodada de perguntas sucessivas;</li>
-                    <li>II. A cada pergunta, a equipe que errar é eliminada automaticamente;</li>
-                    <li>III. O processo se repete até restar apenas uma equipe, que conquistará a posição mais alta
-                        entre as empatadas;</li>
-                    <li>IV. Persistindo empate após eliminações, as equipes restantes continuam no formato de morte
-                        súbita até a definição completa da classificação.</li>
-                </ul>
-                <p><strong>Artigo 23º</strong> - Casos omissos, situações imprevistas ou divergências de interpretação
-                    deste regulamento serão analisados e resolvidos exclusivamente pela Comissão Organizadora (Art. 3º),
-                    não cabendo recurso das suas decisões.</p>
-                <p><strong>Artigo 24º</strong> - Este regulamento entra em vigor na data de sua publicação no site
-                    oficial.</p>
-            </section>
-
-            <section class="rules-section">
-                <h2>ANEXO I - COMISSÃO ORGANIZADORA (8º SEMESTRE)</h2>
-                <ul class="rules-list" style="list-style: none; padding-left: 0;">
-                    <li><code>Antônio Gabriel Pereira do Amaral - Matrícula: 2022046378</code></li>
-                    <li><code>Léo Queiroz Pontes - Matrícula: 2020066175</code></li>
-                    <li><code>Pedro Leonan Gonzaga De Freitas - Matrícula: 2022022400</code></li>
-                </ul>
-            </section>
-
-            <div class="cta-regulamento">
-                <a href="index.html#desafios" class="btn-neon">Entendi, vamos às provas</a>
-                <a href="inscricao.html" class="btn-neon"><i class="fa-solid fa-user-astronaut"></i> Quero me
-                    inscrever!</a>
             </div>
-        </article>
-    </main>
+        </header>
 
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-visual">
-                <div id="delorean-display"></div>
-            </div>
-            <div class="footer-text">
-                <div class="footer-brand">
-                    <span>Engenharia de Software — UEPA Castanhal</span>
-                    <span class="separator">//</span>
-                    <code><span id="rotating-phrase">Protocolo finalizado...</span></code>
+        <main class="container rules-container">
+            <article class="rules-paper">
+                <!-- CAPÍTULO I -->
+
+                <section class="rules-section">
+                    <h2>
+                        CAPÍTULO I - DAS DISPOSIÇÕES PRELIMINARES E OBJETIVOS
+                    </h2>
+                    <p>
+                        <strong>Artigo 1º</strong> - A Copa de Software UEPA,
+                        doravante denominada apenas "Evento", é uma iniciativa
+                        organizada pelos discentes do 8º semestre do curso de
+                        Engenharia de Software da Universidade do Estado do Pará
+                        (UEPA), Campus XX - Castanhal.
+                    </p>
+                    <p>
+                        • § 1º - O Evento ocorrerá no dia 16 de maio de 2026, de
+                        forma presencial, nas dependências do Campus XX
+                        (Castanhal).
+                    </p>
+                    <p>
+                        • § 2º - A participação é aberta a todos os estudantes
+                        da UEPA matriculados em Engenharia de Software ou cursos
+                        de áreas afins, independentemente do campus de origem.
+                    </p>
+                    <p>
+                        <strong>Artigo 2º</strong> - O Evento tem como objetivos
+                        principais:
+                    </p>
+                    <ul class="rules-list">
+                        <li>
+                            I. Fomentar a aplicação prática dos conhecimentos
+                            teóricos adquiridos no curso;
+                        </li>
+                        <li>
+                            II. Estimular o desenvolvimento de competências
+                            técnicas (hard skills) e socioemocionais (soft
+                            skills), como trabalho em equipe e resolução de
+                            problemas sob pressão;
+                        </li>
+                        <li>
+                            III. Promover a integração e o espírito de
+                            colaboração entre discentes de diferentes períodos
+                            do curso, incentivando a troca de experiências, o
+                            networking acadêmico e o fortalecimento dos vínculos
+                            de amizade e união na comunidade estudantil;
+                        </li>
+                        <li>
+                            IV. Identificar e premiar talentos e soluções de
+                            destaque desenvolvidas durante as competições.
+                        </li>
+                    </ul>
+                    <p>
+                        <strong>Artigo 3º</strong> - A Comissão Organizadora
+                        será composta por uma junta de 03 (três) discentes
+                        concluintes do curso de Engenharia de Software (8º
+                        semestre) do campus de Castanhal, formalmente
+                        identificados no Anexo I deste regulamento.
+                    </p>
+                    <p>
+                        • Parágrafo Único: Cabe à Comissão Organizadora a
+                        responsabilidade técnica e administrativa pelo evento,
+                        bem como a palavra final sobre a interpretação destas
+                        regras.
+                    </p>
+                </section>
+
+                <!-- CAPÍTULO II -->
+
+                <section class="rules-section">
+                    <h2>CAPÍTULO II - DO CRONOGRAMA E INSCRIÇÕES</h2>
+                    <p>
+                        <strong>Artigo 4º</strong> - O cronograma oficial da
+                        Copa de Software UEPA obedecerá rigorosamente às
+                        seguintes etapas e prazos:
+                    </p>
+                    <ul class="rules-list">
+                        <li>
+                            I. Período de Inscrições: De 14/03/2026 a
+                            15/05/2026;
+                        </li>
+                        <li>
+                            II. Homologação das Inscrições (Divulgação das
+                            equipes aptas): Será feito em três lotes
+                            consecutivos, nos dias 28/03, 25/04 e 09/05, com uma
+                            divulgação final para casos de inscrições entre o
+                            último lote e o dia do evento;
+                        </li>
+                        <li>
+                            III. Realização do Evento: Dia 16 de maio de 2026,
+                            com início às 08:00 e encerramento às 12:30;
+                        </li>
+                        <li>
+                            IV. Cerimônia de Premiação: Imediatamente após a
+                            apuração dos resultados no dia do evento.
+                        </li>
+                    </ul>
+                    <p>
+                        <strong>Artigo 5º</strong> - As inscrições serão
+                        realizadas exclusivamente através do site oficial da
+                        Copa de Software UEPA, no endereço:
+                        <a
+                            class="system-link"
+                            href="https://copadesoftware.onrender.com/"
+                            target="_blank"
+                            >Copa de Software</a
+                        >
+                    </p>
+                    <p>
+                        • Parágrafo Único: Não serão aceitas inscrições via
+                        e-mail, redes sociais ou formulários físicos, sendo o
+                        site a única plataforma oficial para registro e consulta
+                        de status.
+                    </p>
+                </section>
+
+                <!-- CAPÍTULO III -->
+
+                <section class="rules-section">
+                    <h2>
+                        CAPÍTULO III - DA ELEGIBILIDADE E FORMAÇÃO DAS EQUIPES
+                    </h2>
+                    <p>
+                        <strong>Artigo 6º</strong> - O Evento é aberto a todos
+                        os discentes da UEPA matriculados em Engenharia de
+                        Software ou cursos de áreas afins de qualquer unidade
+                        acadêmica.
+                    </p>
+                    <p>
+                        <strong>Artigo 7º</strong> - As equipes serão compostas
+                        obrigatoriamente por 03 (três) integrantes, podendo ser
+                        formadas das seguintes maneiras:
+                    </p>
+                    <ul class="rules-list">
+                        <li>
+                            I. Inscrição por Equipe (Inscrição Coletiva):
+                            Realizada pelo líder do grupo, sendo obrigatório que
+                            a equipe possua alunos de ao menos dois semestres
+                            diferentes, promovendo a integração entre turmas.
+                        </li>
+                        <li>
+                            II. Inscrição Individual (Banco de Talentos): O
+                            aluno inscreve-se isoladamente pelo site,
+                            autorizando a Comissão Organizadora a incluí-lo em
+                            uma equipe composta por alunos de outros períodos
+                            e/ou campi.
+                        </li>
+                    </ul>
+                    <p>
+                        <strong>Artigo 8º</strong> - É vedada a participação de
+                        membros da Comissão Organizadora como competidores.
+                    </p>
+                </section>
+
+                <!-- CAPÍTULO IV -->
+
+                <section class="rules-section">
+                    <h2>CAPÍTULO IV - DAS MODALIDADES E PROVAS</h2>
+                    <p>
+                        <strong>Artigo 9º</strong> - A Copa de Software UEPA
+                        será composta por 03 (três) modalidades distintas, cada
+                        uma com regulamento específico disponível no site
+                        oficial, conforme síntese abaixo:
+                    </p>
+                    <p>
+                        <strong>I. Algoritmos em Revezamento</strong>
+                        (Velocidade, lógica e compreensão de código)<br />
+                        • Descrição: Desafio de programação em que os três
+                        integrantes se alternam a cada 5 minutos na construção
+                        de uma solução, comunicando-se apenas por comentários no
+                        código.<br />
+                        • Pontuação: A pontuação máxima é de 100 pontos por
+                        código funcional.
+                    </p>
+                    <p>
+                        <strong>II. Casos de Código</strong> (Investigação e
+                        SQL)<br />
+                        • Descrição: Um desafio de lógica e investigação onde a
+                        progressão depende da manipulação de bancos de dados.<br />
+                        • Dinâmica: As pistas para os enigmas de um integrante
+                        estão contidas nos resultados das consultas SQL
+                        realizadas pelos outros membros. Ninguém avança
+                        sozinho.<br />
+                        • Pontuação: São 9 puzzles individuais contando 15
+                        pontos por cada um resolvido. A resolução final e
+                        completa do caso soma mais 45 pontos, totalizando 180 no
+                        máximo.
+                    </p>
+                    <p>
+                        <strong>III. Grande Burnout</strong> (Estratégia e
+                        Quiz)<br />
+                        • Descrição: Prova final de conhecimentos variados em
+                        até 20 rodadas de perguntas (V ou F, Múltipla Escolha,
+                        Code Review) com dinâmica baseada em revezamento
+                        obrigatório.<br />
+                        • Regra do Intervalo: O aluno que responder a uma
+                        pergunta ficará impedido de responder a rodada seguinte
+                        da sua equipe.<br />
+                        • Pontuação: Cada resposta correta vale 15 pontos.
+                    </p>
+                    <p>
+                        <strong>Artigo 10º</strong> - Além das regras gerais
+                        contidas neste documento, cada modalidade possuirá um
+                        Regulamento Específico detalhando critérios técnicos,
+                        ferramentas permitidas e sistema de pontuação minucioso.
+                    </p>
+                    <p>
+                        • Parágrafo Único: Os regulamentos específicos estarão
+                        disponíveis para consulta no site oficial do Evento e
+                        nos links disponibilizados pela Comissão Organizadora.
+                    </p>
+                    <p>
+                        <strong>Artigo 11º</strong> - A infraestrutura
+                        tecnológica para a realização das provas será composta
+                        pelos computadores disponibilizados pela universidade,
+                        com os softwares necessários previamente instalados. Em
+                        algumas modalidades, poderá ser solicitado o uso de
+                        dispositivos próprios (como celulares ou tablets) para
+                        funções auxiliares, tais como controle de pontuação ou
+                        leitura de comandos. Recomenda-se que os participantes
+                        levem tais dispositivos, porém a organização não se
+                        responsabiliza por fornecê-los, nem eles constituirão o
+                        meio principal de resolução das provas.
+                    </p>
+                    <p>
+                        <strong>Artigo 12º</strong> - Na modalidade de perguntas
+                        e respostas (Grande Burnout), caso a resposta de uma
+                        equipe seja diferente do gabarito oficial, mas
+                        tecnicamente aceitável, a validade será decidida de
+                        forma imediata:
+                    </p>
+                    <ul class="rules-list">
+                        <li>
+                            I. A decisão caberá ao Apresentador/Moderador da
+                            prova, que avaliará a semântica da resposta;
+                        </li>
+                        <li>
+                            II. Em caso de dúvida ou impasse, o Moderador poderá
+                            lançar uma Votação em Tempo Real entre os demais
+                            participantes ou plateia para validar a resposta,
+                            seguindo o modelo de voto majoritário.
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- CAPÍTULO V -->
+
+                <section class="rules-section">
+                    <h2>CAPÍTULO V - DA CLASSIFICAÇÃO E PREMIAÇÃO</h2>
+                    <p>
+                        <strong>Artigo 13º</strong> - A classificação final será
+                        determinada pelo somatório dos pontos obtidos nas três
+                        modalidades descritas no Capítulo IV.
+                    </p>
+                    <p>
+                        <strong>Artigo 14º</strong> - Todos os participantes que
+                        completarem as provas receberão um certificado de
+                        participação correspondente a 10 (dez) horas de
+                        atividades complementares.
+                    </p>
+                    <p>
+                        • Parágrafo Único: A carga horária de 10 horas poderá
+                        ser reduzida proporcionalmente caso o participante não
+                        compareça a uma ou mais modalidades, cabendo à Comissão
+                        Organizadora registrar a falta em cada prova e emitir o
+                        certificado com base na efetiva participação.
+                    </p>
+                    <p>
+                        <strong>Artigo 15º</strong> - Além do certificado de
+                        participação descrito no Artigo 14º, as equipes
+                        classificadas nos três primeiros lugares receberão
+                        certificados de premiação, reconhecendo seu desempenho
+                        na competição.
+                    </p>
+
+                    <ul class="rules-list">
+                        <li>
+                            I. 1º Lugar: Certificado de Premiação - 1º Lugar;
+                        </li>
+                        <li>
+                            II. 2º Lugar: Certificado de Premiação - 2º Lugar;
+                        </li>
+                        <li>
+                            III. 3º Lugar: Certificado de Premiação - 3º Lugar.
+                        </li>
+                    </ul>
+
+                    <p>
+                        • Parágrafo Único: Os certificados de premiação poderão
+                        ser utilizados pelos participantes para fins de
+                        comprovação de atividades complementares junto à
+                        coordenação do curso, conforme as normas vigentes do PPC
+                        e critérios de validação institucional.
+                    </p>
+                </section>
+
+                <!-- CAPÍTULO VI -->
+
+                <section class="rules-section">
+                    <h2>CAPÍTULO VI - DAS DISPOSIÇÕES FINAIS</h2>
+                    <p>
+                        <strong>Artigo 16º</strong> - A inscrição no Evento
+                        implica na aceitação total e irrestrita de todos os
+                        itens deste regulamento por parte dos participantes.
+                    </p>
+                    <p>
+                        <strong>Artigo 17º</strong> - Os participantes
+                        autorizam, desde já, o uso de sua imagem e nome em fotos
+                        e vídeos capturados durante o evento para fins de
+                        divulgação acadêmica e portfólio da Comissão
+                        Organizadora.
+                    </p>
+                    <p>
+                        <strong>Artigo 18º</strong> - Em caso de desistência de
+                        um ou mais integrantes de uma equipe após a homologação,
+                        a equipe deverá comunicar imediatamente a Comissão
+                        Organizadora. A equipe será então removida da tabela de
+                        classificação, e os membros remanescentes serão
+                        automaticamente realocados no banco de talentos para
+                        eventual reinscrição individual, devendo manifestar à
+                        Comissão, em até 48 horas, se desejam manter sua
+                        participação ou cancelar definitivamente a inscrição.
+                    </p>
+                    <p>
+                        <strong>Artigo 19º</strong> - Inscritos individualmente
+                        que, por falta de quórum, não forem alocados em uma
+                        equipe no momento da homologação poderão atuar como
+                        reservas durante o evento, substituindo eventuais
+                        ausências de membros de equipes já formadas. Nessa
+                        condição, o reserva receberá a carga horária
+                        correspondente à posição do integrante substituído,
+                        desde que efetivamente participe das provas em que
+                        atuar.
+                    </p>
+                    <p>
+                        <strong>Artigo 20º</strong> - As regras de W.O.
+                        (abandono ou não comparecimento) serão definidas
+                        separadamente para cada modalidade nos respectivos
+                        regulamentos específicos, podendo implicar desde a perda
+                        de pontuação naquela prova até a desclassificação
+                        sumária da equipe, a critério da Comissão Organizadora.
+                    </p>
+                    <p>
+                        <strong>Artigo 21º</strong> - Alegações de
+                        desconhecimento das regras estabelecidas neste
+                        regulamento ou nos regulamentos específicos não serão
+                        aceitas como justificativa para seu descumprimento,
+                        cabendo aos participantes a obrigação de se inteirarem
+                        de todo o conteúdo publicado no site oficial.
+                    </p>
+                    <p>
+                        <strong>Artigo 22º</strong> - Em caso de empate na
+                        pontuação final entre duas ou mais equipes candidatas às
+                        três primeiras colocações, será realizado um desempate
+                        na modalidade Burnout, com as seguintes regras:
+                    </p>
+                    <ul class="rules-list">
+                        <li>
+                            I. As equipes empatadas participarão de uma rodada
+                            de perguntas sucessivas;
+                        </li>
+                        <li>
+                            II. A cada pergunta, a equipe que errar é eliminada
+                            automaticamente;
+                        </li>
+                        <li>
+                            III. O processo se repete até restar apenas uma
+                            equipe, que conquistará a posição mais alta entre as
+                            empatadas;
+                        </li>
+                        <li>
+                            IV. Persistindo empate após eliminações, as equipes
+                            restantes continuam no formato de morte súbita até a
+                            definição completa da classificação.
+                        </li>
+                    </ul>
+                    <p>
+                        <strong>Artigo 23º</strong> - Casos omissos, situações
+                        imprevistas ou divergências de interpretação deste
+                        regulamento serão analisados e resolvidos exclusivamente
+                        pela Comissão Organizadora (Art. 3º), não cabendo
+                        recurso das suas decisões.
+                    </p>
+                    <p>
+                        <strong>Artigo 24º</strong> - Este regulamento entra em
+                        vigor na data de sua publicação no site oficial.
+                    </p>
+                </section>
+
+                <section class="rules-section">
+                    <h2>ANEXO I - COMISSÃO ORGANIZADORA (8º SEMESTRE)</h2>
+                    <ul
+                        class="rules-list"
+                        style="list-style: none; padding-left: 0"
+                    >
+                        <li>
+                            <code
+                                >Antônio Gabriel Pereira do Amaral - Matrícula:
+                                2022046378</code
+                            >
+                        </li>
+                        <li>
+                            <code
+                                >Léo Queiroz Pontes - Matrícula:
+                                2020066175</code
+                            >
+                        </li>
+                        <li>
+                            <code
+                                >Pedro Leonan Gonzaga De Freitas - Matrícula:
+                                2022022400</code
+                            >
+                        </li>
+                    </ul>
+                </section>
+
+                <div class="cta-regulamento">
+                    <a href="index.html#desafios" class="btn-neon"
+                        >Entendi, vamos às provas</a
+                    >
+                    <a href="inscricao.html" class="btn-neon"
+                        ><i class="fa-solid fa-user-astronaut"></i> Quero me
+                        inscrever!</a
+                    >
                 </div>
-                <div class="footer-copy">
-                    Desenvolvido por <strong>Leonan Freitas</strong> &copy; 2026
+            </article>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-visual">
+                    <div id="delorean-display"></div>
+                </div>
+                <div class="footer-text">
+                    <div class="footer-brand">
+                        <span>Engenharia de Software — UEPA Castanhal</span>
+                        <span class="separator">//</span>
+                        <code
+                            ><span id="rotating-phrase"
+                                >Protocolo finalizado...</span
+                            ></code
+                        >
+                    </div>
+                    <div class="footer-copy">
+                        Desenvolvido por <strong>Leonan Freitas</strong> &copy;
+                        2026
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <script src="js/script.js"></script>
-    <script src="js/effects/hamburger.js"></script>
-    <script src="js/effects/matrix.js"></script>
-    <script src="js/rotating-phrases.js"></script>
-    <script>
-        fetch('assets/delorean-anim.html')
-            .then(res => res.text())
-            .then(data => document.getElementById('delorean-display').innerHTML = data);
-    </script>
-</body>
-
+        <script src="js/script.js"></script>
+        <script src="js/effects/hamburger.js"></script>
+        <script src="js/effects/matrix.js"></script>
+        <script src="js/rotating-phrases.js"></script>
+        <script>
+            fetch("assets/delorean-anim.html")
+                .then((res) => res.text())
+                .then(
+                    (data) =>
+                        (document.getElementById("delorean-display").innerHTML =
+                            data),
+                );
+        </script>
+    </body>
 </html>
