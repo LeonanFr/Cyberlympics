@@ -1,154 +1,237 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Grande Burnout — Copa de Software</title>
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/effects/delorean-anim.css" />
+        <link rel="icon" href="assets/starwars.png" />
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Grande Burnout — Copa de Software</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/effects/delorean-anim.css">
-    <link rel="icon" href="assets/starwars.png">
-</head>
-
-<body class="page-rules-detail">
-    <nav class="navbar">
-        <div class="logo">
-            <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
-        </div>
-        <div class="menu-toggle" id="menuToggle">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-        <div class="nav-links" id="navLinks">
-            <a href="index.html#info" title="Informações gerais"><i class="fa-solid fa-circle-info"></i> Info</a>
-            <a href="index.html#desafios" title="Modalidades de prova"><i class="fa-solid fa-gamepad"></i> Provas</a>
-            <a href="index.html#matriz" title="Macroáreas de estudo"><i class="fa-solid fa-microchip"></i> Matriz</a>
-            <a href="ranking.html" title="Classificação ao vivo"><i class="fa-solid fa-trophy"></i> Ranking</a>
-            <a href="equipes.html" title="Times confirmados"><i class="fa-solid fa-users"></i> Equipes</a>
-            <a href="inscricao.html" title="Garanta sua vaga"><i class="fa-solid fa-user-plus"></i> Inscrição</a>
-        </div>
-    </nav>
-
-    <header class="sub-hero">
-        <div class="sub-hero-inner">
-            <h1 class="sub-title"><i class="fa-solid fa-fire"></i> Grande Burnout</h1>
-            <p class="sub-text">Estratégia, risco e conhecimento — a rodada final.</p>
-        </div>
-    </header>
-
-    <main class="container rules-container">
-        <article class="rules-paper">
-            <h1 class="rules-title">Regulamento Oficial</h1>
-            <p class="rules-intro">I Copa de Software da UEPA — modalidade de rodízio em perguntas técnicas.</p>
-
-            <section class="rules-section">
-                <h2>// SOBRE A ATIVIDADE</h2>
-                <p>O Grande Burnout encerra a Copa unindo conhecimentos técnicos com uma estratégia de rodízio. É o
-                    momento de maior tensão, onde os times tentam disparar no placar final ou
-                    saem da disputa.</p>
-            </section>
-
-            <section class="rules-section">
-                <h2>// DINÂMICA DAS RODADAS</h2>
-                <p>A competição possui um limite fixo de <strong>25 rodadas</strong>. Cada ciclo segue estes passos:</p>
-                <ol class="rules-list">
-                    <li><strong>O Tema:</strong> A organização revela o assunto (ex.: "Banco de Dados", "Engenharia de
-                        Requisitos").</li>
-                    <li><strong>Seleção:</strong> O grupo indica qual integrante será o responsável por escrever a
-                        resposta da rodada.</li>
-                    <li><strong>Resposta em Post-it:</strong> Assim que a pergunta completa for exibida no telão,
-                        <strong>todas as equipes</strong> escrevem sua resposta em um post-it e o colocam sobre a mesa,
-                        formando uma única pilha.
-                    </li>
-                </ol>
-            </section>
-
-            <section class="rules-section">
-                <h2>// RODÍZIO DE INTEGRANTES</h2>
-                <ul class="rules-list">
-                    <li><strong>Descanso:</strong> O membro da equipe que escreveu a resposta deve
-                        ficar fora da <strong>rodada seguinte</strong> da sua equipe.</li>
-                    <li><strong>Gestão:</strong> Cabe ao grupo planejar qual parceiro é mais apto para cada assunto,
-                        evitando gastar seus melhores jogadores em temas menos valiosos. Terão 10s a partir da revelação
-                        do tema para escolher o respondente.</li>
-                </ul>
-            </section>
-
-            <section class="rules-section">
-                <h2>// PONTUAÇÃO NO PLACAR GERAL</h2>
-                <ul class="rules-list">
-                    <li><strong>Por acerto:</strong> Cada resposta correta dada pelo time soma <strong>10
-                            pontos</strong> diretos no placar geral.</li>
-
-                    <li><strong>Pontuação máxima possível:</strong> 250 pontos.</li>
-                </ul>
-            </section>
-
-            <section class="rules-section">
-                <h2>// FORMATO DAS PERGUNTAS</h2>
-                <ul class="rules-list">
-                    <li>Verdadeiro ou Falso.</li>
-                    <li>Resposta Aberta.</li>
-                    <li>Múltipla Escolha.</li>
-                    <li>Revisão de Código (identificar falhas em trechos de software).</li>
-                    <li>Complete o Código.</li>
-                </ul>
-            </section>
-
-            <section class="rules-section">
-                <h2>// REGRAS DE CONDUTA E DESEMPATE</h2>
-                <ul class="rules-list">
-                    <li>É proibido trocar o integrante responsável pela resposta após a pergunta aparecer no telão.</li>
-                    <li>A resposta deve ser escrita no post-it de forma legível. Post-its rasurados ou com mais de uma
-                        opção assinalada serão considerados inválidos (equivalente a erro).</li>
-                    <li>Atitudes que visem distrair ou atrapalhar o raciocínio dos adversários causarão punição na
-                        rodada a critério da organização.</li>
-                    <li>O uso de qualquer ferramenta de IA ou consulta externa é vedado.</li>
-                    <li>Casos omissos e situações de fair play serão resolvidos pela comissão organizadora, cujas
-                        decisões são soberanas.</li>
-                </ul>
-                <p class="note">Este regulamento está sujeito a ajustes de última hora por decisão da organização.</p>
-            </section>
-
-            <div class="cta-regulamento">
-                <a href="index.html#desafios" class="link-chip">
-                    <i class="fa-solid fa-arrow-left"></i> Voltar para Provas
-                </a>
+    <body class="page-rules-detail">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
             </div>
-        </article>
-    </main>
-
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-visual">
-                <div id="delorean-display"></div>
+            <div class="menu-toggle" id="menuToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-            <div class="footer-text">
-                <div class="footer-brand">
-                    <span>Engenharia de Software — UEPA Castanhal</span>
-                    <span class="separator">//</span>
-                    <code><span id="rotating-phrase">Analyzing data packets...</span></code>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html#info" title="Informações gerais"
+                    ><i class="fa-solid fa-circle-info"></i> Info</a
+                >
+                <a href="index.html#desafios" title="Modalidades de prova"
+                    ><i class="fa-solid fa-gamepad"></i> Provas</a
+                >
+                <a href="index.html#matriz" title="Macroáreas de estudo"
+                    ><i class="fa-solid fa-microchip"></i> Matriz</a
+                >
+                <a href="ranking.html" title="Classificação ao vivo"
+                    ><i class="fa-solid fa-trophy"></i> Ranking</a
+                >
+                <a href="equipes.html" title="Times confirmados"
+                    ><i class="fa-solid fa-users"></i> Equipes</a
+                >
+                <a href="inscricao.html" title="Garanta sua vaga"
+                    ><i class="fa-solid fa-user-plus"></i> Inscrição</a
+                >
+            </div>
+        </nav>
+
+        <header class="sub-hero">
+            <div class="sub-hero-inner">
+                <h1 class="sub-title">
+                    <i class="fa-solid fa-fire"></i> Grande Burnout
+                </h1>
+                <p class="sub-text">
+                    Estratégia, risco e conhecimento — a rodada final.
+                </p>
+            </div>
+        </header>
+
+        <main class="container rules-container">
+            <article class="rules-paper">
+                <h1 class="rules-title">Regulamento Oficial</h1>
+                <p class="rules-intro">
+                    I Copa de Software da UEPA — modalidade de rodízio em
+                    perguntas técnicas.
+                </p>
+
+                <section class="rules-section">
+                    <h2>// SOBRE A ATIVIDADE</h2>
+                    <p>
+                        O Grande Burnout encerra a Copa unindo conhecimentos
+                        técnicos com uma estratégia de rodízio. É o momento de
+                        maior tensão, onde os times tentam disparar no placar
+                        final ou saem da disputa.
+                    </p>
+                </section>
+
+                <section class="rules-section">
+                    <h2>// DINÂMICA DAS RODADAS</h2>
+                    <p>
+                        A competição possui um limite fixo de
+                        <strong>20 rodadas</strong>. Cada ciclo segue estes
+                        passos:
+                    </p>
+                    <ol class="rules-list">
+                        <li>
+                            <strong>O Tema:</strong> A organização revela o
+                            assunto (ex.: "Banco de Dados", "Engenharia de
+                            Requisitos").
+                        </li>
+                        <li>
+                            <strong>Seleção:</strong> O grupo indica qual
+                            integrante será o responsável por escrever a
+                            resposta da rodada.
+                        </li>
+                        <li>
+                            <strong>Resposta em Post-it:</strong> Assim que a
+                            pergunta completa for exibida no telão,
+                            <strong>todas as equipes</strong> escrevem sua
+                            resposta em um post-it e o colocam sobre a mesa,
+                            formando uma única pilha.
+                        </li>
+                    </ol>
+                </section>
+
+                <section class="rules-section">
+                    <h2>// RODÍZIO DE INTEGRANTES</h2>
+                    <ul class="rules-list">
+                        <li>
+                            <strong>Descanso:</strong> O membro da equipe que
+                            escreveu a resposta deve ficar fora da
+                            <strong>rodada seguinte</strong> da sua equipe.
+                        </li>
+                        <li>
+                            <strong>Gestão:</strong> Cabe ao grupo planejar qual
+                            parceiro é mais apto para cada assunto, evitando
+                            gastar seus melhores jogadores em temas menos
+                            valiosos. Terão 10s a partir da revelação do tema
+                            para escolher o respondente.
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="rules-section">
+                    <h2>// PONTUAÇÃO NO PLACAR GERAL</h2>
+                    <ul class="rules-list">
+                        <li>
+                            <strong>Por acerto:</strong> Cada resposta correta
+                            dada pelo time soma
+                            <strong>15 pontos</strong> diretos no placar geral.
+                        </li>
+
+                        <li>
+                            <strong>Pontuação máxima possível:</strong> 300
+                            pontos.
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="rules-section">
+                    <h2>// FORMATO DAS PERGUNTAS</h2>
+                    <ul class="rules-list">
+                        <li>Verdadeiro ou Falso.</li>
+                        <li>Resposta Aberta.</li>
+                        <li>Múltipla Escolha.</li>
+                        <li>
+                            Revisão de Código (identificar falhas em trechos de
+                            software).
+                        </li>
+                        <li>Complete o Código.</li>
+                    </ul>
+                </section>
+
+                <section class="rules-section">
+                    <h2>// REGRAS DE CONDUTA E DESEMPATE</h2>
+                    <ul class="rules-list">
+                        <li>
+                            É proibido trocar o integrante responsável pela
+                            resposta após a pergunta aparecer no telão.
+                        </li>
+                        <li>
+                            A resposta deve ser escrita no post-it de forma
+                            legível. Post-its rasurados ou com mais de uma opção
+                            assinalada serão considerados inválidos (equivalente
+                            a erro).
+                        </li>
+                        <li>
+                            Atitudes que visem distrair ou atrapalhar o
+                            raciocínio dos adversários causarão punição na
+                            rodada a critério da organização.
+                        </li>
+                        <li>
+                            O uso de qualquer ferramenta de IA ou consulta
+                            externa é vedado.
+                        </li>
+                        <li>
+                            Casos omissos e situações de fair play serão
+                            resolvidos pela comissão organizadora, cujas
+                            decisões são soberanas.
+                        </li>
+                    </ul>
+                    <p class="note">
+                        Este regulamento está sujeito a ajustes de última hora
+                        por decisão da organização.
+                    </p>
+                </section>
+
+                <div class="cta-regulamento">
+                    <a href="index.html#desafios" class="link-chip">
+                        <i class="fa-solid fa-arrow-left"></i> Voltar para
+                        Provas
+                    </a>
                 </div>
-                <div class="footer-copy">
-                    Desenvolvido por <strong>Leonan Freitas</strong> &copy; 2026
+            </article>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-visual">
+                    <div id="delorean-display"></div>
+                </div>
+                <div class="footer-text">
+                    <div class="footer-brand">
+                        <span>Engenharia de Software — UEPA Castanhal</span>
+                        <span class="separator">//</span>
+                        <code
+                            ><span id="rotating-phrase"
+                                >Analyzing data packets...</span
+                            ></code
+                        >
+                    </div>
+                    <div class="footer-copy">
+                        Desenvolvido por <strong>Leonan Freitas</strong> &copy;
+                        2026
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <script src="js/script.js"></script>
-    <script src="js/effects/hamburger.js"></script>
-    <script src="js/effects/matrix.js"></script>
-    <script src="js/rotating-phrases.js"></script>
-    <script>
-        fetch('assets/delorean-anim.html')
-            .then(res => res.text())
-            .then(data => document.getElementById('delorean-display').innerHTML = data);
-    </script>
-</body>
-
+        <script src="js/script.js"></script>
+        <script src="js/effects/hamburger.js"></script>
+        <script src="js/effects/matrix.js"></script>
+        <script src="js/rotating-phrases.js"></script>
+        <script>
+            fetch("assets/delorean-anim.html")
+                .then((res) => res.text())
+                .then(
+                    (data) =>
+                        (document.getElementById("delorean-display").innerHTML =
+                            data),
+                );
+        </script>
+    </body>
 </html>
