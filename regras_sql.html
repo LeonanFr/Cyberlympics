@@ -1,166 +1,268 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Inquérito Relacional — Copa de Software</title>
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/effects/delorean-anim.css" />
+        <link rel="icon" href="assets/starwars.png" />
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inquérito Relacional — Copa de Software</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;700&family=Press+Start+2P&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/effects/delorean-anim.css">
-    <link rel="icon" href="assets/starwars.png">
-</head>
-
-<body class="page-rules-detail">
-    <nav class="navbar">
-        <div class="logo">
-            <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
-        </div>
-        <div class="menu-toggle" id="menuToggle">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-        <div class="nav-links" id="navLinks">
-            <a href="index.html#info" title="Informações gerais"><i class="fa-solid fa-circle-info"></i> Info</a>
-            <a href="index.html#desafios" title="Modalidades de prova"><i class="fa-solid fa-gamepad"></i> Provas</a>
-            <a href="index.html#matriz" title="Macroáreas de estudo"><i class="fa-solid fa-microchip"></i> Matriz</a>
-            <a href="ranking.html" title="Classificação ao vivo"><i class="fa-solid fa-trophy"></i> Ranking</a>
-            <a href="equipes.html" title="Times confirmados"><i class="fa-solid fa-users"></i> Equipes</a>
-            <a href="inscricao.html" title="Garanta sua vaga"><i class="fa-solid fa-user-plus"></i> Inscrição</a>
-        </div>
-    </nav>
-
-    <header class="sub-hero">
-        <div class="sub-hero-inner">
-            <h1 class="sub-title"><i class="fa-solid fa-database"></i> Inquérito Relacional</h1>
-            <p class="sub-text">Decifre o banco de dados, encontre o culpado.</p>
-        </div>
-    </header>
-
-    <main class="container rules-container">
-        <article class="rules-paper">
-            <h1 class="rules-title">Regulamento Oficial</h1>
-            <p class="rules-intro">I Copa de Software da UEPA — modalidade investigativa com SQL.</p>
-
-            <section class="rules-section">
-                <h2>// SOBRE A ATIVIDADE</h2>
-                <p>Esta prova funciona como um jogo de investigação baseado em banco de dados. O objetivo é que o trio
-                    desvende um mistério técnico através da busca e análise de informações escondidas, simulando como
-                    funciona uma perícia digital no mundo real.</p>
-            </section>
-
-            <section class="rules-section">
-                <h2>// FORMAÇÃO E PAPÉIS</h2>
-                <p>Cada time será dividido em três funções que se completam, de acordo com a história do caso.</p>
-                <ul class="rules-list">
-                    <li><strong>Funções:</strong> Cada membro assume um papel de detetive diferente no jogo.</li>
-                    <li><strong>Conversa:</strong> Ao contrário de outras provas, aqui a comunicação entre os jogadores
-                        é liberada e essencial para que a equipe consiga avançar.</li>
-                </ul>
-            </section>
-
-            <section class="rules-section">
-                <h2>// COMO O JOGO FUNCIONA</h2>
-                <p>A disputa é organizada por etapas onde um jogador depende do outro.</p>
-                <ul class="rules-list">
-                    <li><strong>Pistas em Corrente:</strong> Quando um integrante resolve um enigma, ele libera códigos
-                        ou nomes necessários para que o próximo parceiro consiga fazer sua própria busca.</li>
-                    <li><strong>Trabalho em Equipe:</strong> O sucesso do grupo depende de passar as informações
-                        corretas por voz. Um resultado que você encontra no seu banco pode ser o filtro que seu amigo
-                        precisa para rodar o comando dele.</li>
-                    <li><strong>Finalização:</strong> O caso só termina quando todos os participantes terminam suas
-                        partes específicas e o veredito final é entregue.</li>
-                </ul>
-            </section>
-
-            <section class="rules-section">
-                <h2>// TEMPO E TOLERÂNCIA</h2>
-                <ul class="rules-list">
-                    <li><strong>Duração total:</strong> 1:30h.</li>
-                    <li><strong>Início da prova:</strong> O time deve estar com seus 3 membros presentes no horário
-                        marcado. Não será possível iniciar com um membro faltante. A equipe pode retomar a competição
-                        assim que o trio estiver completo, independentemente do horário da competição, contanto que
-                        a modalidade ainda esteja em disputa.</li>
-                </ul>
-            </section>
-
-            <section class="rules-section">
-                <h2>// TECNOLOGIA E REGRAS</h2>
-                <ul class="rules-list">
-                    <li><strong>Sistema:</strong> O desafio acontece em uma plataforma própria de investigação criada
-                        pela organização.</li>
-                    <li><strong>Linguagem:</strong> É obrigatório saber usar comandos SQL para encontrar as respostas.
-                    </li>
-                    <li><strong>Proibições:</strong> Não vale usar ferramentas externas de ajuda ou inteligência
-                        artificial para criar as consultas.</li>
-                    <li>Você pode testar e se familiarizar com os casos individuais do sistema no link: <a
-                            class="system-link" href="https://casosdecodigo.onrender.com/" target="_blank"
-                            rel="noopener noreferrer">Casos de Código</a></li>
-                </ul>
-            </section>
-
-            <section class="rules-section">
-                <h2>// PONTUAÇÃO (MÁXIMO 180 PONTOS)</h2>
-                <ul class="rules-list">
-                    <li><strong>Puzzles individuais:</strong> Cada um dos 9 quebra-cabeças (3 por integrante) vale
-                        <strong>15 pontos</strong>, totalizando 90 pontos. A pontuação é creditada em tempo real assim
-                        que o puzzle é resolvido.
-                    </li>
-                    <li><strong>Resolução do caso:</strong> Ao final, a entrega do veredito correto sobre o culpado
-                        acrescenta <strong>45 pontos</strong>.</li>
-                    <li><strong>Pontuação máxima na modalidade:</strong> 180 pontos.</li>
-                </ul>
-            </section>
-
-            <section class="rules-section">
-                <h2>// REGRAS DE CONDUTA</h2>
-                <ul class="rules-list">
-                    <li>É proibido trocar de lugar ou mexer no teclado e mouse do colega de time.</li>
-                    <li>Tentar acessar dados do sistema que não fazem parte do jogo causará expulsão imediata.</li>
-                    <li>Qualquer problema técnico na plataforma deve ser avisado na hora para os organizadores.</li>
-                    <li>Casos omissos e situações de fair play serão resolvidos pela comissão organizadora, cujas
-                        decisões são soberanas.</li>
-                </ul>
-            </section>
-
-            <div class="cta-regulamento">
-                <a href="index.html#desafios" class="link-chip">
-                    <i class="fa-solid fa-arrow-left"></i> Voltar para Provas
-                </a>
+    <body class="page-rules-detail">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-terminal"></i> [CopaSoftware_UEPA]
             </div>
-        </article>
-    </main>
-
-    <footer class="main-footer">
-        <div class="footer-content">
-            <div class="footer-visual">
-                <div id="delorean-display"></div>
+            <div class="menu-toggle" id="menuToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-            <div class="footer-text">
-                <div class="footer-brand">
-                    <span>Engenharia de Software — UEPA Castanhal</span>
-                    <span class="separator">//</span>
-                    <code><span id="rotating-phrase">Analyzing data packets...</span></code>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html#info" title="Informações gerais"
+                    ><i class="fa-solid fa-circle-info"></i> Info</a
+                >
+                <a href="index.html#desafios" title="Modalidades de prova"
+                    ><i class="fa-solid fa-gamepad"></i> Provas</a
+                >
+                <a href="index.html#matriz" title="Macroáreas de estudo"
+                    ><i class="fa-solid fa-microchip"></i> Matriz</a
+                >
+                <a href="ranking.html" title="Classificação ao vivo"
+                    ><i class="fa-solid fa-trophy"></i> Ranking</a
+                >
+                <a href="equipes.html" title="Times confirmados"
+                    ><i class="fa-solid fa-users"></i> Equipes</a
+                >
+                <a href="inscricao.html" title="Garanta sua vaga"
+                    ><i class="fa-solid fa-user-plus"></i> Inscrição</a
+                >
+            </div>
+        </nav>
+
+        <header class="sub-hero">
+            <div class="sub-hero-inner">
+                <h1 class="sub-title">
+                    <i class="fa-solid fa-database"></i> Inquérito Relacional
+                </h1>
+                <p class="sub-text">
+                    Decifre o banco de dados, encontre o culpado.
+                </p>
+            </div>
+        </header>
+
+        <main class="container rules-container">
+            <article class="rules-paper">
+                <h1 class="rules-title">Regulamento Oficial</h1>
+                <p class="rules-intro">
+                    I Copa de Software da UEPA — modalidade investigativa com
+                    SQL.
+                </p>
+
+                <section class="rules-section">
+                    <h2>// SOBRE A ATIVIDADE</h2>
+                    <p>
+                        Esta prova funciona como um jogo de investigação baseado
+                        em banco de dados. O objetivo é que o trio desvende um
+                        mistério técnico através da busca e análise de
+                        informações escondidas, simulando como funciona uma
+                        perícia digital no mundo real.
+                    </p>
+                </section>
+
+                <section class="rules-section">
+                    <h2>// FORMAÇÃO E PAPÉIS</h2>
+                    <p>
+                        Cada time será dividido em três funções que se
+                        completam, de acordo com a história do caso.
+                    </p>
+                    <ul class="rules-list">
+                        <li>
+                            <strong>Funções:</strong> Cada membro assume um
+                            papel de detetive diferente no jogo.
+                        </li>
+                        <li>
+                            <strong>Conversa:</strong> Ao contrário de outras
+                            provas, aqui a comunicação entre os jogadores é
+                            liberada e essencial para que a equipe consiga
+                            avançar.
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="rules-section">
+                    <h2>// COMO O JOGO FUNCIONA</h2>
+                    <p>
+                        A disputa é organizada por etapas onde um jogador
+                        depende do outro.
+                    </p>
+                    <ul class="rules-list">
+                        <li>
+                            <strong>Pistas em Corrente:</strong> Quando um
+                            integrante resolve um enigma, ele libera códigos ou
+                            nomes necessários para que o próximo parceiro
+                            consiga fazer sua própria busca.
+                        </li>
+                        <li>
+                            <strong>Trabalho em Equipe:</strong> O sucesso do
+                            grupo depende de passar as informações corretas por
+                            voz. Um resultado que você encontra no seu banco
+                            pode ser o filtro que seu amigo precisa para rodar o
+                            comando dele.
+                        </li>
+                        <li>
+                            <strong>Finalização:</strong> O caso só termina
+                            quando todos os participantes terminam suas partes
+                            específicas e o veredito final é entregue.
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="rules-section">
+                    <h2>// TEMPO E TOLERÂNCIA</h2>
+                    <ul class="rules-list">
+                        <li><strong>Duração total:</strong> 1:30h.</li>
+                        <li>
+                            <strong>Início da prova:</strong> O time deve estar
+                            com seus 3 membros presentes no horário marcado. Não
+                            será possível iniciar com um membro faltante. A
+                            equipe pode retomar a competição assim que o trio
+                            estiver completo, independentemente do horário da
+                            competição, contanto que a modalidade ainda esteja
+                            em disputa.
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="rules-section">
+                    <h2>// TECNOLOGIA E REGRAS</h2>
+                    <ul class="rules-list">
+                        <li>
+                            <strong>Sistema:</strong> O desafio acontece em uma
+                            plataforma própria de investigação criada pela
+                            organização.
+                        </li>
+                        <li>
+                            <strong>Linguagem:</strong> É obrigatório saber usar
+                            comandos SQL para encontrar as respostas.
+                        </li>
+                        <li>
+                            <strong>Proibições:</strong> Não vale usar
+                            ferramentas externas de ajuda ou inteligência
+                            artificial para criar as consultas.
+                        </li>
+                        <li>
+                            Você pode testar e se familiarizar com os casos
+                            individuais do sistema no link:
+                            <a
+                                class="system-link"
+                                href="https://casosdecodigo.onrender.com/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                >Casos de Código</a
+                            >
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="rules-section">
+                    <h2>// PONTUAÇÃO (MÁXIMO 180 PONTOS)</h2>
+                    <ul class="rules-list">
+                        <li>
+                            <strong>Puzzles individuais:</strong> Cada um dos 9
+                            quebra-cabeças (3 por integrante) vale
+                            <strong>15 pontos</strong>, totalizando 135 pontos.
+                            A pontuação é creditada em tempo real assim que o
+                            puzzle é resolvido.
+                        </li>
+                        <li>
+                            <strong>Resolução do caso:</strong> Ao final, a
+                            entrega do veredito correto sobre o culpado
+                            acrescenta <strong>45 pontos</strong>.
+                        </li>
+                        <li>
+                            <strong>Pontuação máxima na modalidade:</strong> 180
+                            pontos.
+                        </li>
+                    </ul>
+                </section>
+
+                <section class="rules-section">
+                    <h2>// REGRAS DE CONDUTA</h2>
+                    <ul class="rules-list">
+                        <li>
+                            É proibido trocar de lugar ou mexer no teclado e
+                            mouse do colega de time.
+                        </li>
+                        <li>
+                            Tentar acessar dados do sistema que não fazem parte
+                            do jogo causará expulsão imediata.
+                        </li>
+                        <li>
+                            Qualquer problema técnico na plataforma deve ser
+                            avisado na hora para os organizadores.
+                        </li>
+                        <li>
+                            Casos omissos e situações de fair play serão
+                            resolvidos pela comissão organizadora, cujas
+                            decisões são soberanas.
+                        </li>
+                    </ul>
+                </section>
+
+                <div class="cta-regulamento">
+                    <a href="index.html#desafios" class="link-chip">
+                        <i class="fa-solid fa-arrow-left"></i> Voltar para
+                        Provas
+                    </a>
                 </div>
-                <div class="footer-copy">
-                    Desenvolvido por <strong>Leonan Freitas</strong> &copy; 2026
+            </article>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-visual">
+                    <div id="delorean-display"></div>
+                </div>
+                <div class="footer-text">
+                    <div class="footer-brand">
+                        <span>Engenharia de Software — UEPA Castanhal</span>
+                        <span class="separator">//</span>
+                        <code
+                            ><span id="rotating-phrase"
+                                >Analyzing data packets...</span
+                            ></code
+                        >
+                    </div>
+                    <div class="footer-copy">
+                        Desenvolvido por <strong>Leonan Freitas</strong> &copy;
+                        2026
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <script src="js/script.js"></script>
-    <script src="js/effects/hamburger.js"></script>
-    <script src="js/effects/matrix.js"></script>
-    <script src="js/rotating-phrases.js"></script>
-    <script>
-        fetch('assets/delorean-anim.html')
-            .then(res => res.text())
-            .then(data => document.getElementById('delorean-display').innerHTML = data);
-    </script>
-</body>
-
+        <script src="js/script.js"></script>
+        <script src="js/effects/hamburger.js"></script>
+        <script src="js/effects/matrix.js"></script>
+        <script src="js/rotating-phrases.js"></script>
+        <script>
+            fetch("assets/delorean-anim.html")
+                .then((res) => res.text())
+                .then(
+                    (data) =>
+                        (document.getElementById("delorean-display").innerHTML =
+                            data),
+                );
+        </script>
+    </body>
 </html>
